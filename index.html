@@ -1,1208 +1,1589 @@
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>OptiFind - Find the best options for you!</title>
-        <style>
-            * {
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-            }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OptiFind - Find the best options for you!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-            body {
-                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-                background: #f5f5f5;
-                color: #212121;
-                min-height: 100vh;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                padding: 16px;
-            }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f5f5f5;
+            color: #212121;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 16px;
+        }
 
+        .container {
+            width: 100%;
+            max-width: 420px;
+            background: #fff;
+            border-radius: 24px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .screen {
+            display: none;
+            flex-direction: column;
+            padding: 32px 20px;
+            min-height: 600px;
+            animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .screen.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(0); }
+        }
+
+        .header {
+            background: #4CAF50;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            color: white;
+            min-height: 64px;
+            position: relative;
+        }
+
+        .back-btn {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 8px 12px;
+            margin-right: 12px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .back-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateX(-2px);
+        }
+
+        .back-btn:active {
+            transform: scale(0.95);
+        }
+
+        .header-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .progress-container {
+            margin-top: 12px;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: white;
+            width: 0%;
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .logo-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+        }
+
+        .logo-text {
+            font-size: 32px;
+            font-weight: 700;
+            color: #212121;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 12px;
+            line-height: 1.3;
+            color: #212121;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #212121;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 32px;
+            line-height: 1.5;
+        }
+
+        .gift-icon {
+            font-size: 96px;
+            text-align: center;
+            margin: 40px 0;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: auto;
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.2);
+            transition: left 0.5s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
+
+        .question-group {
+            margin-bottom: 28px;
+            animation: slideIn 0.4s ease;
+        }
+
+        .question-label {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: block;
+            color: #212121;
+        }
+
+        .options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .option-btn {
+            background: #f5f5f5;
+            border: 2px solid #e0e0e0;
+            padding: 12px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 14px;
+            color: #212121;
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(76, 175, 80, 0.1);
+            transform: translate(-50%, -50%);
+            transition: width 0.4s ease, height 0.4s ease;
+        }
+
+        .option-btn:active::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .option-btn:hover {
+            background: #e8e8e8;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .option-btn.selected {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            border-color: #4CAF50;
+            color: #2E7D32;
+            font-weight: 600;
+            transform: scale(1.02);
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2);
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-bottom: 24px;
+        }
+
+        .category-card {
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            border-radius: 16px;
+            padding: 28px 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(76, 175, 80, 0.1) 0%, transparent 70%);
+            transform: scale(0);
+            transition: transform 0.5s ease;
+        }
+
+        .category-card:hover::before {
+            transform: scale(1);
+        }
+
+        .category-card:hover {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            border-color: #4CAF50;
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(76, 175, 80, 0.3);
+        }
+
+        .category-card:active {
+            transform: translateY(-2px) scale(0.98);
+        }
+
+        .category-icon {
+            font-size: 56px;
+            margin-bottom: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .category-card:hover .category-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .category-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #212121;
+        }
+
+        .result-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 0;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            overflow: hidden;
+            animation: slideUp 0.5s ease;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .result-card:hover {
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+            transform: translateY(-4px);
+        }
+
+        .result-image {
+            width: 100%;
+            height: 220px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .result-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .result-content {
+            padding: 20px;
+        }
+
+        .result-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #212121;
+        }
+
+        .result-description {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+
+        .result-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .detail-tag {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            color: #2E7D32;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            border: 1px solid #4CAF50;
+        }
+
+        .result-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .share-btn {
+            flex: 1;
+            background: linear-gradient(135deg, #FFC107 0%, #FFB300 100%);
+            color: #212121;
+            border: none;
+            padding: 14px 20px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
+        }
+
+        .share-btn:hover {
+            background: linear-gradient(135deg, #FFB300 0%, #FFA000 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 193, 7, 0.4);
+        }
+
+        .share-btn:active {
+            transform: translateY(0);
+        }
+
+        .view-btn {
+            flex: 1;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 14px 20px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .view-btn:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+        }
+
+        .content {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip-text {
+            visibility: hidden;
+            background: #212121;
+            color: white;
+            text-align: center;
+            padding: 8px 12px;
+            border-radius: 8px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 12px;
+            white-space: nowrap;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .hint-banner {
+            background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+            border-left: 4px solid #2196F3;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #1565C0;
+            animation: slideIn 0.5s ease;
+        }
+
+        .hint-banner strong {
+            font-weight: 600;
+        }
+
+        .cta-box {
+            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 20px;
+            text-align: center;
+            border: 2px dashed #FF9800;
+        }
+
+        .cta-box h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+            color: #E65100;
+        }
+
+        .cta-box p {
+            font-size: 14px;
+            color: #EF6C00;
+            margin-bottom: 12px;
+        }
+
+        .cta-btn {
+            background: #FF9800;
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            background: #F57C00;
+            transform: translateY(-2px);
+        }
+
+        .error-message {
+            background: #FFEBEE;
+            color: #C62828;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            font-size: 14px;
+            border-left: 4px solid #D32F2F;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+            animation: shake 0.5s ease;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .reset-btn {
+            background: transparent;
+            color: #666;
+            border: 2px solid #ccc;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .reset-btn:hover {
+            background: #f5f5f5;
+            border-color: #999;
+            color: #212121;
+        }
+
+        @media (min-width: 768px) {
             .container {
-                width: 100%;
-                max-width: 420px;
-                background: #fff;
-                border-radius: 24px;
-                box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-                overflow: hidden;
-                min-height: 600px;
-                display: flex;
-                flex-direction: column;
+                max-width: 480px;
             }
-
-            .screen {
-                display: none;
-                flex-direction: column;
-                padding: 32px 20px;
-                min-height: 600px;
-                animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            }
-
-            .screen.active {
-                display: flex;
-            }
-
-            @keyframes fadeIn {
-                from { opacity: 0; transform: translateY(20px); }
-                to { opacity: 1; transform: translateY(0); }
-            }
-
-            @keyframes slideIn {
-                from { transform: translateX(-100%); }
-                to { transform: translateX(0); }
-            }
-
-            .header {
-                background: #4CAF50;
-                padding: 16px 20px;
-                display: flex;
-                align-items: center;
-                color: white;
-                min-height: 64px;
-                position: relative;
-            }
-
-            .back-btn {
-                background: rgba(255,255,255,0.2);
-                border: none;
-                color: white;
-                font-size: 24px;
-                cursor: pointer;
-                padding: 8px 12px;
-                margin-right: 12px;
-                border-radius: 8px;
-                transition: all 0.2s ease;
-            }
-
-            .back-btn:hover {
-                background: rgba(255,255,255,0.3);
-                transform: translateX(-2px);
-            }
-
-            .back-btn:active {
-                transform: scale(0.95);
-            }
-
-            .header-title {
-                font-size: 18px;
-                font-weight: 600;
-            }
-
-            .progress-container {
-                margin-top: 12px;
-            }
-
-            .progress-bar {
-                height: 6px;
-                background: rgba(255,255,255,0.3);
-                border-radius: 3px;
-                overflow: hidden;
-            }
-
-            .progress-fill {
-                height: 100%;
-                background: white;
-                width: 0%;
-                transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-                box-shadow: 0 0 10px rgba(255,255,255,0.5);
-            }
-
-            .logo {
-                display: flex;
-                align-items: center;
-                gap: 12px;
-                margin-bottom: 24px;
-            }
-
-            .logo-icon {
-                width: 56px;
-                height: 56px;
-                background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 32px;
-                box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
-            }
-
-            .logo-text {
-                font-size: 32px;
-                font-weight: 700;
-                color: #212121;
-            }
-
-            h1 {
-                font-size: 28px;
-                margin-bottom: 12px;
-                line-height: 1.3;
-                color: #212121;
-            }
-
-            h2 {
-                font-size: 24px;
-                margin-bottom: 20px;
-                color: #212121;
-            }
-
-            .subtitle {
-                font-size: 16px;
-                color: #666;
-                margin-bottom: 32px;
-                line-height: 1.5;
-            }
-
-            .gift-icon {
-                font-size: 96px;
-                text-align: center;
-                margin: 40px 0;
-                animation: float 3s ease-in-out infinite;
-            }
-
-            @keyframes float {
-                0%, 100% { transform: translateY(0); }
-                50% { transform: translateY(-10px); }
-            }
-
-            .btn {
-                background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
-                color: white;
-                border: none;
-                padding: 16px 32px;
-                border-radius: 12px;
-                font-size: 16px;
-                font-weight: 600;
-                cursor: pointer;
-                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                text-transform: uppercase;
-                letter-spacing: 0.5px;
-                margin-top: auto;
-                box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
-                position: relative;
-                overflow: hidden;
-            }
-
-            .btn::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: -100%;
-                width: 100%;
-                height: 100%;
-                background: rgba(255,255,255,0.2);
-                transition: left 0.5s ease;
-            }
-
-            .btn:hover::before {
-                left: 100%;
-            }
-
-            .btn:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
-            }
-
-            .btn:active {
-                transform: translateY(0);
-            }
-
-            .btn:disabled {
-                background: #ccc;
-                cursor: not-allowed;
-                box-shadow: none;
-                transform: none;
-            }
-
-            .question-group {
-                margin-bottom: 28px;
-                animation: slideIn 0.4s ease;
-            }
-
-            .question-label {
-                font-size: 16px;
-                font-weight: 600;
-                margin-bottom: 12px;
-                display: block;
-                color: #212121;
-            }
-
-            .options {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 10px;
-            }
-
-            .option-btn {
-                background: #f5f5f5;
-                border: 2px solid #e0e0e0;
-                padding: 12px 20px;
-                border-radius: 10px;
-                cursor: pointer;
-                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                font-size: 14px;
-                color: #212121;
-                font-weight: 500;
-                position: relative;
-                overflow: hidden;
-            }
-
-            .option-btn::before {
-                content: '';
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                width: 0;
-                height: 0;
-                border-radius: 50%;
-                background: rgba(76, 175, 80, 0.1);
-                transform: translate(-50%, -50%);
-                transition: width 0.4s ease, height 0.4s ease;
-            }
-
-            .option-btn:active::before {
-                width: 300px;
-                height: 300px;
-            }
-
-            .option-btn:hover {
-                background: #e8e8e8;
-                transform: translateY(-2px);
-                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            }
-
-            .option-btn.selected {
-                background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
-                border-color: #4CAF50;
-                color: #2E7D32;
-                font-weight: 600;
-                transform: scale(1.02);
-                box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2);
-            }
-
+            
             .category-grid {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 14px;
-                margin-bottom: 24px;
+                gap: 16px;
             }
+        }
 
-            .category-card {
-                background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
-                border-radius: 16px;
-                padding: 28px 16px;
-                text-align: center;
-                cursor: pointer;
-                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                border: 2px solid transparent;
-                position: relative;
-                overflow: hidden;
-            }
-
-            .category-card::before {
-                content: '';
-                position: absolute;
-                top: -50%;
-                left: -50%;
-                width: 200%;
-                height: 200%;
-                background: radial-gradient(circle, rgba(76, 175, 80, 0.1) 0%, transparent 70%);
-                transform: scale(0);
-                transition: transform 0.5s ease;
-            }
-
-            .category-card:hover::before {
-                transform: scale(1);
-            }
-
-            .category-card:hover {
-                background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
-                border-color: #4CAF50;
-                transform: translateY(-6px) scale(1.02);
-                box-shadow: 0 8px 20px rgba(76, 175, 80, 0.3);
-            }
-
-            .category-card:active {
-                transform: translateY(-2px) scale(0.98);
-            }
-
-            .category-icon {
-                font-size: 56px;
-                margin-bottom: 12px;
-                transition: transform 0.3s ease;
-            }
-
-            .category-card:hover .category-icon {
-                transform: scale(1.1) rotate(5deg);
-            }
-
-            .category-name {
-                font-size: 16px;
-                font-weight: 600;
-                color: #212121;
-            }
-
-            .result-card {
-                background: #fff;
-                border-radius: 16px;
-                padding: 0;
-                margin-bottom: 20px;
-                transition: all 0.3s ease;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-                overflow: hidden;
-                animation: slideUp 0.5s ease;
-            }
-
-            @keyframes slideUp {
-                from { opacity: 0; transform: translateY(30px); }
-                to { opacity: 1; transform: translateY(0); }
-            }
-
-            .result-card:hover {
-                box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-                transform: translateY(-4px);
-            }
-
-            .result-image {
-                width: 100%;
-                height: 220px;
+        @media (min-width: 1024px) {
+            body {
                 background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 80px;
-                position: relative;
-                overflow: hidden;
             }
+        }
 
-            .result-image img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
+        /* Loading animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
 
-            .result-content {
-                padding: 20px;
-            }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
 
-            .result-title {
-                font-size: 22px;
-                font-weight: 700;
-                margin-bottom: 8px;
-                color: #212121;
-            }
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 20px;
+            animation: fadeInOverlay 0.3s ease;
+        }
 
-            .result-description {
-                font-size: 14px;
-                color: #666;
-                margin-bottom: 16px;
-                line-height: 1.6;
-            }
+        .modal-overlay.active {
+            display: flex;
+        }
 
-            .result-details {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 8px;
-                margin-bottom: 16px;
-            }
+        @keyframes fadeInOverlay {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
 
-            .detail-tag {
-                background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
-                color: #2E7D32;
-                padding: 6px 14px;
-                border-radius: 20px;
-                font-size: 12px;
-                font-weight: 600;
-                border: 1px solid #4CAF50;
-            }
+        .modal {
+            background: white;
+            border-radius: 20px;
+            max-width: 400px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUpModal 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
 
-            .result-actions {
-                display: flex;
-                gap: 10px;
-            }
-
-            .share-btn {
-                flex: 1;
-                background: linear-gradient(135deg, #FFC107 0%, #FFB300 100%);
-                color: #212121;
-                border: none;
-                padding: 14px 20px;
-                border-radius: 10px;
-                font-size: 15px;
-                font-weight: 600;
-                cursor: pointer;
-                transition: all 0.3s ease;
-                box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
-            }
-
-            .share-btn:hover {
-                background: linear-gradient(135deg, #FFB300 0%, #FFA000 100%);
-                transform: translateY(-2px);
-                box-shadow: 0 6px 20px rgba(255, 193, 7, 0.4);
-            }
-
-            .share-btn:active {
-                transform: translateY(0);
-            }
-
-            .view-btn {
-                flex: 1;
-                background: #4CAF50;
-                color: white;
-                border: none;
-                padding: 14px 20px;
-                border-radius: 10px;
-                font-size: 15px;
-                font-weight: 600;
-                cursor: pointer;
-                transition: all 0.3s ease;
-            }
-
-            .view-btn:hover {
-                background: #45a049;
-                transform: translateY(-2px);
-            }
-
-            .content {
-                flex: 1;
-                overflow-y: auto;
-            }
-
-            .tooltip {
-                position: relative;
-                display: inline-block;
-            }
-
-            .tooltip-text {
-                visibility: hidden;
-                background: #212121;
-                color: white;
-                text-align: center;
-                padding: 8px 12px;
-                border-radius: 8px;
-                position: absolute;
-                z-index: 1;
-                bottom: 125%;
-                left: 50%;
-                transform: translateX(-50%);
+        @keyframes slideUpModal {
+            from { 
                 opacity: 0;
-                transition: opacity 0.3s;
-                font-size: 12px;
-                white-space: nowrap;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+                transform: translateY(50px) scale(0.9);
             }
-
-            .tooltip:hover .tooltip-text {
-                visibility: visible;
+            to { 
                 opacity: 1;
+                transform: translateY(0) scale(1);
             }
+        }
 
-            .hint-banner {
-                background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
-                border-left: 4px solid #2196F3;
-                padding: 12px 16px;
-                border-radius: 8px;
-                margin-bottom: 20px;
-                font-size: 14px;
-                color: #1565C0;
-                animation: slideIn 0.5s ease;
+        .modal-header {
+            padding: 24px 24px 16px;
+            border-bottom: 1px solid #e0e0e0;
+            position: relative;
+        }
+
+        .modal-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #212121;
+            margin: 0;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #f5f5f5;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            color: #666;
+        }
+
+        .modal-close:hover {
+            background: #e0e0e0;
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 24px;
+        }
+
+        .modal-footer {
+            padding: 16px 24px 24px;
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+        }
+
+        /* Share Modal Styles */
+        .share-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .share-option {
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: #212121;
+        }
+
+        .share-option:hover {
+            border-color: #4CAF50;
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(76, 175, 80, 0.2);
+        }
+
+        .share-option:active {
+            transform: translateY(-2px);
+        }
+
+        .share-icon {
+            font-size: 32px;
+        }
+
+        .share-label {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .copy-link-container {
+            background: #f5f5f5;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .copy-link-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            font-size: 14px;
+            color: #666;
+            outline: none;
+        }
+
+        .copy-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .copy-btn:hover {
+            background: #45a049;
+        }
+
+        .copy-btn.copied {
+            background: #2196F3;
+        }
+
+        .modal-description {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        /* Confirmation Modal Styles */
+        .modal-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin: 0 auto 16px;
+        }
+
+        .modal-message {
+            text-align: center;
+            font-size: 16px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .modal-btn {
+            flex: 1;
+            padding: 14px 24px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .modal-btn-secondary {
+            background: #f5f5f5;
+            color: #212121;
+            border: 2px solid #e0e0e0;
+        }
+
+        .modal-btn-secondary:hover {
+            background: #e8e8e8;
+        }
+
+        .modal-btn-primary {
+            background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3);
+        }
+
+        .modal-btn-primary:hover {
+            background: linear-gradient(135deg, #d32f2f 0%, #c62828 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(244, 67, 54, 0.4);
+        }
+
+        .modal-btn-primary:active {
+            transform: translateY(0);
+        }
+
+        @media (max-width: 480px) {
+            .share-options {
+                grid-template-columns: 1fr;
             }
-
-            .hint-banner strong {
-                font-weight: 600;
+            
+            .modal-footer {
+                flex-direction: column-reverse;
             }
-
-            .cta-box {
-                background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
-                border-radius: 12px;
-                padding: 16px;
-                margin-top: 20px;
-                text-align: center;
-                border: 2px dashed #FF9800;
+            
+            .modal-btn {
+                width: 100%;
             }
-
-            .cta-box h3 {
-                font-size: 18px;
-                margin-bottom: 8px;
-                color: #E65100;
-            }
-
-            .cta-box p {
-                font-size: 14px;
-                color: #EF6C00;
-                margin-bottom: 12px;
-            }
-
-            .cta-btn {
-                background: #FF9800;
-                color: white;
-                border: none;
-                padding: 10px 24px;
-                border-radius: 8px;
-                font-size: 14px;
-                font-weight: 600;
-                cursor: pointer;
-                transition: all 0.3s ease;
-            }
-
-            .cta-btn:hover {
-                background: #F57C00;
-                transform: translateY(-2px);
-            }
-
-            .error-message {
-                background: #FFEBEE;
-                color: #C62828;
-                padding: 12px 16px;
-                border-radius: 8px;
-                margin-bottom: 16px;
-                font-size: 14px;
-                border-left: 4px solid #D32F2F;
-                display: none;
-            }
-
-            .error-message.show {
-                display: block;
-                animation: shake 0.5s ease;
-            }
-
-            @keyframes shake {
-                0%, 100% { transform: translateX(0); }
-                25% { transform: translateX(-10px); }
-                75% { transform: translateX(10px); }
-            }
-
-            .reset-btn {
-                background: transparent;
-                color: #666;
-                border: 2px solid #ccc;
-                padding: 10px 20px;
-                border-radius: 8px;
-                font-size: 14px;
-                cursor: pointer;
-                margin-top: 12px;
-                transition: all 0.3s ease;
-            }
-
-            .reset-btn:hover {
-                background: #f5f5f5;
-                border-color: #999;
-                color: #212121;
-            }
-
-            @media (min-width: 768px) {
-                .container {
-                    max-width: 480px;
-                }
+        }
+    </style>
+</head>
+<body>
+    <!-- Share Modal -->
+    <div class="modal-overlay" id="shareModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">Share Your Result</h3>
+                <button class="modal-close" onclick="closeModal('shareModal')">×</button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-description">Share your personalized recommendation with friends and family!</p>
                 
-                .category-grid {
-                    gap: 16px;
-                }
-            }
-
-            @media (min-width: 1024px) {
-                body {
-                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                }
-            }
-
-            /* Loading animation */
-            .loading {
-                display: inline-block;
-                width: 20px;
-                height: 20px;
-                border: 3px solid rgba(255,255,255,.3);
-                border-radius: 50%;
-                border-top-color: white;
-                animation: spin 1s ease-in-out infinite;
-            }
-
-            @keyframes spin {
-                to { transform: rotate(360deg); }
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <!-- Landing Screen -->
-            <div class="screen active" id="landing">
-                <div class="content">
-                    <div class="logo">
-                        <div class="logo-icon">🔍</div>
-                        <div class="logo-text">OptiFind</div>
-                    </div>
-                    <h1>Find the best options for you!</h1>
-                    <p class="subtitle">Answer a few quick questions and get personalized recommendations tailored to your preferences and budget.</p>
-                    <div class="gift-icon">🎁</div>
-                    <div class="hint-banner">
-                        <strong>💡 Pro tip:</strong> The more accurate your answers, the better your recommendations!
-                    </div>
+                <div class="copy-link-container">
+                    <input type="text" class="copy-link-input" id="shareLinkInput" readonly>
+                    <button class="copy-btn" onclick="copyShareLink()">Copy</button>
                 </div>
-                <button class="btn" onclick="startApp()">GET STARTED</button>
-                <button class="reset-btn" onclick="resetApp()">Start Fresh</button>
+
+                <div class="share-options" id="shareOptionsContainer"></div>
             </div>
+        </div>
+    </div>
 
-            <!-- General Questions Screen -->
-            <div class="screen" id="general">
-                <div class="header">
-                    <button class="back-btn" onclick="goToScreen('landing')">‹</button>
-                    <div style="flex: 1;">
-                        <div class="header-title">Step 1 of 3</div>
-                        <div class="progress-container">
-                            <div class="progress-bar">
-                                <div class="progress-fill" id="progress1"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="content">
-                    <div class="error-message" id="error-general"></div>
-                    <h2>Tell us about yourself</h2>
-                    
-                    <div class="question-group">
-                        <label class="question-label">What's your age group?</label>
-                        <div class="options">
-                            <button class="option-btn" data-question="age" data-value="Under 18">Under 18</button>
-                            <button class="option-btn" data-question="age" data-value="18-25">18-25</button>
-                            <button class="option-btn" data-question="age" data-value="26-35">26-35</button>
-                            <button class="option-btn" data-question="age" data-value="36+">36+</button>
-                        </div>
-                    </div>
-
-                    <div class="question-group">
-                        <label class="question-label">What's your budget level?</label>
-                        <div class="options">
-                            <button class="option-btn" data-question="budget" data-value="Low">💰 Low</button>
-                            <button class="option-btn" data-question="budget" data-value="Medium">💵 Medium</button>
-                            <button class="option-btn" data-question="budget" data-value="High">💎 High</button>
-                        </div>
-                    </div>
-
-                    <div class="question-group">
-                        <label class="question-label">What's your lifestyle?</label>
-                        <div class="options">
-                            <button class="option-btn" data-question="lifestyle" data-value="Casual">😌 Casual</button>
-                            <button class="option-btn" data-question="lifestyle" data-value="Active">🏃 Active</button>
-                            <button class="option-btn" data-question="lifestyle" data-value="Tech-Savvy">💻 Tech-Savvy</button>
-                            <button class="option-btn" data-question="lifestyle" data-value="Luxury">✨ Luxury</button>
-                        </div>
-                    </div>
-                </div>
-                <button class="btn" onclick="validateAndProceed('general', 'category')">NEXT</button>
+    <!-- Confirmation Modal -->
+    <div class="modal-overlay" id="confirmModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">Start Fresh?</h3>
+                <button class="modal-close" onclick="closeModal('confirmModal')">×</button>
             </div>
+            <div class="modal-body">
+                <div class="modal-icon">⚠️</div>
+                <p class="modal-message">Are you sure you want to start fresh? This will clear all your answers and preferences.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn modal-btn-secondary" onclick="closeModal('confirmModal')">Cancel</button>
+                <button class="modal-btn modal-btn-primary" onclick="confirmReset()">Yes, Reset</button>
+            </div>
+        </div>
+    </div>
 
-            <!-- Category Selection Screen -->
-            <div class="screen" id="category">
-                <div class="header">
-                    <button class="back-btn" onclick="goToScreen('general')">‹</button>
-                    <div style="flex: 1;">
-                        <div class="header-title">Step 2 of 3</div>
-                        <div class="progress-container">
-                            <div class="progress-bar">
-                                <div class="progress-fill" id="progress2"></div>
-                            </div>
-                        </div>
-                    </div>
+    <div class="container">
+        <!-- Landing Screen -->
+        <div class="screen active" id="landing">
+            <div class="content">
+                <div class="logo">
+                    <div class="logo-icon">🔍</div>
+                    <div class="logo-text">OptiFind</div>
                 </div>
-                <div class="content">
-                    <h2>What interests you?</h2>
-                    <div class="hint-banner">
-                        <strong>📌 Choose wisely:</strong> Select the category you're most interested in right now.
-                    </div>
-                    <div class="category-grid" id="categoryGrid"></div>
+                <h1>Find the best options for you!</h1>
+                <p class="subtitle">Answer a few quick questions and get personalized recommendations tailored to your preferences and budget.</p>
+                <div class="gift-icon">🎁</div>
+                <div class="hint-banner">
+                    <strong>💡 Pro tip:</strong> The more accurate your answers, the better your recommendations!
                 </div>
             </div>
+            <button class="btn" onclick="startApp()">GET STARTED</button>
+            <button class="reset-btn" onclick="resetApp()">Start Fresh</button>
+        </div>
 
-            <!-- Category-Specific Questions Screen -->
-            <div class="screen" id="specific">
-                <div class="header">
-                    <button class="back-btn" onclick="goToScreen('category')">‹</button>
-                    <div style="flex: 1;">
-                        <div class="header-title">Step 3 of 3</div>
-                        <div class="progress-container">
-                            <div class="progress-bar">
-                                <div class="progress-fill" id="progress3"></div>
-                            </div>
+        <!-- General Questions Screen -->
+        <div class="screen" id="general">
+            <div class="header">
+                <button class="back-btn" onclick="goToScreen('landing')">‹</button>
+                <div style="flex: 1;">
+                    <div class="header-title">Step 1 of 3</div>
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress1"></div>
                         </div>
                     </div>
                 </div>
-                <div class="content">
-                    <div class="error-message" id="error-specific"></div>
-                    <div id="specificQuestions"></div>
-                </div>
-                <button class="btn" onclick="validateAndShowResults()">GET RECOMMENDATIONS</button>
             </div>
-
-            <!-- Results Screen -->
-            <div class="screen" id="results">
-                <div class="header">
-                    <button class="back-btn" onclick="goToScreen('landing')">‹</button>
-                    <div class="header-title">Your Perfect Match</div>
+            <div class="content">
+                <div class="error-message" id="error-general"></div>
+                <h2>Tell us about yourself</h2>
+                
+                <div class="question-group">
+                    <label class="question-label">What's your age group?</label>
+                    <div class="options">
+                        <button class="option-btn" data-question="age" data-value="Under 18">Under 18</button>
+                        <button class="option-btn" data-question="age" data-value="18-25">18-25</button>
+                        <button class="option-btn" data-question="age" data-value="26-35">26-35</button>
+                        <button class="option-btn" data-question="age" data-value="36+">36+</button>
+                    </div>
                 </div>
-                <div class="content" id="resultsContent"></div>
+
+                <div class="question-group">
+                    <label class="question-label">What's your budget level?</label>
+                    <div class="options">
+                        <button class="option-btn" data-question="budget" data-value="Low">💰 Low</button>
+                        <button class="option-btn" data-question="budget" data-value="Medium">💵 Medium</button>
+                        <button class="option-btn" data-question="budget" data-value="High">💎 High</button>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <label class="question-label">What's your lifestyle?</label>
+                    <div class="options">
+                        <button class="option-btn" data-question="lifestyle" data-value="Casual">😌 Casual</button>
+                        <button class="option-btn" data-question="lifestyle" data-value="Active">🏃 Active</button>
+                        <button class="option-btn" data-question="lifestyle" data-value="Tech-Savvy">💻 Tech-Savvy</button>
+                        <button class="option-btn" data-question="lifestyle" data-value="Luxury">✨ Luxury</button>
+                    </div>
+                </div>
+            </div>
+            <button class="btn" onclick="validateAndProceed('general', 'category')">NEXT</button>
+        </div>
+
+        <!-- Category Selection Screen -->
+        <div class="screen" id="category">
+            <div class="header">
+                <button class="back-btn" onclick="goToScreen('general')">‹</button>
+                <div style="flex: 1;">
+                    <div class="header-title">Step 2 of 3</div>
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content">
+                <h2>What interests you?</h2>
+                <div class="hint-banner">
+                    <strong>📌 Choose wisely:</strong> Select the category you're most interested in right now.
+                </div>
+                <div class="category-grid" id="categoryGrid"></div>
             </div>
         </div>
 
-        <script>
-            // Category configuration with questions
-            const categoryConfig = {
-                cars: {
-                    name: 'Cars',
-                    icon: '🚗',
-                    questions: [
-                        {
-                            id: 'fuel',
-                            label: 'Preferred fuel type?',
-                            options: ['Petrol', 'Diesel', 'Electric', 'Hybrid']
-                        },
-                        {
-                            id: 'size',
-                            label: 'What size do you prefer?',
-                            options: ['Compact', 'Sedan', 'SUV', 'Truck']
-                        }
-                    ],
-                    items: [
-                        { name: "Toyota Camry", budget: "Medium", fuel: "Petrol", size: "Sedan", lifestyle: "Casual", age: "26-35", icon: "🚙", image: "https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=400" },
-                        { name: "Honda Civic", budget: "Medium", fuel: "Petrol", size: "Compact", lifestyle: "Active", age: "18-25", icon: "🚗", image: "https://images.unsplash.com/photo-1590362891991-f776e747a588?w=400" },
-                        { name: "Tesla Model 3", budget: "High", fuel: "Electric", size: "Sedan", lifestyle: "Tech-Savvy", age: "26-35", icon: "⚡", image: "https://images.unsplash.com/photo-1560958089-b8a1929cea89?w=400" },
-                        { name: "BMW X5", budget: "High", fuel: "Diesel", size: "SUV", lifestyle: "Luxury", age: "36+", icon: "🚙", image: "https://images.unsplash.com/photo-1555215695-3004980ad54e?w=400" },
-                        { name: "Kia Picanto", budget: "Low", fuel: "Petrol", size: "Compact", lifestyle: "Casual", age: "18-25", icon: "🚗", image: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=400" },
-                        { name: "Ford F-150", budget: "High", fuel: "Diesel", size: "Truck", lifestyle: "Active", age: "36+", icon: "🚚", image: "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=400" },
-                        { name: "Toyota Prius", budget: "Medium", fuel: "Hybrid", size: "Sedan", lifestyle: "Tech-Savvy", age: "26-35", icon: "🌿", image: "https://images.unsplash.com/photo-1617654112368-307921291f42?w=400" }
-                    ]
-                },
-                gadgets: {
-                    name: 'Gadgets',
-                    icon: '🎧',
-                    questions: [
-                        {
-                            id: 'type',
-                            label: 'What type of gadget?',
-                            options: ['Phone', 'Audio', 'Tablet', 'Wearable', 'Accessory']
-                        },
-                        {
-                            id: 'purpose',
-                            label: 'Primary purpose?',
-                            options: ['Communication', 'Entertainment', 'Productivity', 'Fitness']
-                        }
-                    ],
-                    items: [
-                        { name: "iPhone 15 Pro", budget: "High", type: "Phone", purpose: "Communication", lifestyle: "Luxury", age: "26-35", icon: "📱", image: "https://images.unsplash.com/photo-1592286927505-2fd1d3a1d0e3?w=400" },
-                        { name: "Samsung Galaxy A54", budget: "Medium", type: "Phone", purpose: "Communication", lifestyle: "Tech-Savvy", age: "18-25", icon: "📱", image: "https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=400" },
-                        { name: "Sony WH-1000XM5", budget: "High", type: "Audio", purpose: "Entertainment", lifestyle: "Active", age: "26-35", icon: "🎧", image: "https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=400" },
-                        { name: "Anker PowerCore", budget: "Low", type: "Accessory", purpose: "Productivity", lifestyle: "Casual", age: "18-25", icon: "🔋", image: "https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?w=400" },
-                        { name: "iPad Air", budget: "High", type: "Tablet", purpose: "Productivity", lifestyle: "Tech-Savvy", age: "26-35", icon: "📱", image: "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=400" },
-                        { name: "Apple Watch Ultra", budget: "High", type: "Wearable", purpose: "Fitness", lifestyle: "Active", age: "26-35", icon: "⌚", image: "https://images.unsplash.com/photo-1434494878577-86c23bcb06b9?w=400" },
-                        { name: "JBL Flip 6", budget: "Medium", type: "Audio", purpose: "Entertainment", lifestyle: "Casual", age: "18-25", icon: "🔊", image: "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=400" }
-                    ]
-                },
-                travel: {
-                    name: 'Travel',
-                    icon: '🏖️',
-                    questions: [
-                        {
-                            id: 'type',
-                            label: 'What type of destination?',
-                            options: ['Beach', 'City', 'Adventure', 'Cultural']
-                        },
-                        {
-                            id: 'duration',
-                            label: 'How long?',
-                            options: ['Weekend', 'Week', 'Two Weeks', 'Month']
-                        }
-                    ],
-                    items: [
-                        { name: "Bali, Indonesia", budget: "Medium", type: "Beach", duration: "Week", lifestyle: "Casual", age: "18-25", icon: "🏝️", image: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=400" },
-                        { name: "Paris, France", budget: "High", type: "City", duration: "Week", lifestyle: "Luxury", age: "26-35", icon: "🗼", image: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=400" },
-                        { name: "Tokyo, Japan", budget: "High", type: "City", duration: "Week", lifestyle: "Tech-Savvy", age: "26-35", icon: "🗾", image: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=400" },
-                        { name: "Maldives", budget: "High", type: "Beach", duration: "Week", lifestyle: "Luxury", age: "36+", icon: "🏖️", image: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=400" },
-                        { name: "Barcelona, Spain", budget: "Medium", type: "City", duration: "Weekend", lifestyle: "Active", age: "18-25", icon: "🏛️", image: "https://images.unsplash.com/photo-1583422409516-2895a77efded?w=400" },
-                        { name: "New Zealand", budget: "High", type: "Adventure", duration: "Two Weeks", lifestyle: "Active", age: "26-35", icon: "⛰️", image: "https://images.unsplash.com/photo-1507699622108-4be3abd695ad?w=400" },
-                        { name: "Rome, Italy", budget: "Medium", type: "Cultural", duration: "Week", lifestyle: "Casual", age: "36+", icon: "🏛️", image: "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=400" }
-                    ]
-                },
-                books: {
-                    name: 'Books',
-                    icon: '📚',
-                    questions: [
-                        {
-                            id: 'type',
-                            label: 'Fiction or Non-Fiction?',
-                            options: ['Fiction', 'Non-Fiction']
-                        },
-                        {
-                            id: 'theme',
-                            label: 'Preferred theme?',
-                            options: ['Fantasy', 'Self-Help', 'History', 'Business', 'Mystery', 'Romance']
-                        }
-                    ],
-                    items: [
-                        { name: "Atomic Habits", type: "Non-Fiction", theme: "Self-Help", budget: "Low", lifestyle: "Active", age: "26-35", icon: "📖", image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400" },
-                        { name: "The Hobbit", type: "Fiction", theme: "Fantasy", budget: "Low", lifestyle: "Casual", age: "18-25", icon: "📚", image: "https://images.unsplash.com/photo-1621351183012-e2f9972dd9bf?w=400" },
-                        { name: "Sapiens", type: "Non-Fiction", theme: "History", budget: "Medium", lifestyle: "Tech-Savvy", age: "26-35", icon: "📕", image: "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=400" },
-                        { name: "Harry Potter Series", type: "Fiction", theme: "Fantasy", budget: "Medium", lifestyle: "Casual", age: "Under 18", icon: "📗", image: "https://images.unsplash.com/photo-1615799998603-7c6270a45196?w=400" },
-                        { name: "The Lean Startup", type: "Non-Fiction", theme: "Business", budget: "Medium", lifestyle: "Tech-Savvy", age: "26-35", icon: "📘", image: "https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=400" },
-                        { name: "Gone Girl", type: "Fiction", theme: "Mystery", budget: "Low", lifestyle: "Casual", age: "26-35", icon: "🔍", image: "https://images.unsplash.com/photo-1541963463532-d68292c34b19?w=400" },
-                        { name: "Pride and Prejudice", type: "Fiction", theme: "Romance", budget: "Low", lifestyle: "Casual", age: "18-25", icon: "💕", image: "https://images.unsplash.com/photo-1524578271613-d550eacf6090?w=400" }
-                    ]
-                },
-                fitness: {
-                    name: 'Fitness',
-                    icon: '💪',
-                    questions: [
-                        {
-                            id: 'focus',
-                            label: 'What\'s your focus?',
-                            options: ['Weight Loss', 'Muscle Building', 'Flexibility', 'Cardio', 'Strength']
-                        },
-                        {
-                            id: 'setting',
-                            label: 'Where do you prefer?',
-                            options: ['Home', 'Gym', 'Outdoor', 'Studio']
-                        }
-                    ],
-                    items: [
-                        { name: "Home HIIT Program", focus: "Weight Loss", budget: "Low", setting: "Home", lifestyle: "Active", age: "18-25", icon: "🏃", image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400" },
-                        { name: "Premium Gym Membership", focus: "Muscle Building", budget: "High", setting: "Gym", lifestyle: "Active", age: "26-35", icon: "💪", image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400" },
-                        { name: "Yoga Classes", focus: "Flexibility", budget: "Medium", setting: "Studio", lifestyle: "Casual", age: "26-35", icon: "🧘", image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400" },
-                        { name: "CrossFit Training", focus: "Strength", budget: "High", setting: "Gym", lifestyle: "Active", age: "26-35", icon: "🏋️", image: "https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=400" },
-                        { name: "Running Plan", focus: "Cardio", budget: "Low", setting: "Outdoor", lifestyle: "Active", age: "18-25", icon: "🏃", image: "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=400" },
-                        { name: "Personal Training", focus: "Muscle Building", budget: "High", setting: "Gym", lifestyle: "Luxury", age: "36+", icon: "👟", image: "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=400" },
-                        { name: "Pilates Studio", focus: "Flexibility", budget: "Medium", setting: "Studio", lifestyle: "Casual", age: "26-35", icon: "🤸", image: "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=400" }
-                    ]
-                }
+        <!-- Category-Specific Questions Screen -->
+        <div class="screen" id="specific">
+            <div class="header">
+                <button class="back-btn" onclick="goToScreen('category')">‹</button>
+                <div style="flex: 1;">
+                    <div class="header-title">Step 3 of 3</div>
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content">
+                <div class="error-message" id="error-specific"></div>
+                <div id="specificQuestions"></div>
+            </div>
+            <button class="btn" onclick="validateAndShowResults()">GET RECOMMENDATIONS</button>
+        </div>
+
+        <!-- Results Screen -->
+        <div class="screen" id="results">
+            <div class="header">
+                <button class="back-btn" onclick="goToScreen('landing')">‹</button>
+                <div class="header-title">Your Perfect Match</div>
+            </div>
+            <div class="content" id="resultsContent"></div>
+        </div>
+    </div>
+
+    <script>
+        // Category configuration with questions
+        const categoryConfig = {
+            cars: {
+                name: 'Cars',
+                icon: '🚗',
+                questions: [
+                    {
+                        id: 'fuel',
+                        label: 'Preferred fuel type?',
+                        options: ['Petrol', 'Diesel', 'Electric', 'Hybrid']
+                    },
+                    {
+                        id: 'size',
+                        label: 'What size do you prefer?',
+                        options: ['Compact', 'Sedan', 'SUV', 'Truck']
+                    }
+                ],
+                items: [
+                    { name: "Toyota Camry", budget: "Medium", fuel: "Petrol", size: "Sedan", lifestyle: "Casual", age: "26-35", icon: "🚙", image: "https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=400" },
+                    { name: "Honda Civic", budget: "Medium", fuel: "Petrol", size: "Compact", lifestyle: "Active", age: "18-25", icon: "🚗", image: "https://images.unsplash.com/photo-1590362891991-f776e747a588?w=400" },
+                    { name: "Tesla Model 3", budget: "High", fuel: "Electric", size: "Sedan", lifestyle: "Tech-Savvy", age: "26-35", icon: "⚡", image: "https://images.unsplash.com/photo-1560958089-b8a1929cea89?w=400" },
+                    { name: "BMW X5", budget: "High", fuel: "Diesel", size: "SUV", lifestyle: "Luxury", age: "36+", icon: "🚙", image: "https://images.unsplash.com/photo-1555215695-3004980ad54e?w=400" },
+                    { name: "Kia Picanto", budget: "Low", fuel: "Petrol", size: "Compact", lifestyle: "Casual", age: "18-25", icon: "🚗", image: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=400" },
+                    { name: "Ford F-150", budget: "High", fuel: "Diesel", size: "Truck", lifestyle: "Active", age: "36+", icon: "🚚", image: "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=400" },
+                    { name: "Toyota Prius", budget: "Medium", fuel: "Hybrid", size: "Sedan", lifestyle: "Tech-Savvy", age: "26-35", icon: "🌿", image: "https://images.unsplash.com/photo-1617654112368-307921291f42?w=400" }
+                ]
+            },
+            gadgets: {
+                name: 'Gadgets',
+                icon: '🎧',
+                questions: [
+                    {
+                        id: 'type',
+                        label: 'What type of gadget?',
+                        options: ['Phone', 'Audio', 'Tablet', 'Wearable', 'Accessory']
+                    },
+                    {
+                        id: 'purpose',
+                        label: 'Primary purpose?',
+                        options: ['Communication', 'Entertainment', 'Productivity', 'Fitness']
+                    }
+                ],
+                items: [
+                    { name: "iPhone 15 Pro", budget: "High", type: "Phone", purpose: "Communication", lifestyle: "Luxury", age: "26-35", icon: "📱", image: "https://images.unsplash.com/photo-1592286927505-2fd1d3a1d0e3?w=400" },
+                    { name: "Samsung Galaxy A54", budget: "Medium", type: "Phone", purpose: "Communication", lifestyle: "Tech-Savvy", age: "18-25", icon: "📱", image: "https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=400" },
+                    { name: "Sony WH-1000XM5", budget: "High", type: "Audio", purpose: "Entertainment", lifestyle: "Active", age: "26-35", icon: "🎧", image: "https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=400" },
+                    { name: "Anker PowerCore", budget: "Low", type: "Accessory", purpose: "Productivity", lifestyle: "Casual", age: "18-25", icon: "🔋", image: "https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?w=400" },
+                    { name: "iPad Air", budget: "High", type: "Tablet", purpose: "Productivity", lifestyle: "Tech-Savvy", age: "26-35", icon: "📱", image: "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=400" },
+                    { name: "Apple Watch Ultra", budget: "High", type: "Wearable", purpose: "Fitness", lifestyle: "Active", age: "26-35", icon: "⌚", image: "https://images.unsplash.com/photo-1434494878577-86c23bcb06b9?w=400" },
+                    { name: "JBL Flip 6", budget: "Medium", type: "Audio", purpose: "Entertainment", lifestyle: "Casual", age: "18-25", icon: "🔊", image: "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=400" }
+                ]
+            },
+            travel: {
+                name: 'Travel',
+                icon: '🏖️',
+                questions: [
+                    {
+                        id: 'type',
+                        label: 'What type of destination?',
+                        options: ['Beach', 'City', 'Adventure', 'Cultural']
+                    },
+                    {
+                        id: 'duration',
+                        label: 'How long?',
+                        options: ['Weekend', 'Week', 'Two Weeks', 'Month']
+                    }
+                ],
+                items: [
+                    { name: "Bali, Indonesia", budget: "Medium", type: "Beach", duration: "Week", lifestyle: "Casual", age: "18-25", icon: "🏝️", image: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=400" },
+                    { name: "Paris, France", budget: "High", type: "City", duration: "Week", lifestyle: "Luxury", age: "26-35", icon: "🗼", image: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=400" },
+                    { name: "Tokyo, Japan", budget: "High", type: "City", duration: "Week", lifestyle: "Tech-Savvy", age: "26-35", icon: "🗾", image: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=400" },
+                    { name: "Maldives", budget: "High", type: "Beach", duration: "Week", lifestyle: "Luxury", age: "36+", icon: "🏖️", image: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=400" },
+                    { name: "Barcelona, Spain", budget: "Medium", type: "City", duration: "Weekend", lifestyle: "Active", age: "18-25", icon: "🏛️", image: "https://images.unsplash.com/photo-1583422409516-2895a77efded?w=400" },
+                    { name: "New Zealand", budget: "High", type: "Adventure", duration: "Two Weeks", lifestyle: "Active", age: "26-35", icon: "⛰️", image: "https://images.unsplash.com/photo-1507699622108-4be3abd695ad?w=400" },
+                    { name: "Rome, Italy", budget: "Medium", type: "Cultural", duration: "Week", lifestyle: "Casual", age: "36+", icon: "🏛️", image: "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=400" }
+                ]
+            },
+            books: {
+                name: 'Books',
+                icon: '📚',
+                questions: [
+                    {
+                        id: 'type',
+                        label: 'Fiction or Non-Fiction?',
+                        options: ['Fiction', 'Non-Fiction']
+                    },
+                    {
+                        id: 'theme',
+                        label: 'Preferred theme?',
+                        options: ['Fantasy', 'Self-Help', 'History', 'Business', 'Mystery', 'Romance']
+                    }
+                ],
+                items: [
+                    { name: "Atomic Habits", type: "Non-Fiction", theme: "Self-Help", budget: "Low", lifestyle: "Active", age: "26-35", icon: "📖", image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400" },
+                    { name: "The Hobbit", type: "Fiction", theme: "Fantasy", budget: "Low", lifestyle: "Casual", age: "18-25", icon: "📚", image: "https://images.unsplash.com/photo-1621351183012-e2f9972dd9bf?w=400" },
+                    { name: "Sapiens", type: "Non-Fiction", theme: "History", budget: "Medium", lifestyle: "Tech-Savvy", age: "26-35", icon: "📕", image: "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=400" },
+                    { name: "Harry Potter Series", type: "Fiction", theme: "Fantasy", budget: "Medium", lifestyle: "Casual", age: "Under 18", icon: "📗", image: "https://images.unsplash.com/photo-1615799998603-7c6270a45196?w=400" },
+                    { name: "The Lean Startup", type: "Non-Fiction", theme: "Business", budget: "Medium", lifestyle: "Tech-Savvy", age: "26-35", icon: "📘", image: "https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=400" },
+                    { name: "Gone Girl", type: "Fiction", theme: "Mystery", budget: "Low", lifestyle: "Casual", age: "26-35", icon: "🔍", image: "https://images.unsplash.com/photo-1541963463532-d68292c34b19?w=400" },
+                    { name: "Pride and Prejudice", type: "Fiction", theme: "Romance", budget: "Low", lifestyle: "Casual", age: "18-25", icon: "💕", image: "https://images.unsplash.com/photo-1524578271613-d550eacf6090?w=400" }
+                ]
+            },
+            fitness: {
+                name: 'Fitness',
+                icon: '💪',
+                questions: [
+                    {
+                        id: 'focus',
+                        label: 'What\'s your focus?',
+                        options: ['Weight Loss', 'Muscle Building', 'Flexibility', 'Cardio', 'Strength']
+                    },
+                    {
+                        id: 'setting',
+                        label: 'Where do you prefer?',
+                        options: ['Home', 'Gym', 'Outdoor', 'Studio']
+                    }
+                ],
+                items: [
+                    { name: "Home HIIT Program", focus: "Weight Loss", budget: "Low", setting: "Home", lifestyle: "Active", age: "18-25", icon: "🏃", image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400" },
+                    { name: "Premium Gym Membership", focus: "Muscle Building", budget: "High", setting: "Gym", lifestyle: "Active", age: "26-35", icon: "💪", image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400" },
+                    { name: "Yoga Classes", focus: "Flexibility", budget: "Medium", setting: "Studio", lifestyle: "Casual", age: "26-35", icon: "🧘", image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400" },
+                    { name: "CrossFit Training", focus: "Strength", budget: "High", setting: "Gym", lifestyle: "Active", age: "26-35", icon: "🏋️", image: "https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=400" },
+                    { name: "Running Plan", focus: "Cardio", budget: "Low", setting: "Outdoor", lifestyle: "Active", age: "18-25", icon: "🏃", image: "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=400" },
+                    { name: "Personal Training", focus: "Muscle Building", budget: "High", setting: "Gym", lifestyle: "Luxury", age: "36+", icon: "👟", image: "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=400" },
+                    { name: "Pilates Studio", focus: "Flexibility", budget: "Medium", setting: "Studio", lifestyle: "Casual", age: "26-35", icon: "🤸", image: "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=400" }
+                ]
+            }
+        };
+
+        // User data storage
+        let userData = {};
+
+        // Initialize app
+        function initApp() {
+            // Load saved data from localStorage
+            const savedData = localStorage.getItem('optifindData');
+            if (savedData) {
+                userData = JSON.parse(savedData);
+                restoreUserSelections();
+            }
+
+            // Set up category grid
+            renderCategoryGrid();
+
+            // Animate progress bars on load
+            setTimeout(() => {
+                document.getElementById('progress1').style.width = '33%';
+                document.getElementById('progress2').style.width = '66%';
+                document.getElementById('progress3').style.width = '100%';
+            }, 100);
+        }
+
+        // Save data to localStorage
+        function saveData() {
+            localStorage.setItem('optifindData', JSON.stringify(userData));
+        }
+
+        // Restore user selections from saved data
+        function restoreUserSelections() {
+            Object.keys(userData).forEach(key => {
+                const buttons = document.querySelectorAll(`[data-question="${key}"]`);
+                buttons.forEach(btn => {
+                    if (btn.dataset.value === userData[key]) {
+                        btn.classList.add('selected');
+                    }
+                });
+            });
+        }
+
+        // Start app
+        function startApp() {
+            goToScreen('general');
+        }
+
+        // Reset app
+        function resetApp() {
+            openConfirmModal();
+        }
+
+        // Open share modal
+        function openShareModal(itemName, category, shareUrl) {
+            const modal = document.getElementById('shareModal');
+            const linkInput = document.getElementById('shareLinkInput');
+            const optionsContainer = document.getElementById('shareOptionsContainer');
+
+            // Set share URL
+            linkInput.value = shareUrl || window.location.href;
+
+            // Create share message
+            const messages = {
+                cars: `🚗 I just found my perfect car on OptiFind: ${itemName}! Find yours too:`,
+                gadgets: `📱 Check out this awesome gadget I discovered: ${itemName}! Get personalized recommendations:`,
+                travel: `✈️ My next destination is ${itemName}! Find your perfect getaway:`,
+                books: `📚 OptiFind recommended this amazing book: ${itemName}! Discover your next read:`,
+                fitness: `💪 Found my perfect fitness plan: ${itemName}! Get yours:`
             };
 
-            // User data storage
-            let userData = {};
+            const message = messages[category] || `Check out what I found on OptiFind: ${itemName}!`;
+            const fullMessage = `${message} ${linkInput.value}`;
+            const encodedMessage = encodeURIComponent(fullMessage);
+            const encodedUrl = encodeURIComponent(linkInput.value);
 
-            // Initialize app
-            function initApp() {
-                // Load saved data from localStorage
-                const savedData = localStorage.getItem('optifindData');
-                if (savedData) {
-                    userData = JSON.parse(savedData);
-                    restoreUserSelections();
+            // Create share options
+            const shareOptions = [
+                {
+                    icon: '💬',
+                    label: 'WhatsApp',
+                    url: `https://wa.me/?text=${encodedMessage}`
+                },
+                {
+                    icon: '✈️',
+                    label: 'Telegram',
+                    url: `https://t.me/share/url?url=${encodedUrl}&text=${encodeURIComponent(message)}`
+                },
+                {
+                    icon: '🐦',
+                    label: 'Twitter',
+                    url: `https://twitter.com/intent/tweet?text=${encodedMessage}`
+                },
+                {
+                    icon: '📘',
+                    label: 'Facebook',
+                    url: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`
                 }
+            ];
 
-                // Set up category grid
-                renderCategoryGrid();
+            optionsContainer.innerHTML = shareOptions.map(opt => `
+                <a href="${opt.url}" target="_blank" class="share-option" onclick="closeModal('shareModal')">
+                    <div class="share-icon">${opt.icon}</div>
+                    <div class="share-label">${opt.label}</div>
+                </a>
+            `).join('');
 
-                // Animate progress bars on load
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Open confirmation modal
+        function openConfirmModal() {
+            const modal = document.getElementById('confirmModal');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close modal
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal on overlay click
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal-overlay')) {
+                closeModal(e.target.id);
+            }
+        });
+
+        // Close modal on ESC key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal('shareModal');
+                closeModal('confirmModal');
+            }
+        });
+
+        // Copy share link
+        function copyShareLink() {
+            const input = document.getElementById('shareLinkInput');
+            const btn = input.nextElementSibling;
+            
+            input.select();
+            input.setSelectionRange(0, 99999); // For mobile devices
+
+            navigator.clipboard.writeText(input.value).then(() => {
+                btn.textContent = '✓ Copied!';
+                btn.classList.add('copied');
+                
                 setTimeout(() => {
-                    document.getElementById('progress1').style.width = '33%';
-                    document.getElementById('progress2').style.width = '66%';
-                    document.getElementById('progress3').style.width = '100%';
-                }, 100);
-            }
+                    btn.textContent = 'Copy';
+                    btn.classList.remove('copied');
+                }, 2000);
+            }).catch(() => {
+                // Fallback for older browsers
+                document.execCommand('copy');
+                btn.textContent = '✓ Copied!';
+                btn.classList.add('copied');
+                
+                setTimeout(() => {
+                    btn.textContent = 'Copy';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
 
-            // Save data to localStorage
-            function saveData() {
-                localStorage.setItem('optifindData', JSON.stringify(userData));
-            }
+        // Confirm reset
+        function confirmReset() {
+            localStorage.removeItem('optifindData');
+            userData = {};
+            closeModal('confirmModal');
+            location.reload();
+        }
 
-            // Restore user selections from saved data
-            function restoreUserSelections() {
-                Object.keys(userData).forEach(key => {
-                    const buttons = document.querySelectorAll(`[data-question="${key}"]`);
-                    buttons.forEach(btn => {
-                        if (btn.dataset.value === userData[key]) {
-                            btn.classList.add('selected');
-                        }
-                    });
+        // Navigate between screens
+        function goToScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(screenId).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        // Set up option button listeners
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('option-btn')) {
+                const question = e.target.dataset.question;
+                const value = e.target.dataset.value;
+                
+                // Deselect all options for this question
+                document.querySelectorAll(`[data-question="${question}"]`).forEach(btn => {
+                    btn.classList.remove('selected');
                 });
-            }
+                
+                // Select clicked option
+                e.target.classList.add('selected');
+                
+                // Save to userData and localStorage
+                userData[question] = value;
+                saveData();
 
-            // Start app
-            function startApp() {
-                goToScreen('general');
-            }
-
-            // Reset app
-            function resetApp() {
-                if (confirm('Are you sure you want to start fresh? This will clear all your answers.')) {
-                    localStorage.removeItem('optifindData');
-                    userData = {};
-                    location.reload();
+                // Hide error message if visible
+                const errorMsg = e.target.closest('.screen').querySelector('.error-message');
+                if (errorMsg) {
+                    errorMsg.classList.remove('show');
                 }
             }
+        });
 
-            // Navigate between screens
-            function goToScreen(screenId) {
-                document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-                document.getElementById(screenId).classList.add('active');
-                window.scrollTo(0, 0);
+        // Validate and proceed to next screen
+        function validateAndProceed(currentScreen, nextScreen) {
+            const requiredQuestions = currentScreen === 'general' 
+                ? ['age', 'budget', 'lifestyle'] 
+                : getRequiredQuestionsForCategory();
+
+            const missingAnswers = requiredQuestions.filter(q => !userData[q]);
+
+            if (missingAnswers.length > 0) {
+                const errorElement = document.getElementById(`error-${currentScreen}`);
+                errorElement.textContent = '⚠️ Please answer all questions before continuing.';
+                errorElement.classList.add('show');
+                setTimeout(() => errorElement.classList.remove('show'), 3000);
+                return;
             }
 
-            // Set up option button listeners
-            document.addEventListener('click', function(e) {
-                if (e.target.classList.contains('option-btn')) {
-                    const question = e.target.dataset.question;
-                    const value = e.target.dataset.value;
-                    
-                    // Deselect all options for this question
-                    document.querySelectorAll(`[data-question="${question}"]`).forEach(btn => {
-                        btn.classList.remove('selected');
-                    });
-                    
-                    // Select clicked option
-                    e.target.classList.add('selected');
-                    
-                    // Save to userData and localStorage
-                    userData[question] = value;
-                    saveData();
+            goToScreen(nextScreen);
+        }
 
-                    // Hide error message if visible
-                    const errorMsg = e.target.closest('.screen').querySelector('.error-message');
-                    if (errorMsg) {
-                        errorMsg.classList.remove('show');
-                    }
-                }
+        // Get required questions for current category
+        function getRequiredQuestionsForCategory() {
+            if (!userData.category) return [];
+            const config = categoryConfig[userData.category];
+            return config.questions.map(q => q.id);
+        }
+
+        // Render category grid
+        function renderCategoryGrid() {
+            const grid = document.getElementById('categoryGrid');
+            grid.innerHTML = Object.keys(categoryConfig).map(key => {
+                const cat = categoryConfig[key];
+                return `
+                    <div class="category-card" onclick="selectCategory('${key}')">
+                        <div class="category-icon">${cat.icon}</div>
+                        <div class="category-name">${cat.name}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Select category
+        function selectCategory(catKey) {
+            userData.category = catKey;
+            saveData();
+            showSpecificQuestions(catKey);
+            goToScreen('specific');
+        }
+
+        // Show category-specific questions
+        function showSpecificQuestions(catKey) {
+            const config = categoryConfig[catKey];
+            const container = document.getElementById('specificQuestions');
+            
+            let html = `<h2>Almost there! 🎯</h2>`;
+            
+            config.questions.forEach(q => {
+                html += `
+                    <div class="question-group">
+                        <label class="question-label">${q.label}</label>
+                        <div class="options">
+                            ${q.options.map(opt => 
+                                `<button class="option-btn ${userData[q.id] === opt ? 'selected' : ''}" 
+                                         data-question="${q.id}" 
+                                         data-value="${opt}">${opt}</button>`
+                            ).join('')}
+                        </div>
+                    </div>
+                `;
             });
 
-            // Validate and proceed to next screen
-            function validateAndProceed(currentScreen, nextScreen) {
-                const requiredQuestions = currentScreen === 'general' 
-                    ? ['age', 'budget', 'lifestyle'] 
-                    : getRequiredQuestionsForCategory();
+            container.innerHTML = html;
+        }
 
-                const missingAnswers = requiredQuestions.filter(q => !userData[q]);
+        // Validate and show results
+        function validateAndShowResults() {
+            const requiredQuestions = getRequiredQuestionsForCategory();
+            const missingAnswers = requiredQuestions.filter(q => !userData[q]);
 
-                if (missingAnswers.length > 0) {
-                    const errorElement = document.getElementById(`error-${currentScreen}`);
-                    errorElement.textContent = '⚠️ Please answer all questions before continuing.';
-                    errorElement.classList.add('show');
-                    setTimeout(() => errorElement.classList.remove('show'), 3000);
-                    return;
-                }
-
-                goToScreen(nextScreen);
+            if (missingAnswers.length > 0) {
+                const errorElement = document.getElementById('error-specific');
+                errorElement.textContent = '⚠️ Please answer all questions to get your recommendations.';
+                errorElement.classList.add('show');
+                setTimeout(() => errorElement.classList.remove('show'), 3000);
+                return;
             }
 
-            // Get required questions for current category
-            function getRequiredQuestionsForCategory() {
-                if (!userData.category) return [];
-                const config = categoryConfig[userData.category];
-                return config.questions.map(q => q.id);
-            }
+            showResults();
+        }
 
-            // Render category grid
-            function renderCategoryGrid() {
-                const grid = document.getElementById('categoryGrid');
-                grid.innerHTML = Object.keys(categoryConfig).map(key => {
-                    const cat = categoryConfig[key];
-                    return `
-                        <div class="category-card" onclick="selectCategory('${key}')">
-                            <div class="category-icon">${cat.icon}</div>
-                            <div class="category-name">${cat.name}</div>
-                        </div>
-                    `;
-                }).join('');
-            }
+        // Smart recommendation algorithm
+        function getRecommendations() {
+            const category = userData.category;
+            const items = categoryConfig[category].items;
 
-            // Select category
-            function selectCategory(catKey) {
-                userData.category = catKey;
-                saveData();
-                showSpecificQuestions(catKey);
-                goToScreen('specific');
-            }
+            // Score each item based on user preferences
+            const scoredItems = items.map(item => {
+                let score = 0;
 
-            // Show category-specific questions
-            function showSpecificQuestions(catKey) {
-                const config = categoryConfig[catKey];
-                const container = document.getElementById('specificQuestions');
+                // Budget match (highest priority)
+                if (item.budget === userData.budget) score += 10;
                 
-                let html = `<h2>Almost there! 🎯</h2>`;
-                
-                config.questions.forEach(q => {
-                    html += `
-                        <div class="question-group">
-                            <label class="question-label">${q.label}</label>
-                            <div class="options">
-                                ${q.options.map(opt => 
-                                    `<button class="option-btn ${userData[q.id] === opt ? 'selected' : ''}" 
-                                            data-question="${q.id}" 
-                                            data-value="${opt}">${opt}</button>`
-                                ).join('')}
-                            </div>
-                        </div>
-                    `;
+                // Category-specific matches
+                categoryConfig[category].questions.forEach(q => {
+                    if (item[q.id] === userData[q.id]) score += 5;
                 });
 
-                container.innerHTML = html;
-            }
+                // Lifestyle match
+                if (item.lifestyle === userData.lifestyle) score += 3;
 
-            // Validate and show results
-            function validateAndShowResults() {
-                const requiredQuestions = getRequiredQuestionsForCategory();
-                const missingAnswers = requiredQuestions.filter(q => !userData[q]);
+                // Age match
+                if (item.age === userData.age) score += 2;
 
-                if (missingAnswers.length > 0) {
-                    const errorElement = document.getElementById('error-specific');
-                    errorElement.textContent = '⚠️ Please answer all questions to get your recommendations.';
-                    errorElement.classList.add('show');
-                    setTimeout(() => errorElement.classList.remove('show'), 3000);
-                    return;
-                }
+                return { ...item, score };
+            });
 
-                showResults();
-            }
+            // Sort by score and return top 3
+            return scoredItems.sort((a, b) => b.score - a.score).slice(0, 3);
+        }
 
-            // Smart recommendation algorithm
-            function getRecommendations() {
-                const category = userData.category;
-                const items = categoryConfig[category].items;
+        // Show results
+        function showResults() {
+            const recommendations = getRecommendations();
+            const container = document.getElementById('resultsContent');
+            
+            let html = `
+                <h2>🎉 Perfect matches for you!</h2>
+                <div class="hint-banner">
+                    Based on your preferences, here are our top recommendations:
+                </div>
+            `;
 
-                // Score each item based on user preferences
-                const scoredItems = items.map(item => {
-                    let score = 0;
-
-                    // Budget match (highest priority)
-                    if (item.budget === userData.budget) score += 10;
-                    
-                    // Category-specific matches
-                    categoryConfig[category].questions.forEach(q => {
-                        if (item[q.id] === userData[q.id]) score += 5;
-                    });
-
-                    // Lifestyle match
-                    if (item.lifestyle === userData.lifestyle) score += 3;
-
-                    // Age match
-                    if (item.age === userData.age) score += 2;
-
-                    return { ...item, score };
-                });
-
-                // Sort by score and return top 3
-                return scoredItems.sort((a, b) => b.score - a.score).slice(0, 3);
-            }
-
-            // Show results
-            function showResults() {
-                const recommendations = getRecommendations();
-                const container = document.getElementById('resultsContent');
-                
-                let html = `
-                    <h2>🎉 Perfect matches for you!</h2>
-                    <div class="hint-banner">
-                        Based on your preferences, here are our top recommendations:
-                    </div>
-                `;
-
-                recommendations.forEach((item, index) => {
-                    const detailKeys = Object.keys(item).filter(k => 
-                        !['name', 'icon', 'image', 'score'].includes(k)
-                    );
-
-                    html += `
-                        <div class="result-card" style="animation-delay: ${index * 0.1}s">
-                            <div class="result-image">
-                                <img src="${item.image}" alt="${item.name}" onerror="this.style.display='none'; this.parentElement.innerHTML='${item.icon}';">
-                            </div>
-                            <div class="result-content">
-                                <div class="result-title">${index === 0 ? '🏆 ' : ''}${item.name}</div>
-                                <div class="result-description">
-                                    ${index === 0 ? 'Our top recommendation based on your preferences!' : 
-                                    'A great alternative that matches your needs perfectly.'}
-                                </div>
-                                <div class="result-details">
-                                    ${detailKeys.map(k => 
-                                        `<span class="detail-tag">${k}: ${item[k]}</span>`
-                                    ).join('')}
-                                </div>
-                                <div class="result-actions">
-                                    <button class="share-btn" onclick="shareResult('${item.name}', '${userData.category}')">
-                                        Share 📤
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                });
+            recommendations.forEach((item, index) => {
+                const detailKeys = Object.keys(item).filter(k => 
+                    !['name', 'icon', 'image', 'score'].includes(k)
+                );
 
                 html += `
-                    <div class="cta-box">
-                        <h3>🎁 Invite Friends!</h3>
-                        <p>Know someone who needs recommendations? Share OptiFind with them!</p>
-                        <button class="cta-btn" onclick="inviteFriend()">Invite Now</button>
+                    <div class="result-card" style="animation-delay: ${index * 0.1}s">
+                        <div class="result-image">
+                            <img src="${item.image}" alt="${item.name}" onerror="this.style.display='none'; this.parentElement.innerHTML='${item.icon}';">
+                        </div>
+                        <div class="result-content">
+                            <div class="result-title">${index === 0 ? '🏆 ' : ''}${item.name}</div>
+                            <div class="result-description">
+                                ${index === 0 ? 'Our top recommendation based on your preferences!' : 
+                                  'A great alternative that matches your needs perfectly.'}
+                            </div>
+                            <div class="result-details">
+                                ${detailKeys.map(k => 
+                                    `<span class="detail-tag">${k}: ${item[k]}</span>`
+                                ).join('')}
+                            </div>
+                            <div class="result-actions">
+                                <button class="share-btn" onclick="shareResult('${item.name}', '${userData.category}')">
+                                    Share 📤
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                    <button class="btn" onclick="startOver()" style="margin-top: 20px;">Find More Recommendations</button>
                 `;
+            });
 
-                container.innerHTML = html;
-                goToScreen('results');
-            }
+            html += `
+                <div class="cta-box">
+                    <h3>🎁 Invite Friends!</h3>
+                    <p>Know someone who needs recommendations? Share OptiFind with them!</p>
+                    <button class="cta-btn" onclick="inviteFriend()">Invite Now</button>
+                </div>
+                <button class="btn" onclick="startOver()" style="margin-top: 20px;">Find More Recommendations</button>
+            `;
 
-            // Share result
-            function shareResult(itemName, category) {
-                const messages = {
-                    cars: `🚗 I just found my perfect car on OptiFind: ${itemName}! Find yours too: ${window.location.href}`,
-                    gadgets: `📱 Check out this awesome gadget I discovered: ${itemName}! Get personalized recommendations: ${window.location.href}`,
-                    travel: `✈️ My next destination is ${itemName}! Find your perfect getaway: ${window.location.href}`,
-                    books: `📚 OptiFind recommended this amazing book: ${itemName}! Discover your next read: ${window.location.href}`,
-                    fitness: `💪 Found my perfect fitness plan: ${itemName}! Get yours: ${window.location.href}`
-                };
+            container.innerHTML = html;
+            goToScreen('results');
+        }
 
-                const message = messages[category] || `Check out what I found on OptiFind: ${itemName}! ${window.location.href}`;
+        // Share result
+        function shareResult(itemName, category) {
+            const shareUrl = window.location.href;
+            openShareModal(itemName, category, shareUrl);
+        }
 
-                if (navigator.share) {
-                    navigator.share({
-                        title: 'OptiFind Recommendation',
-                        text: message,
-                        url: window.location.href
-                    }).catch(() => {});
-                } else {
-                    // Fallback: Copy to clipboard
-                    navigator.clipboard.writeText(message).then(() => {
-                        alert('✅ Message copied! Share it on WhatsApp, Twitter, or any platform.');
-                    }).catch(() => {
-                        // Show share options
-                        const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
-                        const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(message)}`;
-                        const telegramUrl = `https://t.me/share/url?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(message)}`;
-                        
-                        const choice = confirm('Share on:\n1. WhatsApp (OK)\n2. Twitter (Cancel)');
-                        window.open(choice ? whatsappUrl : twitterUrl, '_blank');
-                    });
-                }
-            }
+        // Invite friend
+        function inviteFriend() {
+            const inviteMessage = '🎁 I found this amazing app that gives personalized recommendations for Cars, Gadgets, Travel, Books & Fitness! Try OptiFind';
+            openShareModal('OptiFind', 'general', window.location.href);
+            
+            // Update modal title for invite
+            document.querySelector('#shareModal .modal-title').textContent = 'Invite Friends';
+            document.querySelector('#shareModal .modal-description').textContent = 'Share OptiFind with your friends and help them find what they love!';
+        }
 
-            // Invite friend
-            function inviteFriend() {
-                const inviteMessage = `🎁 I found this amazing app that gives personalized recommendations for Cars, Gadgets, Travel, Books & Fitness! Try OptiFind: ${window.location.href}`;
-                
-                if (navigator.share) {
-                    navigator.share({
-                        title: 'Try OptiFind!',
-                        text: inviteMessage,
-                        url: window.location.href
-                    }).catch(() => {});
-                } else {
-                    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(inviteMessage)}`;
-                    window.open(whatsappUrl, '_blank');
-                }
-            }
+        // Start over
+        function startOver() {
+            // Keep general preferences, clear category-specific
+            const generalData = {
+                age: userData.age,
+                budget: userData.budget,
+                lifestyle: userData.lifestyle
+            };
+            userData = generalData;
+            saveData();
+            goToScreen('category');
+        }
 
-            // Start over
-            function startOver() {
-                // Keep general preferences, clear category-specific
-                const generalData = {
-                    age: userData.age,
-                    budget: userData.budget,
-                    lifestyle: userData.lifestyle
-                };
-                userData = generalData;
-                saveData();
-                goToScreen('category');
-            }
-
-            // Initialize app on load
-            initApp();
-        </script>
-    </body>
-    </html>                             
+        // Initialize app on load
+        initApp();
+    </script>
+</body>
+</html>
