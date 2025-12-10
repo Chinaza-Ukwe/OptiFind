@@ -3,11 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OptiFind - Find the best options for you!</title>
-   <link rel="icon" href="https://i.imgur.com/Mqks1oR.png" type="image/png">
-
-
+    <title>OptiFind - Find the best choice for you</title>
+    
+    <!-- External Resources -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
     <style>
+        /* ========== CSS VARIABLES ========== */
+        :root {
+            --soft-blue: #6C8EF5;
+            --light-blue: #A8C6FF;
+            --cool-grey: #F5F7FA;
+            --dark-grey: #4A5568;
+            --white: #FFFFFF;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            --radius: 12px;
+        }
+
+        /* ========== GLOBAL STYLES ========== */
         * {
             margin: 0;
             padding: 0;
@@ -15,1578 +29,1740 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: #f5f5f5;
-            color: #212121;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 16px;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--cool-grey);
+            color: var(--dark-grey);
+            line-height: 1.6;
         }
 
         .container {
-            width: 100%;
-            max-width: 420px;
-            background: #fff;
-            border-radius: 24px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            overflow: hidden;
-            min-height: 600px;
-            display: flex;
-            flex-direction: column;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
 
-        .screen {
-            display: none;
-            flex-direction: column;
-            padding: 32px 20px;
-            min-height: 600px;
-            animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        /* ========== HEADER ========== */
+        header {
+            background-color: var(--white);
+            padding: 20px 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
-        .screen.active {
-            display: flex;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes slideIn {
-            from { transform: translateX(-100%); }
-            to { transform: translateX(0); }
-        }
-
-        .header {
-            background: #4CAF50;
-            padding: 16px 20px;
+        .logo {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 28px;
+            color: var(--soft-blue);
             display: flex;
             align-items: center;
-            color: white;
-            min-height: 64px;
-            position: relative;
-        }
-
-        .back-btn {
-            background: rgba(255,255,255,0.2);
-            border: none;
-            color: white;
-            font-size: 24px;
             cursor: pointer;
-            padding: 8px 12px;
-            margin-right: 12px;
-            border-radius: 8px;
-            transition: all 0.2s ease;
         }
 
-        .back-btn:hover {
-            background: rgba(255,255,255,0.3);
-            transform: translateX(-2px);
+        .logo i {
+            margin-right: 10px;
+            font-size: 24px;
         }
 
-        .back-btn:active {
-            transform: scale(0.95);
+        /* ========== MAIN CONTENT ========== */
+        .main-content {
+            min-height: calc(100vh - 140px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 40px 0;
         }
 
-        .header-title {
-            font-size: 18px;
-            font-weight: 600;
+        /* ========== WELCOME SCREEN ========== */
+        .welcome-screen {
+            text-align: center;
         }
 
-        .progress-container {
-            margin-top: 12px;
+        .main-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--soft-blue);
+            margin-bottom: 15px;
+        }
+
+        .subtext {
+            font-size: 20px;
+            color: var(--dark-grey);
+            margin-bottom: 60px;
+            font-weight: 300;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .option-card {
+            background-color: var(--white);
+            border-radius: var(--radius);
+            padding: 30px 20px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 2px solid transparent;
+        }
+
+        .option-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--light-blue);
+        }
+
+        .option-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background-color: var(--light-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .option-icon i {
+            font-size: 30px;
+            color: var(--soft-blue);
+        }
+
+        .option-card h3 {
+            font-size: 22px;
+            color: var(--dark-grey);
+            margin-bottom: 10px;
+        }
+
+        .option-card p {
+            color: #718096;
+            text-align: center;
+            font-size: 15px;
+        }
+
+        /* ========== QUESTION FLOW PAGE ========== */
+        .question-screen {
+            max-width: 800px;
+            margin: 0 auto;
+            display: none;
         }
 
         .progress-bar {
             height: 6px;
-            background: rgba(255,255,255,0.3);
+            background-color: #E2E8F0;
             border-radius: 3px;
+            margin-bottom: 40px;
             overflow: hidden;
         }
 
-        .progress-fill {
+        .progress {
             height: 100%;
-            background: white;
-            width: 0%;
-            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 0 10px rgba(255,255,255,0.5);
+            background-color: var(--soft-blue);
+            width: 20%;
+            transition: width 0.5s ease;
         }
 
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 24px;
+        .question-container {
+            background-color: var(--white);
+            border-radius: var(--radius);
+            padding: 40px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
         }
 
-        .logo-icon {
-            width: 56px;
-            height: 56px;
-            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 32px;
-            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+        .question-number {
+            color: var(--soft-blue);
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 14px;
         }
 
-        .logo-text {
-            font-size: 32px;
-            font-weight: 700;
-            color: #212121;
-        }
-
-        h1 {
-            font-size: 28px;
-            margin-bottom: 12px;
-            line-height: 1.3;
-            color: #212121;
-        }
-
-        h2 {
+        .question-text {
             font-size: 24px;
-            margin-bottom: 20px;
-            color: #212121;
-        }
-
-        .subtitle {
-            font-size: 16px;
-            color: #666;
-            margin-bottom: 32px;
-            line-height: 1.5;
-        }
-
-        .gift-icon {
-            font-size: 96px;
-            text-align: center;
-            margin: 40px 0;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .btn {
-            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
-            color: white;
-            border: none;
-            padding: 16px 32px;
-            border-radius: 12px;
-            font-size: 16px;
             font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-top: auto;
-            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
-            position: relative;
-            overflow: hidden;
+            margin-bottom: 30px;
+            color: var(--dark-grey);
         }
 
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: rgba(255,255,255,0.2);
-            transition: left 0.5s ease;
-        }
-
-        .btn:hover::before {
-            left: 100%;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
-        }
-
-        .btn:active {
-            transform: translateY(0);
-        }
-
-        .btn:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-            box-shadow: none;
-            transform: none;
-        }
-
-        .question-group {
-            margin-bottom: 28px;
-            animation: slideIn 0.4s ease;
-        }
-
-        .question-label {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 12px;
-            display: block;
-            color: #212121;
-        }
-
-        .options {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
+        .options-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
         }
 
         .option-btn {
-            background: #f5f5f5;
-            border: 2px solid #e0e0e0;
-            padding: 12px 20px;
-            border-radius: 10px;
+            background-color: var(--cool-grey);
+            border: none;
+            padding: 18px 15px;
+            border-radius: var(--radius);
+            font-size: 16px;
+            color: var(--dark-grey);
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            font-size: 14px;
-            color: #212121;
-            font-weight: 500;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .option-btn::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(76, 175, 80, 0.1);
-            transform: translate(-50%, -50%);
-            transition: width 0.4s ease, height 0.4s ease;
-        }
-
-        .option-btn:active::before {
-            width: 300px;
-            height: 300px;
+            transition: all 0.2s ease;
+            text-align: center;
         }
 
         .option-btn:hover {
-            background: #e8e8e8;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            background-color: var(--light-blue);
+            color: var(--white);
         }
 
         .option-btn.selected {
-            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
-            border-color: #4CAF50;
-            color: #2E7D32;
-            font-weight: 600;
-            transform: scale(1.02);
-            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2);
+            background-color: var(--soft-blue);
+            color: var(--white);
         }
 
-        .category-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 14px;
-            margin-bottom: 24px;
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
         }
 
-        .category-card {
-            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
-            border-radius: 16px;
-            padding: 28px 16px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 2px solid transparent;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .category-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(76, 175, 80, 0.1) 0%, transparent 70%);
-            transform: scale(0);
-            transition: transform 0.5s ease;
-        }
-
-        .category-card:hover::before {
-            transform: scale(1);
-        }
-
-        .category-card:hover {
-            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
-            border-color: #4CAF50;
-            transform: translateY(-6px) scale(1.02);
-            box-shadow: 0 8px 20px rgba(76, 175, 80, 0.3);
-        }
-
-        .category-card:active {
-            transform: translateY(-2px) scale(0.98);
-        }
-
-        .category-icon {
-            font-size: 56px;
-            margin-bottom: 12px;
-            transition: transform 0.3s ease;
-        }
-
-        .category-card:hover .category-icon {
-            transform: scale(1.1) rotate(5deg);
-        }
-
-        .category-name {
+        .nav-btn {
+            padding: 12px 30px;
+            border-radius: var(--radius);
             font-size: 16px;
-            font-weight: 600;
-            color: #212121;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            font-weight: 500;
         }
 
-        .result-card {
-            background: #fff;
-            border-radius: 16px;
-            padding: 0;
-            margin-bottom: 20px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            overflow: hidden;
-            animation: slideUp 0.5s ease;
+        .nav-btn.back {
+            background-color: transparent;
+            color: var(--dark-grey);
         }
 
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+        .nav-btn.back:hover {
+            background-color: #EDF2F7;
         }
 
-        .result-card:hover {
-            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-            transform: translateY(-4px);
+        .nav-btn.next {
+            background-color: var(--soft-blue);
+            color: var(--white);
         }
 
-        .result-image {
-            width: 100%;
-            height: 220px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        .nav-btn.next:hover {
+            background-color: #5A7AF0;
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* ========== THREE DOTS MENU ========== */
+        .saved-item {
+            position: relative;
+            padding-right: 40px;
+        }
+
+        .action-btn.saved {
+            background-color: #52BE80;
+            color: white;
+        }
+
+        .action-btn.saved:hover {
+            background-color: #45A86F;
+        }
+
+        .three-dots-menu {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #718096;
+            font-size: 18px;
+            padding: 5px;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+            z-index: 2;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 80px;
+            width: 30px;
+            height: 30px;
+        }
+
+        .three-dots-menu:hover {
+            color: var(--soft-blue);
+            background-color: rgba(108, 142, 245, 0.1);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 35px;
+            right: 10px;
+            background-color: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 8px 0;
+            min-width: 120px;
+            display: none;
+            z-index: 10;
+            border: 1px solid #E2E8F0;
+        }
+
+        .dropdown-menu.show {
+            display: block;
+        }
+
+        .dropdown-item {
+            padding: 8px 16px;
+            background: none;
+            border: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            font-size: 14px;
+            color: var(--dark-grey);
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dropdown-item:hover {
+            background-color: var(--cool-grey);
+            color: var(--soft-blue);
+        }
+
+        .dropdown-item.delete {
+            color: #E53E3E;
+        }
+
+        .dropdown-item.delete:hover {
+            background-color: rgba(229, 62, 62, 0.1);
+        }
+
+        /* For saved item cards on homepage */
+        .saved-item-card {
             position: relative;
+            padding-right: 40px;
+        }
+
+        .saved-item-card .three-dots-menu {
+            top: 10px;
+            right: 10px;
+        }
+
+        .saved-item-card .dropdown-menu {
+            top: 35px;
+            right: 10px;
+        }
+
+        /* Prevent text selection on three dots menu */
+        .three-dots-menu, .dropdown-menu {
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        /* ========== RECOMMENDATION PAGE ========== */
+        .recommendation-screen {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+            display: none;
+        }
+
+        .recommendation-card {
+            background-color: var(--white);
+            border-radius: var(--radius);
+            padding: 50px 40px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+        }
+
+        .recommendation-logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: var(--light-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
             overflow: hidden;
         }
 
-        .result-image img {
+        .recommendation-logo img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
-        .result-content {
-            padding: 20px;
-        }
-
-        .result-title {
-            font-size: 22px;
+        .recommendation-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 36px;
             font-weight: 700;
-            margin-bottom: 8px;
-            color: #212121;
-        }
-
-        .result-description {
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 16px;
-            line-height: 1.6;
-        }
-
-        .result-details {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 16px;
-        }
-
-        .detail-tag {
-            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
-            color: #2E7D32;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            border: 1px solid #4CAF50;
-        }
-
-        .result-actions {
-            display: flex;
-            gap: 10px;
-        }
-
-        .share-btn {
-            flex: 1;
-            background: linear-gradient(135deg, #FFC107 0%, #FFB300 100%);
-            color: #212121;
-            border: none;
-            padding: 14px 20px;
-            border-radius: 10px;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
-        }
-
-        .share-btn:hover {
-            background: linear-gradient(135deg, #FFB300 0%, #FFA000 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 193, 7, 0.4);
-        }
-
-        .share-btn:active {
-            transform: translateY(0);
-        }
-
-        .view-btn {
-            flex: 1;
-            background: #4CAF50;
-            color: white;
-            border: none;
-            padding: 14px 20px;
-            border-radius: 10px;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .view-btn:hover {
-            background: #45a049;
-            transform: translateY(-2px);
-        }
-
-        .content {
-            flex: 1;
-            overflow-y: auto;
-        }
-
-        .tooltip {
-            position: relative;
-            display: inline-block;
-        }
-
-        .tooltip-text {
-            visibility: hidden;
-            background: #212121;
-            color: white;
-            text-align: center;
-            padding: 8px 12px;
-            border-radius: 8px;
-            position: absolute;
-            z-index: 1;
-            bottom: 125%;
-            left: 50%;
-            transform: translateX(-50%);
-            opacity: 0;
-            transition: opacity 0.3s;
-            font-size: 12px;
-            white-space: nowrap;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        }
-
-        .tooltip:hover .tooltip-text {
-            visibility: visible;
-            opacity: 1;
-        }
-
-        .hint-banner {
-            background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
-            border-left: 4px solid #2196F3;
-            padding: 12px 16px;
-            border-radius: 8px;
+            color: var(--dark-grey);
             margin-bottom: 20px;
-            font-size: 14px;
-            color: #1565C0;
-            animation: slideIn 0.5s ease;
         }
 
-        .hint-banner strong {
-            font-weight: 600;
-        }
-
-        .cta-box {
-            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
-            border-radius: 12px;
-            padding: 16px;
-            margin-top: 20px;
-            text-align: center;
-            border: 2px dashed #FF9800;
-        }
-
-        .cta-box h3 {
+        .recommendation-author {
             font-size: 18px;
-            margin-bottom: 8px;
-            color: #E65100;
+            color: #718096;
+            margin-bottom: 30px;
+            font-style: italic;
         }
 
-        .cta-box p {
-            font-size: 14px;
-            color: #EF6C00;
-            margin-bottom: 12px;
-        }
-
-        .cta-btn {
-            background: #FF9800;
-            color: white;
-            border: none;
-            padding: 10px 24px;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .cta-btn:hover {
-            background: #F57C00;
-            transform: translateY(-2px);
-        }
-
-        .error-message {
-            background: #FFEBEE;
-            color: #C62828;
-            padding: 12px 16px;
-            border-radius: 8px;
-            margin-bottom: 16px;
-            font-size: 14px;
-            border-left: 4px solid #D32F2F;
-            display: none;
-        }
-
-        .error-message.show {
-            display: block;
-            animation: shake 0.5s ease;
-        }
-
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-10px); }
-            75% { transform: translateX(10px); }
-        }
-
-        .reset-btn {
-            background: transparent;
-            color: #666;
-            border: 2px solid #ccc;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-size: 14px;
-            cursor: pointer;
-            margin-top: 12px;
-            transition: all 0.3s ease;
-        }
-
-        .reset-btn:hover {
-            background: #f5f5f5;
-            border-color: #999;
-            color: #212121;
-        }
-
-        @media (min-width: 768px) {
-            .container {
-                max-width: 480px;
-            }
-            
-            .category-grid {
-                gap: 16px;
-            }
-        }
-
-        @media (min-width: 1024px) {
-            body {
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            }
-        }
-
-        /* Loading animation */
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,.3);
-            border-radius: 50%;
-            border-top-color: white;
-            animation: spin 1s ease-in-out infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* Modal Styles */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.6);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            padding: 20px;
-            animation: fadeInOverlay 0.3s ease;
-        }
-
-        .modal-overlay.active {
-            display: flex;
-        }
-
-        @keyframes fadeInOverlay {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .modal {
-            background: white;
-            border-radius: 20px;
-            max-width: 400px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            animation: slideUpModal 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-        }
-
-        @keyframes slideUpModal {
-            from { 
-                opacity: 0;
-                transform: translateY(50px) scale(0.9);
-            }
-            to { 
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-
-        .modal-header {
-            padding: 24px 24px 16px;
-            border-bottom: 1px solid #e0e0e0;
-            position: relative;
-        }
-
-        .modal-title {
-            font-size: 22px;
-            font-weight: 700;
-            color: #212121;
-            margin: 0;
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: #f5f5f5;
-            border: none;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            font-size: 24px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s ease;
-            color: #666;
-        }
-
-        .modal-close:hover {
-            background: #e0e0e0;
-            transform: rotate(90deg);
-        }
-
-        .modal-body {
-            padding: 24px;
-        }
-
-        .modal-footer {
-            padding: 16px 24px 24px;
-            display: flex;
-            gap: 12px;
-            justify-content: flex-end;
-        }
-
-        /* Share Modal Styles */
-        .share-options {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-
-        .share-option {
-            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
-            border: 2px solid #e0e0e0;
-            border-radius: 12px;
-            padding: 16px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            color: #212121;
-        }
-
-        .share-option:hover {
-            border-color: #4CAF50;
-            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
-            transform: translateY(-4px);
-            box-shadow: 0 6px 16px rgba(76, 175, 80, 0.2);
-        }
-
-        .share-option:active {
-            transform: translateY(-2px);
-        }
-
-        .share-icon {
-            font-size: 32px;
-        }
-
-        .share-label {
-            font-size: 14px;
-            font-weight: 600;
-        }
-
-        .copy-link-container {
-            background: #f5f5f5;
-            border: 2px solid #e0e0e0;
-            border-radius: 12px;
-            padding: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 16px;
-        }
-
-        .copy-link-input {
-            flex: 1;
-            background: transparent;
-            border: none;
-            font-size: 14px;
-            color: #666;
-            outline: none;
-        }
-
-        .copy-btn {
-            background: #4CAF50;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            white-space: nowrap;
-        }
-
-        .copy-btn:hover {
-            background: #45a049;
-        }
-
-        .copy-btn.copied {
-            background: #2196F3;
-        }
-
-        .modal-description {
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 20px;
+        .recommendation-tagline {
+            font-size: 20px;
+            color: var(--dark-grey);
+            margin-bottom: 30px;
             line-height: 1.5;
         }
 
-        /* Confirmation Modal Styles */
-        .modal-icon {
-            width: 64px;
-            height: 64px;
-            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+        .match-reasons {
+            background-color: var(--cool-grey);
+            border-radius: var(--radius);
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .match-reasons h3 {
+            font-size: 18px;
+            color: var(--soft-blue);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .match-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .match-tag {
+            background-color: var(--soft-blue);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .try-message {
+            font-size: 22px;
+            color: var(--soft-blue);
+            font-weight: 600;
+            margin-bottom: 40px;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .action-btn {
+            padding: 14px 30px;
+            border-radius: var(--radius);
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .action-btn.primary {
+            background-color: var(--soft-blue);
+            color: var(--white);
+        }
+
+        .action-btn.primary:hover {
+            background-color: #5A7AF0;
+        }
+
+        .action-btn.secondary {
+            background-color: transparent;
+            color: var(--dark-grey);
+            border: 1px solid #CBD5E0;
+        }
+
+        .action-btn.secondary:hover {
+            background-color: #EDF2F7;
+        }
+
+        .action-btn.tertiary {
+            background-color: transparent;
+            color: var(--soft-blue);
+            border: 1px solid var(--soft-blue);
+        }
+
+        .action-btn.tertiary:hover {
+            background-color: rgba(108, 142, 245, 0.1);
+        }
+
+        .social-share {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .social-btn {
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 32px;
-            margin: 0 auto 16px;
-        }
-
-        .modal-message {
-            text-align: center;
-            font-size: 16px;
-            color: #666;
-            line-height: 1.6;
-        }
-
-        .modal-btn {
-            flex: 1;
-            padding: 14px 24px;
-            border-radius: 10px;
-            font-size: 15px;
-            font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             border: none;
-        }
-
-        .modal-btn-secondary {
-            background: #f5f5f5;
-            color: #212121;
-            border: 2px solid #e0e0e0;
-        }
-
-        .modal-btn-secondary:hover {
-            background: #e8e8e8;
-        }
-
-        .modal-btn-primary {
-            background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
+            font-size: 18px;
             color: white;
-            box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3);
         }
 
-        .modal-btn-primary:hover {
-            background: linear-gradient(135deg, #d32f2f 0%, #c62828 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(244, 67, 54, 0.4);
+        .social-btn.twitter { background-color: #1DA1F2; }
+        .social-btn.facebook { background-color: #1877F2; }
+        .social-btn.linkedin { background-color: #0A66C2; }
+        .social-btn.whatsapp { background-color: #25D366; }
+        .social-btn.reddit { background-color: #FF4500; }
+        .social-btn.link { background-color: var(--dark-grey); }
+
+        .social-btn:hover {
+            transform: translateY(-3px);
+            opacity: 0.9;
         }
 
-        .modal-btn-primary:active {
+        /* ========== TOAST NOTIFICATION ========== */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--soft-blue);
+            color: white;
+            padding: 15px 25px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .toast.show {
             transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* ========== SAVED RECOMMENDATIONS ========== */
+        .saved-recommendations {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background-color: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 20px;
+            width: 300px;
+            max-height: 400px;
+            overflow-y: auto;
+            display: none;
+            z-index: 99;
+        }
+
+        .saved-recommendations.show {
+            display: block;
+        }
+
+        .saved-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #E2E8F0;
+        }
+
+        .saved-item {
+            padding: 10px;
+            border-radius: var(--radius);
+            background-color: var(--cool-grey);
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .saved-item:hover {
+            background-color: #E2E8F0;
+        }
+
+        .save-indicator {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: var(--soft-blue);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            display: none;
+        }
+
+        .save-indicator:hover {
+            transform: scale(1.1);
+        }
+
+        /* ========== SAVED ITEMS GRID ON HOMEPAGE ========== */
+        .saved-items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .saved-item-card {
+            background-color: var(--white);
+            border-radius: var(--radius);
+            padding: 15px;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-left: 4px solid var(--soft-blue);
+        }
+
+        .saved-item-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .saved-item-category {
+            font-size: 12px;
+            color: var(--soft-blue);
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .saved-item-name {
+            font-weight: 600;
+            color: var(--dark-grey);
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .saved-item-date {
+            font-size: 11px;
+            color: #718096;
+        }
+
+        /* ========== FOOTER ========== */
+        footer {
+            background-color: var(--white);
+            padding: 30px 0;
+            text-align: center;
+            color: #718096;
+            font-size: 14px;
+            margin-top: 40px;
+            border-top: 1px solid #E2E8F0;
+        }
+
+        /* ========== RESPONSIVE STYLES ========== */
+        @media (max-width: 768px) {
+            .main-title { font-size: 36px; }
+            .subtext { font-size: 18px; margin-bottom: 40px; }
+            .options-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+            .question-container { padding: 30px 20px; }
+            .question-text { font-size: 20px; }
+            .recommendation-title { font-size: 28px; }
+            .recommendation-card { padding: 40px 20px; }
+            .action-buttons { flex-direction: column; }
+            .action-btn { width: 100%; }
+            .saved-recommendations {
+                position: fixed;
+                top: auto;
+                bottom: 0;
+                right: 0;
+                left: 0;
+                width: 100%;
+                border-radius: var(--radius) var(--radius) 0 0;
+                max-height: 50vh;
+            }
+            .save-indicator { top: 10px; right: 10px; }
         }
 
         @media (max-width: 480px) {
-            .share-options {
-                grid-template-columns: 1fr;
-            }
-            
-            .modal-footer {
-                flex-direction: column-reverse;
-            }
-            
-            .modal-btn {
-                width: 100%;
-            }
+            .main-title { font-size: 30px; }
+            .subtext { font-size: 16px; }
+            .option-card { padding: 25px 15px; }
+            .options-container { grid-template-columns: 1fr; }
+            .navigation-buttons { flex-direction: column; gap: 15px; }
+            .nav-btn { width: 100%; }
         }
     </style>
 </head>
+
 <body>
-    <!-- Share Modal -->
-    <div class="modal-overlay" id="shareModal">
-        <div class="modal">
-            <div class="modal-header">
-                <h3 class="modal-title">Share Your Result</h3>
-                <button class="modal-close" onclick="closeModal('shareModal')">×</button>
+    <!-- ========== HEADER ========== -->
+    <header>
+        <div class="container">
+            <div class="logo" id="logo">
+                <i class="fas fa-search"></i> OptiFind
             </div>
-            <div class="modal-body">
-                <p class="modal-description">Share your personalized recommendation with friends and family!</p>
+        </div>
+    </header>
+
+    <!-- ========== MAIN CONTENT ========== -->
+    <div class="main-content">
+        <!-- Welcome Screen -->
+        <div class="container welcome-screen" id="welcomeScreen">
+            <h1 class="main-title">OptiFind</h1>
+            <p class="subtext">Find the best choice for you.</p>
+            
+            <div class="options-grid">
+                <div class="option-card" data-option="books">
+                    <div class="option-icon"><i class="fas fa-book"></i></div>
+                    <h3>Books to Buy</h3>
+                    <p>Find your next great read</p>
+                </div>
                 
-                <div class="copy-link-container">
-                    <input type="text" class="copy-link-input" id="shareLinkInput" readonly>
-                    <button class="copy-btn" onclick="copyShareLink()">Copy</button>
+                <div class="option-card" data-option="courses">
+                    <div class="option-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <h3>Courses</h3>
+                    <p>Discover the best courses to advance your career</p>
                 </div>
-
-                <div class="share-options" id="shareOptionsContainer"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Confirmation Modal -->
-    <div class="modal-overlay" id="confirmModal">
-        <div class="modal">
-            <div class="modal-header">
-                <h3 class="modal-title">Start Fresh?</h3>
-                <button class="modal-close" onclick="closeModal('confirmModal')">×</button>
-            </div>
-            <div class="modal-body">
-                <div class="modal-icon">⚠️</div>
-                <p class="modal-message">Are you sure you want to start fresh? This will clear all your answers and preferences.</p>
-            </div>
-            <div class="modal-footer">
-                <button class="modal-btn modal-btn-secondary" onclick="closeModal('confirmModal')">Cancel</button>
-                <button class="modal-btn modal-btn-primary" onclick="confirmReset()">Yes, Reset</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
-        <!-- Landing Screen -->
-        <div class="screen active" id="landing">
-            <div class="content">
-                <div class="logo">
-                    <div class="logo-icon">🔍</div>
-                    <div class="logo-text">OptiFind</div>
-                </div>
-                <h1>Find the best options for you!</h1>
-                <p class="subtitle">Answer a few quick questions and get personalized recommendations tailored to your preferences and budget.</p>
-                <div class="gift-icon">🎁</div>
-                <div class="hint-banner">
-                    <strong>💡 Pro tip:</strong> The more accurate your answers, the better your recommendations!
-                </div>
-            </div>
-            <button class="btn" onclick="startApp()">GET STARTED</button>
-            <button class="reset-btn" onclick="resetApp()">Start Fresh</button>
-        </div>
-
-        <!-- General Questions Screen -->
-        <div class="screen" id="general">
-            <div class="header">
-                <button class="back-btn" onclick="goToScreen('landing')">‹</button>
-                <div style="flex: 1;">
-                    <div class="header-title">Step 1 of 3</div>
-                    <div class="progress-container">
-                        <div class="progress-bar">
-                            <div class="progress-fill" id="progress1"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="content">
-                <div class="error-message" id="error-general"></div>
-                <h2>Tell us about yourself</h2>
                 
-                <div class="question-group">
-                    <label class="question-label">What's your age group?</label>
-                    <div class="options">
-                        <button class="option-btn" data-question="age" data-value="Under 18">Under 18</button>
-                        <button class="option-btn" data-question="age" data-value="18-25">18-25</button>
-                        <button class="option-btn" data-question="age" data-value="26-35">26-35</button>
-                        <button class="option-btn" data-question="age" data-value="36+">36+</button>
-                    </div>
+                <div class="option-card" data-option="apps">
+                    <div class="option-icon"><i class="fas fa-mobile-alt"></i></div>
+                    <h3>Apps to Use</h3>
+                    <p>Get recommendations for useful applications</p>
                 </div>
-
-                <div class="question-group">
-                    <label class="question-label">What's your budget level?</label>
-                    <div class="options">
-                        <button class="option-btn" data-question="budget" data-value="Low">💰 Low</button>
-                        <button class="option-btn" data-question="budget" data-value="Medium">💵 Medium</button>
-                        <button class="option-btn" data-question="budget" data-value="High">💎 High</button>
-                    </div>
-                </div>
-
-                <div class="question-group">
-                    <label class="question-label">What's your lifestyle?</label>
-                    <div class="options">
-                        <button class="option-btn" data-question="lifestyle" data-value="Casual">😌 Casual</button>
-                        <button class="option-btn" data-question="lifestyle" data-value="Active">🏃 Active</button>
-                        <button class="option-btn" data-question="lifestyle" data-value="Tech-Savvy">💻 Tech-Savvy</button>
-                        <button class="option-btn" data-question="lifestyle" data-value="Luxury">✨ Luxury</button>
-                    </div>
+                
+                <div class="option-card" data-option="skills">
+                    <div class="option-icon"><i class="fas fa-lightbulb"></i></div>
+                    <h3>Skills to Learn</h3>
+                    <p>Find skills that will make you more valuable</p>
                 </div>
             </div>
-            <button class="btn" onclick="validateAndProceed('general', 'category')">NEXT</button>
-        </div>
 
-        <!-- Category Selection Screen -->
-        <div class="screen" id="category">
-            <div class="header">
-                <button class="back-btn" onclick="goToScreen('general')">‹</button>
-                <div style="flex: 1;">
-                    <div class="header-title">Step 2 of 3</div>
-                    <div class="progress-container">
-                        <div class="progress-bar">
-                            <div class="progress-fill" id="progress2"></div>
-                        </div>
-                    </div>
+            <!-- Recent Recommendations -->
+            <div class="recent-recommendations" id="recentRecommendations" style="display: none; margin-top: 50px;">
+                <h3 style="color: var(--dark-grey); margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-history"></i> Your Recent Recommendations
+                </h3>
+                <div class="saved-items-grid" id="savedItemsGrid">
+                    <!-- Saved items will appear here -->
                 </div>
-            </div>
-            <div class="content">
-                <h2>What interests you?</h2>
-                <div class="hint-banner">
-                    <strong>📌 Choose wisely:</strong> Select the category you're most interested in right now.
+                <div class="view-all-saved" style="margin-top: 20px;">
+                    <button class="action-btn secondary" id="viewAllSavedBtn" style="padding: 10px 20px; font-size: 14px;">
+                        <i class="fas fa-bookmark"></i> View All Saved Recommendations
+                    </button>
                 </div>
-                <div class="category-grid" id="categoryGrid"></div>
             </div>
         </div>
 
-        <!-- Category-Specific Questions Screen -->
-        <div class="screen" id="specific">
-            <div class="header">
-                <button class="back-btn" onclick="goToScreen('category')">‹</button>
-                <div style="flex: 1;">
-                    <div class="header-title">Step 3 of 3</div>
-                    <div class="progress-container">
-                        <div class="progress-bar">
-                            <div class="progress-fill" id="progress3"></div>
-                        </div>
-                    </div>
+        <!-- Question Flow Page -->
+        <div class="container question-screen" id="questionScreen">
+            <div class="progress-bar">
+                <div class="progress" id="progressBar"></div>
+            </div>
+            
+            <div class="question-container">
+                <div class="question-number" id="questionNumber">Question 1 of 3</div>
+                <h2 class="question-text" id="questionText"></h2>
+                
+                <div class="options-container" id="optionsContainer">
+                    <!-- Options will be dynamically added here -->
                 </div>
             </div>
-            <div class="content">
-                <div class="error-message" id="error-specific"></div>
-                <div id="specificQuestions"></div>
+            
+            <div class="navigation-buttons">
+                <button class="nav-btn back" id="backBtn" disabled>
+                    <i class="fas fa-arrow-left"></i> Back
+                </button>
+                <button class="nav-btn next" id="nextBtn" disabled>
+                    Next <i class="fas fa-arrow-right"></i>
+                </button>
             </div>
-            <button class="btn" onclick="validateAndShowResults()">GET RECOMMENDATIONS</button>
         </div>
 
-        <!-- Results Screen -->
-        <div class="screen" id="results">
-            <div class="header">
-                <button class="back-btn" onclick="goToScreen('landing')">‹</button>
-                <div class="header-title">Your Perfect Match</div>
+        <!-- Recommendation Page -->
+        <div class="container recommendation-screen" id="recommendationScreen">
+            <div class="save-indicator" id="saveIndicator" title="Save this recommendation">
+                <i class="fas fa-bookmark"></i>
             </div>
-            <div class="content" id="resultsContent"></div>
+            
+            <div class="recommendation-card">
+                <div class="recommendation-logo" id="recommendationLogo">
+                    <!-- Image will be loaded here -->
+                </div>
+                
+                <h1 class="recommendation-title" id="recommendationTitle"></h1>
+                <div class="recommendation-author" id="recommendationAuthor"></div>
+                <p class="recommendation-tagline" id="recommendationTagline"></p>
+                
+                <div class="match-reasons" id="matchReasons">
+                    <h3><i class="fas fa-check-circle"></i> Why we recommended this:</h3>
+                    <div class="match-tags" id="matchTags">
+                        <!-- Matched tags will appear here -->
+                    </div>
+                </div>
+                
+                <div class="try-message">Go try it out.</div>
+                
+                <div class="action-buttons">
+                    <button class="action-btn primary" id="findMoreBtn">
+                        <i class="fas fa-search"></i> Find More Recommendations
+                    </button>
+                    <button class="action-btn secondary" id="retryBtn">
+                        <i class="fas fa-redo"></i> Adjust My Answers
+                    </button>
+                    <button class="action-btn tertiary" id="saveBtn">
+                        <i class="fas fa-bookmark"></i> Save Recommendation
+                    </button>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="action-btn secondary" id="shareBtn">
+                        <i class="fas fa-share-alt"></i> Share
+                    </button>
+                    <button class="action-btn secondary" id="viewSavedBtn">
+                        <i class="fas fa-history"></i> View Saved (0)
+                    </button>
+                </div>
+                
+                <!-- Social Share Buttons -->
+                <div class="social-share" id="socialShare" style="display: none;">
+                    <button class="social-btn twitter" data-platform="twitter"><i class="fab fa-twitter"></i></button>
+                    <button class="social-btn facebook" data-platform="facebook"><i class="fab fa-facebook-f"></i></button>
+                    <button class="social-btn linkedin" data-platform="linkedin"><i class="fab fa-linkedin-in"></i></button>
+                    <button class="social-btn whatsapp" data-platform="whatsapp"><i class="fab fa-whatsapp"></i></button>
+                    <button class="social-btn reddit" data-platform="reddit"><i class="fab fa-reddit-alien"></i></button>
+                    <button class="social-btn link" id="copyLinkBtn"><i class="fas fa-link"></i></button>
+                </div>
+            </div>
         </div>
     </div>
+
+    <!-- ========== SAVED RECOMMENDATIONS PANEL ========== -->
+    <div class="saved-recommendations" id="savedPanel">
+        <div class="saved-header">
+            <h3><i class="fas fa-bookmark"></i> Saved Recommendations</h3>
+            <button class="action-btn secondary" id="closeSavedBtn" style="padding: 5px 10px; font-size: 14px;">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div id="savedItems">
+            <!-- Saved items will appear here -->
+        </div>
+    </div>
+
+    <!-- ========== TOAST NOTIFICATION ========== -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage"></span>
+    </div>
+
+    <!-- ========== FOOTER ========== -->
+    <footer>
+        <div class="container">
+            <p>© 2025 OptiFind. All rights reserved.</p>
+            <p>Helping you make better decisions, one recommendation at a time.</p>
+        </div>
+    </footer>
 
     <script>
-        // Category configuration with questions
-        const categoryConfig = {
-            cars: {
-                name: 'Cars',
-                icon: '🚗',
-                questions: [
-                    {
-                        id: 'fuel',
-                        label: 'Preferred fuel type?',
-                        options: ['Petrol', 'Diesel', 'Electric', 'Hybrid']
-                    },
-                    {
-                        id: 'size',
-                        label: 'What size do you prefer?',
-                        options: ['Compact', 'Sedan', 'SUV', 'Truck']
-                    }
-                ],
-                items: [
-                    { name: "Toyota Camry", budget: "Medium", fuel: "Petrol", size: "Sedan", lifestyle: "Casual", age: "26-35", icon: "🚙", image: "https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=400" },
-                    { name: "Honda Civic", budget: "Medium", fuel: "Petrol", size: "Compact", lifestyle: "Active", age: "18-25", icon: "🚗", image: "https://imhttps://media.ed.edmunds-media.com/honda/civic/2026/oem/2026_honda_civic_sedan_si_fq_oem_1_600.jpgages.unsplash.com/photo-1590362891991-f776e747a588?w=400" },
-                    { name: "Tesla Model 3", budget: "High", fuel: "Electric", size: "Sedan", lifestyle: "Tech-Savvy", age: "26-35", icon: "⚡", image: "https://images.unsplash.com/photo-1560958089-b8a1929cea89?w=400" },
-                    { name: "BMW X5", budget: "High", fuel: "Diesel", size: "SUV", lifestyle: "Luxury", age: "36+", icon: "🚙", image: "https://images.unsplash.com/photo-1555215695-3004980ad54e?w=400" },
-                    { name: "Kia Picanto", budget: "Low", fuel: "Petrol", size: "Compact", lifestyle: "Casual", age: "18-25", icon: "🚗", image: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=400" },
-                    { name: "Ford F-150", budget: "High", fuel: "Diesel", size: "Truck", lifestyle: "Active", age: "36+", icon: "🚚", image: "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=400" },
-                    { name: "Toyota Prius", budget: "Medium", fuel: "Hybrid", size: "Sedan", lifestyle: "Tech-Savvy", age: "26-35", icon: "🌿", image: "https://images.unsplash.com/photo-1617654112368-307921291f42?w=400" }
-                ]
+        // ========== DATASET ==========
+        const itemsDataset = [
+            {
+                "id": 1,
+                "name": "Atomic Habits",
+                "image": "https://images-na.ssl-images-amazon.com/images/I/81YkqyaFVEL.jpg",
+                "tags": ["books", "non-fiction", "self-improvement", "productivity", "habits"],
+                "author": "by James Clear",
+                "tagline": "Tiny Changes, Remarkable Results",
+                "icon": "fas fa-book",
+                "color": "#6C8EF5"
             },
-            gadgets: {
-                name: 'Gadgets',
-                icon: '🎧',
-                questions: [
-                    {
-                        id: 'type',
-                        label: 'What type of gadget?',
-                        options: ['Phone', 'Audio', 'Tablet', 'Wearable', 'Accessory']
-                    },
-                    {
-                        id: 'purpose',
-                        label: 'Primary purpose?',
-                        options: ['Communication', 'Entertainment', 'Productivity', 'Fitness']
-                    }
-                ],
-                items: [
-                    { name: "iPhone 15 Pro", budget: "High", type: "Phone", purpose: "Communication", lifestyle: "Luxury", age: "26-35", icon: "📱", image: "https://images.unsplash.com/photo-1592286927505-2fd1d3a1d0e3?w=400" },
-                    { name: "Samsung Galaxy A54", budget: "Medium", type: "Phone", purpose: "Communication", lifestyle: "Tech-Savvy", age: "18-25", icon: "📱", image: "https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=400" },
-                    { name: "Sony WH-1000XM5", budget: "High", type: "Audio", purpose: "Entertainment", lifestyle: "Active", age: "26-35", icon: "🎧", image: "https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=400" },
-                    { name: "Anker PowerCore", budget: "Low", type: "Accessory", purpose: "Productivity", lifestyle: "Casual", age: "18-25", icon: "🔋", image: "https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?w=400" },
-                    { name: "iPad Air", budget: "High", type: "Tablet", purpose: "Productivity", lifestyle: "Tech-Savvy", age: "26-35", icon: "📱", image: "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=400" },
-                    { name: "Apple Watch Ultra", budget: "High", type: "Wearable", purpose: "Fitness", lifestyle: "Active", age: "26-35", icon: "⌚", image: "https://images.unsplash.com/photo-1434494878577-86c23bcb06b9?w=400" },
-                    { name: "JBL Flip 6", budget: "Medium", type: "Audio", purpose: "Entertainment", lifestyle: "Casual", age: "18-25", icon: "🔊", image: "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=400" }
-                ]
-            },
-            travel: {
-                name: 'Travel',
-                icon: '🏖️',
-                questions: [
-                    {
-                        id: 'type',
-                        label: 'What type of destination?',
-                        options: ['Beach', 'City', 'Adventure', 'Cultural']
-                    },
-                    {
-                        id: 'duration',
-                        label: 'How long?',
-                        options: ['Weekend', 'Week', 'Two Weeks', 'Month']
-                    }
-                ],
-                items: [
-                    { name: "Bali, Indonesia", budget: "Medium", type: "Beach", duration: "Week", lifestyle: "Casual", age: "18-25", icon: "🏝️", image: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=400" },
-                    { name: "Paris, France", budget: "High", type: "City", duration: "Week", lifestyle: "Luxury", age: "26-35", icon: "🗼", image: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=400" },
-                    { name: "Tokyo, Japan", budget: "High", type: "City", duration: "Week", lifestyle: "Tech-Savvy", age: "26-35", icon: "🗾", image: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=400" },
-                    { name: "Maldives", budget: "High", type: "Beach", duration: "Week", lifestyle: "Luxury", age: "36+", icon: "🏖️", image: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=400" },
-                    { name: "Barcelona, Spain", budget: "Medium", type: "City", duration: "Weekend", lifestyle: "Active", age: "18-25", icon: "🏛️", image: "https://images.unsplash.com/photo-1583422409516-2895a77efded?w=400" },
-                    { name: "New Zealand", budget: "High", type: "Adventure", duration: "Two Weeks", lifestyle: "Active", age: "26-35", icon: "⛰️", image: "https://images.unsplash.com/photo-1507699622108-4be3abd695ad?w=400" },
-                    { name: "Rome, Italy", budget: "Medium", type: "Cultural", duration: "Week", lifestyle: "Casual", age: "36+", icon: "🏛️", image: "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=400" }
-                ]
-            },
-            books: {
-                name: 'Books',
-                icon: '📚',
-                questions: [
-                    {
-                        id: 'type',
-                        label: 'Fiction or Non-Fiction?',
-                        options: ['Fiction', 'Non-Fiction']
-                    },
-                    {
-                        id: 'theme',
-                        label: 'Preferred theme?',
-                        options: ['Fantasy', 'Self-Help', 'History', 'Business', 'Mystery', 'Romance']
-                    }
-                ],
-                items: [
-                    { name: "Atomic Habits", type: "Non-Fiction", theme: "Self-Help", budget: "Low", lifestyle: "Active", age: "26-35", icon: "📖", image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400" },
-                    { name: "The Hobbit", type: "Fiction", theme: "Fantasy", budget: "Low", lifestyle: "Casual", age: "18-25", icon: "📚", image: "https://images.unsplash.com/photo-1621351183012-e2f9972dd9bf?w=400" },
-                    { name: "Sapiens", type: "Non-Fiction", theme: "History", budget: "Medium", lifestyle: "Tech-Savvy", age: "26-35", icon: "📕", image: "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=400" },
-                    { name: "Harry Potter Series", type: "Fiction", theme: "Fantasy", budget: "Medium", lifestyle: "Casual", age: "Under 18", icon: "📗", image: "https://images.unsplash.com/photo-1615799998603-7c6270a45196?w=400" },
-                    { name: "The Lean Startup", type: "Non-Fiction", theme: "Business", budget: "Medium", lifestyle: "Tech-Savvy", age: "26-35", icon: "📘", image: "https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=400" },
-                    { name: "Gone Girl", type: "Fiction", theme: "Mystery", budget: "Low", lifestyle: "Casual", age: "26-35", icon: "🔍", image: "https://images.unsplash.com/photo-1541963463532-d68292c34b19?w=400" },
-                    { name: "Pride and Prejudice", type: "Fiction", theme: "Romance", budget: "Low", lifestyle: "Casual", age: "18-25", icon: "💕", image: "https://images.unsplash.com/photo-1524578271613-d550eacf6090?w=400" }
-                ]
-            },
-            fitness: {
-                name: 'Fitness',
-                icon: '💪',
-                questions: [
-                    {
-                        id: 'focus',
-                        label: 'What\'s your focus?',
-                        options: ['Weight Loss', 'Muscle Building', 'Flexibility', 'Cardio', 'Strength']
-                    },
-                    {
-                        id: 'setting',
-                        label: 'Where do you prefer?',
-                        options: ['Home', 'Gym', 'Outdoor', 'Studio']
-                    }
-                ],
-                items: [
-                    { name: "Home HIIT Program", focus: "Weight Loss", budget: "Low", setting: "Home", lifestyle: "Active", age: "18-25", icon: "🏃", image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400" },
-                    { name: "Premium Gym Membership", focus: "Muscle Building", budget: "High", setting: "Gym", lifestyle: "Active", age: "26-35", icon: "💪", image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400" },
-                    { name: "Yoga Classes", focus: "Flexibility", budget: "Medium", setting: "Studio", lifestyle: "Casual", age: "26-35", icon: "🧘", image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400" },
-                    { name: "CrossFit Training", focus: "Strength", budget: "High", setting: "Gym", lifestyle: "Active", age: "26-35", icon: "🏋️", image: "https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=400" },
-                    { name: "Running Plan", focus: "Cardio", budget: "Low", setting: "Outdoor", lifestyle: "Active", age: "18-25", icon: "🏃", image: "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=400" },
-                    { name: "Personal Training", focus: "Muscle Building", budget: "High", setting: "Gym", lifestyle: "Luxury", age: "36+", icon: "👟", image: "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=400" },
-                    { name: "Pilates Studio", focus: "Flexibility", budget: "Medium", setting: "Studio", lifestyle: "Casual", age: "26-35", icon: "🤸", image: "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=400" }
-                ]
+            // ... (rest of the dataset remains the same)
+            {
+                "id": 40,
+                "name": "Cooking Fundamentals",
+                "image": "https://images.unsplash.com/photo-1565958011703-44f9829ba187?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y29va2luZ3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60",
+                "tags": ["skills", "life-skills", "creative-skills", "health", "personal-growth"],
+                "author": "Life Skill",
+                "tagline": "Master basic cooking techniques and recipes",
+                "icon": "fas fa-utensils",
+                "color": "#FF6B6B"
             }
+        ];
+
+        // ========== QUESTION MAPPING ==========
+        const questionsData = {
+            books: [
+                {
+                    question: "What type of book are you into?",
+                    options: ["Fiction", "Non-fiction", "Biography", "History"],
+                    tags: ["fiction", "non-fiction", "biography", "history"]
+                },
+                {
+                    question: "What's your primary goal for reading?",
+                    options: ["Entertainment", "Self-improvement", "Professional growth", "Academic knowledge"],
+                    tags: ["entertainment", "self-improvement", "professional-growth", "academic"]
+                },
+                {
+                    question: "How much time can you dedicate to reading each week?",
+                    options: ["Less than 2 hours", "2-5 hours", "5-10 hours", "More than 10 hours"],
+                    tags: ["quick-read", "moderate", "dedicated", "avid-reader"]
+                }
+            ],
+            courses: [
+                {
+                    question: "What field are you interested in?",
+                    options: ["Technology", "Business", "Creative Arts", "Science"],
+                    tags: ["technology", "business", "creative-arts", "science"]
+                },
+                {
+                    question: "What's your current skill level?",
+                    options: ["Beginner", "Intermediate", "Advanced", "Expert"],
+                    tags: ["beginner", "intermediate", "advanced", "expert"]
+                },
+                {
+                    question: "What's your primary goal?",
+                    options: ["Career change", "Skill improvement", "Personal interest", "Academic requirement"],
+                    tags: ["career-change", "skill-improvement", "personal-growth", "academic"]
+                }
+            ],
+            apps: [
+                {
+                    question: "What type of app are you looking for?",
+                    options: ["Productivity", "Health & Fitness", "Finance", "Entertainment"],
+                    tags: ["productivity", "health-fitness", "finance", "entertainment"]
+                },
+                {
+                    question: "What's your budget for apps?",
+                    options: ["Free only", "Free with in-app purchases", "One-time purchase", "Subscription"],
+                    tags: ["free", "freemium", "one-time-purchase", "subscription"]
+                },
+                {
+                    question: "How often will you use this app?",
+                    options: ["Daily", "Weekly", "Monthly", "Occasionally"],
+                    tags: ["daily-use", "weekly-use", "monthly-use", "occasional-use"]
+                }
+            ],
+            skills: [
+                {
+                    question: "What area do you want to improve in?",
+                    options: ["Technical skills", "Soft skills", "Creative skills", "Management skills"],
+                    tags: ["technical-skills", "soft-skills", "creative-skills", "management-skills"]
+                },
+                {
+                    question: "How soon do you need to learn this skill?",
+                    options: ["Within a month", "1-3 months", "3-6 months", "No rush"],
+                    tags: ["urgent", "soon", "moderate-pace", "leisurely"]
+                },
+                {
+                    question: "What's your main motivation?",
+                    options: ["Career advancement", "Personal growth", "Side project", "Job requirement"],
+                    tags: ["career-growth", "personal-growth", "hobby", "professional-requirement"]
+                }
+            ]
         };
 
-        // User data storage
-        let userData = {};
+        // ========== APPLICATION STATE ==========
+        const state = {
+            currentScreen: 'welcome',
+            selectedOption: null,
+            currentQuestionIndex: 0,
+            userAnswers: [],
+            userTags: [],
+            questions: [],
+            recommendation: null,
+            matchedTags: [],
+            savedRecommendations: []
+        };
 
-        // Initialize app
-        function initApp() {
-            // Load saved data from localStorage
-            const savedData = localStorage.getItem('optifindData');
-            if (savedData) {
-                userData = JSON.parse(savedData);
-                restoreUserSelections();
+        // ========== DOM ELEMENTS ==========
+        const welcomeScreen = document.getElementById('welcomeScreen');
+        const questionScreen = document.getElementById('questionScreen');
+        const recommendationScreen = document.getElementById('recommendationScreen');
+        const progressBar = document.getElementById('progressBar');
+        const questionNumber = document.getElementById('questionNumber');
+        const questionText = document.getElementById('questionText');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const backBtn = document.getElementById('backBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const recommendationTitle = document.getElementById('recommendationTitle');
+        const recommendationAuthor = document.getElementById('recommendationAuthor');
+        const recommendationTagline = document.getElementById('recommendationTagline');
+        const recommendationLogo = document.getElementById('recommendationLogo');
+        const matchReasons = document.getElementById('matchReasons');
+        const matchTags = document.getElementById('matchTags');
+        const findMoreBtn = document.getElementById('findMoreBtn');
+        const retryBtn = document.getElementById('retryBtn');
+        const saveBtn = document.getElementById('saveBtn');
+        const shareBtn = document.getElementById('shareBtn');
+        const viewSavedBtn = document.getElementById('viewSavedBtn');
+        const socialShare = document.getElementById('socialShare');
+        const copyLinkBtn = document.getElementById('copyLinkBtn');
+        const saveIndicator = document.getElementById('saveIndicator');
+        const savedPanel = document.getElementById('savedPanel');
+        const savedItems = document.getElementById('savedItems');
+        const closeSavedBtn = document.getElementById('closeSavedBtn');
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toastMessage');
+        const logo = document.getElementById('logo');
+        const viewAllSavedBtn = document.getElementById('viewAllSavedBtn');
+        const recentRecommendations = document.getElementById('recentRecommendations');
+        const savedItemsGrid = document.getElementById('savedItemsGrid');
+
+        // ========== EVENT LISTENERS ==========
+        document.addEventListener('DOMContentLoaded', initApp);
+        
+        // Option cards click event
+        document.querySelectorAll('.option-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const option = card.getAttribute('data-option');
+                selectOption(option);
+            });
+        });
+
+        // Navigation buttons
+        backBtn.addEventListener('click', goToPreviousQuestion);
+        nextBtn.addEventListener('click', goToNextQuestion);
+        
+        // Recommendation buttons
+        findMoreBtn.addEventListener('click', () => showScreen('welcome'));
+        retryBtn.addEventListener('click', retryQuestions);
+        
+        // Save button
+        saveBtn.addEventListener('click', handleSaveButtonClick);
+        saveIndicator.addEventListener('click', handleSaveButtonClick);
+        
+        // Other buttons
+        shareBtn.addEventListener('click', toggleSocialShare);
+        viewSavedBtn.addEventListener('click', toggleSavedPanel);
+        closeSavedBtn.addEventListener('click', toggleSavedPanel);
+        logo.addEventListener('click', () => showScreen('welcome'));
+        viewAllSavedBtn.addEventListener('click', () => {
+            showScreen('recommendation');
+            toggleSavedPanel();
+        });
+        
+        // Social sharing
+        document.querySelectorAll('.social-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const platform = this.getAttribute('data-platform');
+                if (platform === 'link' || this.id === 'copyLinkBtn') {
+                    copyRecommendationLink();
+                } else {
+                    shareOnPlatform(platform);
+                }
+            });
+        });
+
+        // Close saved panel when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!savedPanel.contains(e.target) && !viewSavedBtn.contains(e.target)) {
+                savedPanel.classList.remove('show');
             }
+        });
 
-            // Set up category grid
-            renderCategoryGrid();
-
-            // Animate progress bars on load
-            setTimeout(() => {
-                document.getElementById('progress1').style.width = '33%';
-                document.getElementById('progress2').style.width = '66%';
-                document.getElementById('progress3').style.width = '100%';
-            }, 100);
+        // ========== INITIALIZATION ==========
+        function initApp() {
+            state.currentScreen = 'welcome';
+            showScreen('welcome');
+            loadSavedRecommendations();
+            checkUrlParameters();
         }
 
-        // Save data to localStorage
-        function saveData() {
-            localStorage.setItem('optifindData', JSON.stringify(userData));
+        // ========== DATA MANAGEMENT ==========
+        function loadSavedRecommendations() {
+            const saved = localStorage.getItem('optifind_saved');
+            if (saved) {
+                state.savedRecommendations = JSON.parse(saved);
+                updateSavedCount();
+                if (state.currentScreen === 'welcome') {
+                    checkAndShowRecentRecommendations();
+                }
+            }
         }
 
-        // Restore user selections from saved data
-        function restoreUserSelections() {
-            Object.keys(userData).forEach(key => {
-                const buttons = document.querySelectorAll(`[data-question="${key}"]`);
-                buttons.forEach(btn => {
-                    if (btn.dataset.value === userData[key]) {
-                        btn.classList.add('selected');
+        function updateSavedCount() {
+            viewSavedBtn.innerHTML = `<i class="fas fa-history"></i> View Saved (${state.savedRecommendations.length})`;
+            if (viewAllSavedBtn) {
+                viewAllSavedBtn.innerHTML = `<i class="fas fa-bookmark"></i> View All Saved Recommendations (${state.savedRecommendations.length})`;
+            }
+        }
+
+        // ========== SCREEN MANAGEMENT ==========
+        function showScreen(screen) {
+            welcomeScreen.style.display = 'none';
+            questionScreen.style.display = 'none';
+            recommendationScreen.style.display = 'none';
+            socialShare.style.display = 'none';
+            saveIndicator.style.display = 'none';
+            
+            switch(screen) {
+                case 'welcome':
+                    welcomeScreen.style.display = 'block';
+                    state.currentScreen = 'welcome';
+                    resetState();
+                    checkAndShowRecentRecommendations();
+                    break;
+                case 'questions':
+                    questionScreen.style.display = 'block';
+                    state.currentScreen = 'questions';
+                    loadQuestion();
+                    break;
+                case 'recommendation':
+                    recommendationScreen.style.display = 'block';
+                    saveIndicator.style.display = 'flex';
+                    state.currentScreen = 'recommendation';
+                    showRecommendation();
+                    break;
+            }
+        }
+        
+        function resetState() {
+            state.selectedOption = null;
+            state.currentQuestionIndex = 0;
+            state.userAnswers = [];
+            state.userTags = [];
+            state.questions = [];
+            state.recommendation = null;
+            state.matchedTags = [];
+        }
+
+        // ========== RECENT RECOMMENDATIONS ==========
+        function checkAndShowRecentRecommendations() {
+            if (state.savedRecommendations.length > 0) {
+                recentRecommendations.style.display = 'block';
+                renderRecentRecommendations();
+            } else {
+                recentRecommendations.style.display = 'none';
+            }
+        }
+
+        function renderRecentRecommendations() {
+            savedItemsGrid.innerHTML = '';
+            
+            const recentItems = [...state.savedRecommendations]
+                .sort((a, b) => new Date(b.savedAt) - new Date(a.savedAt))
+                .slice(0, 3);
+            
+            if (recentItems.length === 0) {
+                savedItemsGrid.innerHTML = '<p style="text-align: center; color: #718096;">No recent recommendations yet.</p>';
+                return;
+            }
+            
+            recentItems.forEach(item => {
+                const card = createSavedItemCard(item, 'home');
+                savedItemsGrid.appendChild(card);
+            });
+            
+            attachDropdownEvents('home');
+        }
+
+        // ========== OPTION SELECTION ==========
+        function selectOption(option) {
+            state.selectedOption = option;
+            state.currentQuestionIndex = 0;
+            state.userAnswers = [];
+            state.userTags = [];
+            state.questions = questionsData[option];
+            showScreen('questions');
+        }
+
+        // ========== QUESTION FLOW ==========
+        function loadQuestion() {
+            const question = state.questions[state.currentQuestionIndex];
+            
+            // Update progress bar
+            const progress = ((state.currentQuestionIndex + 1) / state.questions.length) * 100;
+            progressBar.style.width = `${progress}%`;
+            
+            // Update question number and text
+            questionNumber.textContent = `Question ${state.currentQuestionIndex + 1} of ${state.questions.length}`;
+            questionText.textContent = question.question;
+            
+            // Clear previous options
+            optionsContainer.innerHTML = '';
+            
+            // Add new options
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('button');
+                optionElement.className = 'option-btn';
+                if (state.userAnswers[state.currentQuestionIndex] === index) {
+                    optionElement.classList.add('selected');
+                }
+                optionElement.textContent = option;
+                optionElement.addEventListener('click', () => selectAnswer(index));
+                optionsContainer.appendChild(optionElement);
+            });
+            
+            // Update navigation buttons
+            backBtn.disabled = state.currentQuestionIndex === 0;
+            nextBtn.disabled = state.userAnswers[state.currentQuestionIndex] === undefined;
+            
+            // Change next button text on last question
+            if (state.currentQuestionIndex === state.questions.length - 1) {
+                nextBtn.innerHTML = 'Get Recommendation <i class="fas fa-check"></i>';
+            } else {
+                nextBtn.innerHTML = 'Next <i class="fas fa-arrow-right"></i>';
+            }
+        }
+
+        function selectAnswer(answerIndex) {
+            // Remove selected class from all options
+            document.querySelectorAll('.option-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked option
+            document.querySelectorAll('.option-btn')[answerIndex].classList.add('selected');
+            
+            // Save answer and corresponding tag
+            state.userAnswers[state.currentQuestionIndex] = answerIndex;
+            
+            // Get the corresponding tag for this answer
+            const currentQuestion = state.questions[state.currentQuestionIndex];
+            const selectedTag = currentQuestion.tags[answerIndex];
+            
+            // Add tag to user's selected tags
+            if (!state.userTags.includes(selectedTag)) {
+                state.userTags.push(selectedTag);
+            }
+            
+            // Enable next button
+            nextBtn.disabled = false;
+        }
+
+        function goToPreviousQuestion() {
+            if (state.currentQuestionIndex > 0) {
+                // Remove the tag from the previous answer
+                const prevQuestion = state.questions[state.currentQuestionIndex];
+                const prevAnswerIndex = state.userAnswers[state.currentQuestionIndex];
+                if (prevAnswerIndex !== undefined) {
+                    const prevTag = prevQuestion.tags[prevAnswerIndex];
+                    state.userTags = state.userTags.filter(tag => tag !== prevTag);
+                }
+                
+                state.currentQuestionIndex--;
+                loadQuestion();
+            }
+        }
+
+        function goToNextQuestion() {
+            if (state.userAnswers[state.currentQuestionIndex] !== undefined) {
+                if (state.currentQuestionIndex === state.questions.length - 1) {
+                    calculateRecommendation();
+                    showScreen('recommendation');
+                } else {
+                    state.currentQuestionIndex++;
+                    loadQuestion();
+                }
+            }
+        }
+
+        function retryQuestions() {
+            if (state.selectedOption) {
+                state.currentQuestionIndex = 0;
+                state.userAnswers = [];
+                state.userTags = [];
+                showScreen('questions');
+            }
+        }
+
+        // ========== RECOMMENDATION ENGINE ==========
+        function calculateRecommendation() {
+            // Add the primary category tag
+            state.userTags.push(state.selectedOption);
+            
+            // Score each item based on tag matches
+            const scoredItems = itemsDataset.map(item => {
+                let score = 0;
+                let matched = [];
+                
+                // Count tag matches
+                state.userTags.forEach(userTag => {
+                    if (item.tags.includes(userTag)) {
+                        score += 1;
+                        matched.push(userTag);
                     }
                 });
-            });
-        }
-
-        // Start app
-        function startApp() {
-            goToScreen('general');
-        }
-
-        // Reset app
-        function resetApp() {
-            openConfirmModal();
-        }
-
-        // Open share modal
-        function openShareModal(itemName, category, shareUrl) {
-            const modal = document.getElementById('shareModal');
-            const linkInput = document.getElementById('shareLinkInput');
-            const optionsContainer = document.getElementById('shareOptionsContainer');
-
-            // Set share URL
-            linkInput.value = shareUrl || window.location.href;
-
-            // Create share message
-            const messages = {
-                cars: `🚗 I just found my perfect car on OptiFind: ${itemName}! Find yours too:`,
-                gadgets: `📱 Check out this awesome gadget I discovered: ${itemName}! Get personalized recommendations:`,
-                travel: `✈️ My next destination is ${itemName}! Find your perfect getaway:`,
-                books: `📚 OptiFind recommended this amazing book: ${itemName}! Discover your next read:`,
-                fitness: `💪 Found my perfect fitness plan: ${itemName}! Get yours:`
-            };
-
-            const message = messages[category] || `Check out what I found on OptiFind: ${itemName}!`;
-            const fullMessage = `${message} ${linkInput.value}`;
-            const encodedMessage = encodeURIComponent(fullMessage);
-            const encodedUrl = encodeURIComponent(linkInput.value);
-
-            // Create share options
-            const shareOptions = [
-                {
-                    icon: '💬',
-                    label: 'WhatsApp',
-                    url: `https://wa.me/?text=${encodedMessage}`
-                },
-                {
-                    icon: '✈️',
-                    label: 'Telegram',
-                    url: `https://t.me/share/url?url=${encodedUrl}&text=${encodeURIComponent(message)}`
-                },
-                {
-                    icon: '🐦',
-                    label: 'Twitter',
-                    url: `https://twitter.com/intent/tweet?text=${encodedMessage}`
-                },
-                {
-                    icon: '📘',
-                    label: 'Facebook',
-                    url: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`
+                
+                // Bonus points for primary category match
+                if (item.tags.includes(state.selectedOption)) {
+                    score += 2;
                 }
-            ];
-
-            optionsContainer.innerHTML = shareOptions.map(opt => `
-                <a href="${opt.url}" target="_blank" class="share-option" onclick="closeModal('shareModal')">
-                    <div class="share-icon">${opt.icon}</div>
-                    <div class="share-label">${opt.label}</div>
-                </a>
-            `).join('');
-
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        // Open confirmation modal
-        function openConfirmModal() {
-            const modal = document.getElementById('confirmModal');
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        // Close modal
-        function closeModal(modalId) {
-            const modal = document.getElementById(modalId);
-            modal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-
-        // Close modal on overlay click
-        document.addEventListener('click', function(e) {
-            if (e.target.classList.contains('modal-overlay')) {
-                closeModal(e.target.id);
-            }
-        });
-
-        // Close modal on ESC key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeModal('shareModal');
-                closeModal('confirmModal');
-            }
-        });
-
-        // Copy share link
-        function copyShareLink() {
-            const input = document.getElementById('shareLinkInput');
-            const btn = input.nextElementSibling;
-            
-            input.select();
-            input.setSelectionRange(0, 99999); // For mobile devices
-
-            navigator.clipboard.writeText(input.value).then(() => {
-                btn.textContent = '✓ Copied!';
-                btn.classList.add('copied');
                 
-                setTimeout(() => {
-                    btn.textContent = 'Copy';
-                    btn.classList.remove('copied');
-                }, 2000);
-            }).catch(() => {
-                // Fallback for older browsers
-                document.execCommand('copy');
-                btn.textContent = '✓ Copied!';
-                btn.classList.add('copied');
-                
-                setTimeout(() => {
-                    btn.textContent = 'Copy';
-                    btn.classList.remove('copied');
-                }, 2000);
+                return { item, score, matched };
             });
-        }
-
-        // Confirm reset
-        function confirmReset() {
-            localStorage.removeItem('optifindData');
-            userData = {};
-            closeModal('confirmModal');
-            location.reload();
-        }
-
-        // Navigate between screens
-        function goToScreen(screenId) {
-            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-            document.getElementById(screenId).classList.add('active');
-            window.scrollTo(0, 0);
-        }
-
-        // Set up option button listeners
-        document.addEventListener('click', function(e) {
-            if (e.target.classList.contains('option-btn')) {
-                const question = e.target.dataset.question;
-                const value = e.target.dataset.value;
-                
-                // Deselect all options for this question
-                document.querySelectorAll(`[data-question="${question}"]`).forEach(btn => {
-                    btn.classList.remove('selected');
-                });
-                
-                // Select clicked option
-                e.target.classList.add('selected');
-                
-                // Save to userData and localStorage
-                userData[question] = value;
-                saveData();
-
-                // Hide error message if visible
-                const errorMsg = e.target.closest('.screen').querySelector('.error-message');
-                if (errorMsg) {
-                    errorMsg.classList.remove('show');
-                }
-            }
-        });
-
-        // Validate and proceed to next screen
-        function validateAndProceed(currentScreen, nextScreen) {
-            const requiredQuestions = currentScreen === 'general' 
-                ? ['age', 'budget', 'lifestyle'] 
-                : getRequiredQuestionsForCategory();
-
-            const missingAnswers = requiredQuestions.filter(q => !userData[q]);
-
-            if (missingAnswers.length > 0) {
-                const errorElement = document.getElementById(`error-${currentScreen}`);
-                errorElement.textContent = '⚠️ Please answer all questions before continuing.';
-                errorElement.classList.add('show');
-                setTimeout(() => errorElement.classList.remove('show'), 3000);
-                return;
-            }
-
-            goToScreen(nextScreen);
-        }
-
-        // Get required questions for current category
-        function getRequiredQuestionsForCategory() {
-            if (!userData.category) return [];
-            const config = categoryConfig[userData.category];
-            return config.questions.map(q => q.id);
-        }
-
-        // Render category grid
-        function renderCategoryGrid() {
-            const grid = document.getElementById('categoryGrid');
-            grid.innerHTML = Object.keys(categoryConfig).map(key => {
-                const cat = categoryConfig[key];
-                return `
-                    <div class="category-card" onclick="selectCategory('${key}')">
-                        <div class="category-icon">${cat.icon}</div>
-                        <div class="category-name">${cat.name}</div>
-                    </div>
-                `;
-            }).join('');
-        }
-
-        // Select category
-        function selectCategory(catKey) {
-            userData.category = catKey;
-            saveData();
-            showSpecificQuestions(catKey);
-            goToScreen('specific');
-        }
-
-        // Show category-specific questions
-        function showSpecificQuestions(catKey) {
-            const config = categoryConfig[catKey];
-            const container = document.getElementById('specificQuestions');
             
-            let html = `<h2>Almost there! 🎯</h2>`;
+            // Sort by score (highest first)
+            scoredItems.sort((a, b) => b.score - a.score);
             
-            config.questions.forEach(q => {
-                html += `
-                    <div class="question-group">
-                        <label class="question-label">${q.label}</label>
-                        <div class="options">
-                            ${q.options.map(opt => 
-                                `<button class="option-btn ${userData[q.id] === opt ? 'selected' : ''}" 
-                                         data-question="${q.id}" 
-                                         data-value="${opt}">${opt}</button>`
-                            ).join('')}
-                        </div>
-                    </div>
-                `;
-            });
-
-            container.innerHTML = html;
-        }
-
-        // Validate and show results
-        function validateAndShowResults() {
-            const requiredQuestions = getRequiredQuestionsForCategory();
-            const missingAnswers = requiredQuestions.filter(q => !userData[q]);
-
-            if (missingAnswers.length > 0) {
-                const errorElement = document.getElementById('error-specific');
-                errorElement.textContent = '⚠️ Please answer all questions to get your recommendations.';
-                errorElement.classList.add('show');
-                setTimeout(() => errorElement.classList.remove('show'), 3000);
-                return;
-            }
-
-            showResults();
-        }
-
-        // Smart recommendation algorithm
-        function getRecommendations() {
-            const category = userData.category;
-            const items = categoryConfig[category].items;
-
-            // Score each item based on user preferences
-            const scoredItems = items.map(item => {
-                let score = 0;
-
-                // Budget match (highest priority)
-                if (item.budget === userData.budget) score += 10;
-                
-                // Category-specific matches
-                categoryConfig[category].questions.forEach(q => {
-                    if (item[q.id] === userData[q.id]) score += 5;
-                });
-
-                // Lifestyle match
-                if (item.lifestyle === userData.lifestyle) score += 3;
-
-                // Age match
-                if (item.age === userData.age) score += 2;
-
-                return { ...item, score };
-            });
-
-            // Sort by score and return top 3
-            return scoredItems.sort((a, b) => b.score - a.score).slice(0, 3);
-        }
-
-        // Show results
-        function showResults() {
-            const recommendations = getRecommendations();
-            const container = document.getElementById('resultsContent');
+            // Get top score
+            const topScore = scoredItems[0].score;
             
-            let html = `
-                <h2>🎉 Perfect matches for you!</h2>
-                <div class="hint-banner">
-                    Based on your preferences, here are our top recommendations:
-                </div>
-            `;
-
-            recommendations.forEach((item, index) => {
-                const detailKeys = Object.keys(item).filter(k => 
-                    !['name', 'icon', 'image', 'score'].includes(k)
+            // Filter items with top score
+            const topItems = scoredItems.filter(item => item.score === topScore);
+            
+            // If tie, pick randomly from top items
+            const randomIndex = Math.floor(Math.random() * topItems.length);
+            state.recommendation = topItems[randomIndex].item;
+            state.matchedTags = topItems[randomIndex].matched;
+            
+            // Fallback if no good match
+            if (topScore < 2) {
+                // Find any item from the selected category
+                const categoryItems = itemsDataset.filter(item => 
+                    item.tags.includes(state.selectedOption)
                 );
+                if (categoryItems.length > 0) {
+                    const randomFallback = Math.floor(Math.random() * categoryItems.length);
+                    state.recommendation = categoryItems[randomFallback];
+                    state.matchedTags = [state.selectedOption];
+                }
+            }
+        }
 
-                html += `
-                    <div class="result-card" style="animation-delay: ${index * 0.1}s">
-                        <div class="result-image">
-                            <img src="${item.image}" alt="${item.name}" onerror="this.style.display='none'; this.parentElement.innerHTML='${item.icon}';">
-                        </div>
-                        <div class="result-content">
-                            <div class="result-title">${index === 0 ? '🏆 ' : ''}${item.name}</div>
-                            <div class="result-description">
-                                ${index === 0 ? 'Our top recommendation based on your preferences!' : 
-                                  'A great alternative that matches your needs perfectly.'}
-                            </div>
-                            <div class="result-details">
-                                ${detailKeys.map(k => 
-                                    `<span class="detail-tag">${k}: ${item[k]}</span>`
-                                ).join('')}
-                            </div>
-                            <div class="result-actions">
-                                <button class="share-btn" onclick="shareResult('${item.name}', '${userData.category}')">
-                                    Share 📤
-                                </button>
-                            </div>
-                        </div>
+        function showRecommendation() {
+            if (!state.recommendation) {
+                calculateRecommendation();
+            }
+            
+            const recommendation = state.recommendation;
+            
+            // Update recommendation details
+            recommendationTitle.textContent = recommendation.name;
+            recommendationAuthor.textContent = recommendation.author || "";
+            recommendationTagline.textContent = recommendation.tagline || "";
+            
+            // Show match reasons
+            matchTags.innerHTML = '';
+            state.matchedTags.forEach(tag => {
+                const tagElement = document.createElement('span');
+                tagElement.className = 'match-tag';
+                tagElement.textContent = tag.replace(/-/g, ' ');
+                matchTags.appendChild(tagElement);
+            });
+            
+            // Update logo with IMAGE instead of icon
+            recommendationLogo.innerHTML = '';
+            
+            if (recommendation.image) {
+                const img = document.createElement('img');
+                img.src = recommendation.image;
+                img.alt = recommendation.name;
+                img.loading = 'lazy';
+                
+                img.onerror = function() {
+                    // Fallback to icon if image fails
+                    this.style.display = 'none';
+                    const icon = document.createElement('i');
+                    const fallbackIcons = {
+                        'books': 'fas fa-book',
+                        'courses': 'fas fa-graduation-cap',
+                        'apps': 'fas fa-mobile-alt',
+                        'skills': 'fas fa-lightbulb'
+                    };
+                    icon.classList.add(...fallbackIcons[state.selectedOption].split(' '));
+                    icon.style.fontSize = '50px';
+                    icon.style.color = 'var(--soft-blue)';
+                    recommendationLogo.appendChild(icon);
+                };
+                
+                recommendationLogo.appendChild(img);
+            } else {
+                // Fallback to icon if no image URL
+                const icon = document.createElement('i');
+                const fallbackIcons = {
+                    'books': 'fas fa-book',
+                    'courses': 'fas fa-graduation-cap',
+                    'apps': 'fas fa-mobile-alt',
+                    'skills': 'fas fa-lightbulb'
+                };
+                icon.classList.add(...fallbackIcons[state.selectedOption].split(' '));
+                icon.style.fontSize = '50px';
+                icon.style.color = 'var(--soft-blue)';
+                recommendationLogo.appendChild(icon);
+            }
+            
+            // Set background color
+            recommendationLogo.style.backgroundColor = recommendation.color || 'var(--light-blue)';
+            
+            // Check if already saved
+            updateSaveButtonState();
+        }
+
+        // ========== SAVE/RESTORE FUNCTIONALITY ==========
+        function updateSaveButtonState() {
+            if (!state.recommendation) return;
+            
+            const isSaved = state.savedRecommendations.some(r => r.id === state.recommendation.id);
+            if (isSaved) {
+                saveBtn.innerHTML = '<i class="fas fa-bookmark"></i> Saved';
+                saveBtn.disabled = false;
+                saveIndicator.innerHTML = '<i class="fas fa-bookmark"></i>';
+                saveBtn.classList.add('saved');
+            } else {
+                saveBtn.innerHTML = '<i class="fas fa-bookmark"></i> Save Recommendation';
+                saveBtn.disabled = false;
+                saveIndicator.innerHTML = '<i class="fas fa-bookmark"></i>';
+                saveBtn.classList.remove('saved');
+            }
+        }
+
+        function handleSaveButtonClick() {
+            if (!state.recommendation) return;
+            
+            const isSaved = state.savedRecommendations.some(r => r.id === state.recommendation.id);
+            if (isSaved) {
+                unsaveCurrentRecommendation();
+            } else {
+                saveCurrentRecommendation();
+            }
+        }
+
+        function saveCurrentRecommendation() {
+            if (!state.recommendation) return;
+            
+            // Check if already saved
+            const isAlreadySaved = state.savedRecommendations.some(r => r.id === state.recommendation.id);
+            
+            if (isAlreadySaved) {
+                showToast('This recommendation is already saved!');
+                return;
+            }
+            
+            // Add timestamp and category
+            const savedRec = {
+                ...state.recommendation,
+                savedAt: new Date().toISOString(),
+                category: state.selectedOption,
+                userTags: [...state.userTags]
+            };
+            
+            state.savedRecommendations.push(savedRec);
+            
+            // Save to localStorage
+            localStorage.setItem('optifind_saved', JSON.stringify(state.savedRecommendations));
+            
+            // Update UI
+            updateSaveButtonState();
+            updateSavedCount();
+            
+            showToast(`"${state.recommendation.name}" saved!`);
+            
+            // Update recent recommendations if on welcome screen
+            if (state.currentScreen === 'welcome') {
+                renderRecentRecommendations();
+                checkAndShowRecentRecommendations();
+            }
+        }
+
+        function unsaveCurrentRecommendation() {
+            if (!state.recommendation) return;
+            deleteSavedRecommendation(state.recommendation.id);
+        }
+
+        function deleteSavedRecommendation(id) {
+            const recIndex = state.savedRecommendations.findIndex(r => r.id == id);
+            
+            if (recIndex === -1) {
+                showToast('Recommendation not found');
+                return;
+            }
+            
+            const recName = state.savedRecommendations[recIndex].name;
+            
+            // Remove from array
+            state.savedRecommendations.splice(recIndex, 1);
+            
+            // Save to localStorage
+            localStorage.setItem('optifind_saved', JSON.stringify(state.savedRecommendations));
+            
+            // Update UI
+            updateSavedCount();
+            
+            // Re-render the saved items panel if it's open
+            if (savedPanel.classList.contains('show')) {
+                renderSavedItems();
+            }
+            
+            // Update recent recommendations on homepage
+            if (state.currentScreen === 'welcome') {
+                renderRecentRecommendations();
+                checkAndShowRecentRecommendations();
+            }
+            
+            // If the deleted recommendation is currently being viewed, update button
+            if (state.recommendation && state.recommendation.id == id) {
+                showToast(`"${recName}" deleted`);
+                updateSaveButtonState();
+            } else {
+                showToast(`"${recName}" deleted from saved items`);
+            }
+            
+            // Close all dropdowns
+            document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                menu.classList.remove('show');
+            });
+        }
+
+        function loadSavedRecommendation(savedRec) {
+            state.recommendation = savedRec;
+            state.selectedOption = savedRec.category;
+            state.userTags = savedRec.userTags || [];
+            showScreen('recommendation');
+        }
+
+        // ========== SAVED ITEMS PANEL ==========
+        function toggleSavedPanel() {
+            savedPanel.classList.toggle('show');
+            
+            if (savedPanel.classList.contains('show')) {
+                renderSavedItems();
+            }
+        }
+
+        function renderSavedItems() {
+            savedItems.innerHTML = '';
+            
+            if (state.savedRecommendations.length === 0) {
+                savedItems.innerHTML = '<p style="text-align: center; color: #718096;">No saved recommendations yet.</p>';
+                return;
+            }
+            
+            // Sort by most recent
+            const sorted = [...state.savedRecommendations].sort((a, b) => 
+                new Date(b.savedAt) - new Date(a.savedAt)
+            );
+            
+            sorted.forEach((rec, index) => {
+                const item = createSavedItemCard(rec, 'panel');
+                savedItems.appendChild(item);
+            });
+            
+            attachDropdownEvents('panel');
+            
+            // Close dropdowns when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.three-dots-menu') && !e.target.closest('.dropdown-menu')) {
+                    document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                        menu.classList.remove('show');
+                    });
+                }
+            });
+        }
+
+        // ========== UI COMPONENT CREATION ==========
+        function createSavedItemCard(rec, type) {
+            const isHome = type === 'home';
+            const container = isHome ? document.createElement('div') : document.createElement('div');
+            const className = isHome ? 'saved-item-card' : 'saved-item';
+            
+            container.className = className;
+            container.setAttribute('data-id', rec.id);
+            
+            if (isHome) {
+                container.innerHTML = `
+                    <button class="three-dots-menu" data-id="${rec.id}">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </button>
+                    <div class="dropdown-menu" id="dropdown-home-${rec.id}">
+                        <button class="dropdown-item delete" data-id="${rec.id}">
+                            <i class="fas fa-trash"></i> Delete
+                        </button>
+                    </div>
+                    <div class="saved-item-category">${rec.category}</div>
+                    <div class="saved-item-name">${rec.name}</div>
+                    <div class="saved-item-date">${formatDate(rec.savedAt)}</div>
+                `;
+                
+                container.addEventListener('click', (e) => {
+                    if (!e.target.closest('.three-dots-menu') && !e.target.closest('.dropdown-menu')) {
+                        loadSavedRecommendation(rec);
+                    }
+                });
+            } else {
+                container.innerHTML = `
+                    <strong>${rec.name}</strong>
+                    <div style="font-size: 12px; color: #718096; margin-top: 5px;">
+                        ${new Date(rec.savedAt).toLocaleDateString()} • ${rec.category}
+                    </div>
+                    <button class="three-dots-menu" data-id="${rec.id}">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </button>
+                    <div class="dropdown-menu" id="dropdown-${rec.id}">
+                        <button class="dropdown-item delete" data-id="${rec.id}">
+                            <i class="fas fa-trash"></i> Delete
+                        </button>
                     </div>
                 `;
-            });
-
-            html += `
-                <div class="cta-box">
-                    <h3>🎁 Invite Friends!</h3>
-                    <p>Know someone who needs recommendations? Share OptiFind with them!</p>
-                    <button class="cta-btn" onclick="inviteFriend()">Invite Now</button>
-                </div>
-                <button class="btn" onclick="startOver()" style="margin-top: 20px;">Find More Recommendations</button>
-            `;
-
-            container.innerHTML = html;
-            goToScreen('results');
-        }
-
-        // Share result
-        function shareResult(itemName, category) {
-            const shareUrl = window.location.href;
-            openShareModal(itemName, category, shareUrl);
-        }
-
-        // Invite friend
-        function inviteFriend() {
-            const inviteMessage = '🎁 I found this amazing app that gives personalized recommendations for Cars, Gadgets, Travel, Books & Fitness! Try OptiFind';
-            openShareModal('OptiFind', 'general', window.location.href);
+                
+                container.addEventListener('click', (e) => {
+                    if (!e.target.closest('.three-dots-menu') && !e.target.closest('.dropdown-menu')) {
+                        loadSavedRecommendation(rec);
+                        savedPanel.classList.remove('show');
+                    }
+                });
+            }
             
-            // Update modal title for invite
-            document.querySelector('#shareModal .modal-title').textContent = 'Invite Friends';
-            document.querySelector('#shareModal .modal-description').textContent = 'Share OptiFind with your friends and help them find what they love!';
+            return container;
         }
 
-        // Start over
-        function startOver() {
-            // Keep general preferences, clear category-specific
-            const generalData = {
-                age: userData.age,
-                budget: userData.budget,
-                lifestyle: userData.lifestyle
+        function attachDropdownEvents(type) {
+            const prefix = type === 'home' ? 'home-' : '';
+            
+            document.querySelectorAll(`.${type === 'home' ? 'saved-item-card' : 'saved-item'} .three-dots-menu`).forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const id = this.getAttribute('data-id');
+                    const dropdown = document.getElementById(`dropdown-${prefix}${id}`);
+                    
+                    // Close all other dropdowns
+                    document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                        if (menu !== dropdown) {
+                            menu.classList.remove('show');
+                        }
+                    });
+                    
+                    // Toggle current dropdown
+                    dropdown.classList.toggle('show');
+                });
+            });
+            
+            document.querySelectorAll(`.${type === 'home' ? 'saved-item-card' : 'saved-item'} .dropdown-item.delete`).forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const id = this.getAttribute('data-id');
+                    deleteSavedRecommendation(id);
+                });
+            });
+        }
+
+        // ========== UTILITY FUNCTIONS ==========
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const now = new Date();
+            const diffInHours = Math.floor((now - date) / (1000 * 60 * 60));
+            
+            if (diffInHours < 24) {
+                return `${diffInHours} hour${diffInHours !== 1 ? 's' : ''} ago`;
+            } else {
+                return date.toLocaleDateString('en-US', { 
+                    month: 'short', 
+                    day: 'numeric' 
+                });
+            }
+        }
+
+        function checkUrlParameters() {
+            // Optional: Add URL parameter parsing if needed
+        }
+
+        // ========== SHARING FUNCTIONALITY ==========
+        function toggleSocialShare() {
+            socialShare.style.display = socialShare.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        function shareOnPlatform(platform) {
+            const recommendation = state.recommendation;
+            const shareText = `I found "${recommendation.name}" on OptiFind! ${recommendation.tagline}`;
+            const url = window.location.origin + window.location.pathname;
+            
+            const shareUrls = {
+                twitter: `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(url)}`,
+                facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(shareText)}`,
+                linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`,
+                whatsapp: `https://wa.me/?text=${encodeURIComponent(shareText + ' ' + url)}`,
+                reddit: `https://www.reddit.com/submit?url=${encodeURIComponent(url)}&title=${encodeURIComponent(shareText)}`
             };
-            userData = generalData;
-            saveData();
-            goToScreen('category');
+            
+            if (shareUrls[platform]) {
+                window.open(shareUrls[platform], '_blank', 'width=600,height=400');
+            }
         }
 
-        // Initialize app on load
-        initApp();
+        function copyRecommendationLink() {
+            const url = window.location.origin + window.location.pathname;
+            const recommendation = state.recommendation;
+            const shareText = `Check out "${recommendation.name}" on OptiFind: ${recommendation.tagline}`;
+            const textToCopy = `${shareText}\n\n${url}`;
+            
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    showToast('Link copied to clipboard!');
+                }).catch(err => {
+                    fallbackCopyText(textToCopy);
+                });
+            } else {
+                fallbackCopyText(textToCopy);
+            }
+        }
+
+        function fallbackCopyText(text) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            
+            textArea.style.position = 'fixed';
+            textArea.style.left = '-999999px';
+            textArea.style.top = '-999999px';
+            document.body.appendChild(textArea);
+            
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    showToast('Link copied to clipboard!');
+                } else {
+                    showToast('Failed to copy link. Please try again.');
+                }
+            } catch (err) {
+                console.error('Failed to copy:', err);
+                showToast('Failed to copy link. Please try again.');
+            }
+            
+            document.body.removeChild(textArea);
+        }
+
+        // ========== TOAST NOTIFICATION ==========
+        function showToast(message) {
+            toastMessage.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
     </script>
 </body>
 </html>
