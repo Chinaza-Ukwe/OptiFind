@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OptiFind - Personalized Learning & Productivity Recommendations</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%23f72585' d='M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm306.7 69.1L162.4 380.6c-19.4 7.5-38.5-11.6-31-31l55.5-144.3c3.3-8.5 9.9-15.1 18.4-18.4l144.3-55.5c19.4-7.5 38.5 11.6 31 31L325.1 306.7c-3.2 8.5-9.9 15.1-18.4 18.4zM288 256a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z'/%3E%3C/svg%3E">
+    <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
     <style>
         /* Reset and Base Styles */
         * {
@@ -72,16 +81,7 @@
             color: var(--accent);
         }
 
-        .badge {
-            background-color: var(--accent);
-            color: white;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-left: 10px;
-        }
-
+       
         /* Main Content */
         .main-content {
             padding: 2rem 0;
@@ -264,16 +264,7 @@
         }
 
         /* Results Styles */
-        .user-badge {
-            display: inline-block;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-        }
-
+       
         .results-header {
             display: flex;
             justify-content: space-between;
@@ -601,6 +592,34 @@
             gap: 0.5rem;
             margin-top: 1rem;
         }
+
+        /* Custom Alert Modal */
+.alert-modal {
+    max-width: 400px;
+}
+
+.alert-modal .modal-header {
+    text-align: center;
+}
+
+.alert-modal .modal-header i {
+    font-size: 3rem;
+    color: var(--accent);
+    margin-bottom: 1rem;
+}
+
+.alert-modal h3 {
+    color: var(--dark);
+    margin-bottom: 0.5rem;
+}
+
+.alert-modal p {
+    color: var(--gray);
+    line-height: 1.6;
+}
+
+
+
     </style>
 </head>
 <body>
@@ -670,14 +689,32 @@
         </div>
     </div>
 
+    <!-- Alert Modal -->
+<div id="alertModal" class="modal-overlay hidden">
+    <div class="modal alert-modal">
+        <div class="modal-header">
+            <i class="fas fa-exclamation-circle"></i>
+            <h3>Please Select an Option</h3>
+            <p>You need to choose one of the options before continuing to the next question.</p>
+        </div>
+        
+        <div style="text-align: center; margin-top: 2rem;">
+            <button class="btn btn-primary" id="closeAlertBtn">
+                Got it! <i class="fas fa-check"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+
+
     <!-- Header -->
     <header>
         <div class="container header-content">
             <div class="logo">
-                <i class="fas fa-compass"></i>
-                <span>OptiFind</span>
-                <span class="badge" id="userBadge">Explorer</span>
-            </div>
+    <i class="fas fa-compass"></i>
+    <span>OptiFind</span>
+</div>
             <div>
                 <button class="btn btn-secondary" id="resetBtn">
                     <i class="fas fa-redo"></i> Restart Quiz
@@ -715,7 +752,6 @@
         <!-- Results Section -->
         <section id="resultsSection" class="hidden">
             <div class="results-container">
-                <div class="user-badge" id="resultsBadge"></div>
                 
                 <div class="results-header">
                     <h2 class="section-title">Your Personalized Recommendations</h2>
@@ -1326,8 +1362,6 @@
         const nextBtn = document.getElementById('nextBtn');
         const resetBtn = document.getElementById('resetBtn');
         const progressFill = document.getElementById('progressFill');
-        const userBadge = document.getElementById('userBadge');
-        const resultsBadge = document.getElementById('resultsBadge');
         const categoryFilters = document.getElementById('categoryFilters');
         const recommendationsGrid = document.getElementById('recommendationsGrid');
         const welcomeModal = document.getElementById('welcomeModal');
@@ -1337,49 +1371,48 @@
         const descriptionCategory = document.getElementById('descriptionCategory');
         const descriptionContent = document.getElementById('descriptionContent');
         const closeDescriptionBtn = document.getElementById('closeDescriptionBtn');
+        const alertModal = document.getElementById('alertModal');
+        const closeAlertBtn = document.getElementById('closeAlertBtn');
 
         // Initialize the app
         function init() {
-            // Check if user has seen tutorial
-            const hasSeenTutorial = localStorage.getItem('optifindSeenTutorial');
-            
-            // Check if user has completed quiz before
-            const savedState = localStorage.getItem('optifindState');
-            if (savedState) {
-                const parsedState = JSON.parse(savedState);
-                state.userAnswers = parsedState.userAnswers || [];
-                state.userTags = parsedState.userTags || [];
-                
-                if (state.userAnswers.length === quizQuestions.length) {
-                    // User has completed the quiz before
-                    showResults();
-                    generateRecommendations();
-                    updateBadge();
-                } else {
-                    // User has partial answers, restore state
-                    state.currentQuestionIndex = state.userAnswers.length;
-                    loadQuestion();
-                }
-                
-                // Show welcome modal only on first visit
-                if (!hasSeenTutorial) {
-                    setTimeout(() => {
-                        welcomeModal.classList.remove('hidden');
-                    }, 500);
-                }
-            } else {
-                // First-time user - show welcome modal
-                if (!hasSeenTutorial) {
-                    welcomeModal.classList.remove('hidden');
-                    quizSection.classList.add('hidden');
-                } else {
-                    loadQuestion();
-                }
-            }
-            
-            setupEventListeners();
-            createProgressSteps();
+    // Check if user has seen tutorial
+    const hasSeenTutorial = localStorage.getItem('optifindSeenTutorial');
+    
+    // Check if user has completed quiz before
+    const savedState = localStorage.getItem('optifindState');
+    
+    if (savedState) {
+        const parsedState = JSON.parse(savedState);
+        state.userAnswers = parsedState.userAnswers || [];
+        state.userTags = parsedState.userTags || [];
+        
+        if (state.userAnswers.length === quizQuestions.length) {
+            // User has completed the quiz before
+            showResults();
+            generateRecommendations();
+        } else {
+            // User has partial answers, restore state
+            state.currentQuestionIndex = state.userAnswers.length;
+            loadQuestion();
         }
+    } else {
+        // New user - load first question
+        loadQuestion();
+    }
+    
+    // Show welcome modal only on first visit
+    if (!hasSeenTutorial) {
+        // Hide quiz section only when showing welcome modal
+        quizSection.classList.add('hidden');
+        setTimeout(() => {
+            welcomeModal.classList.remove('hidden');
+        }, 500);
+    }
+    
+    setupEventListeners();
+    createProgressSteps();
+}
 
         // Show item description modal
         function showDescription(item) {
@@ -1518,16 +1551,15 @@ function getOptionIcon(questionIndex, optionIndex) {
         function nextQuestion() {
             // Check if an option is selected
             if (state.userAnswers[state.currentQuestionIndex] === undefined) {
-                alert('Please select an option before continuing.');
-                return;
-            }
+    alertModal.classList.remove('hidden');
+    return;
+}
             
             // If this is the last question, calculate results
             if (state.currentQuestionIndex === quizQuestions.length - 1) {
                 calculateUserTags();
                 showResults();
                 generateRecommendations();
-                updateBadge();
                 return;
             }
             
@@ -1759,22 +1791,7 @@ function displayRecommendations(items) {
             window.open(shareUrl, '_blank', 'width=600,height=400');
         }
 
-        // Update user badge based on number of tags
-        function updateBadge() {
-            const tagCount = state.userTags.length;
-            let badge = 'Explorer';
-            
-            if (tagCount >= 15) {
-                badge = 'Master Learner';
-            } else if (tagCount >= 10) {
-                badge = 'Skill Seeker';
-            } else if (tagCount >= 5) {
-                badge = 'Knowledge Hunter';
-            }
-            
-            userBadge.textContent = badge;
-            resultsBadge.textContent = badge;
-        }
+       
 
         // Show results section
         function showResults() {
@@ -1831,6 +1848,17 @@ function displayRecommendations(items) {
                     descriptionModal.classList.add('hidden');
                 }
             });
+
+            closeAlertBtn.addEventListener('click', () => {
+    alertModal.classList.add('hidden');
+});
+
+// Close alert modal when clicking outside
+alertModal.addEventListener('click', (e) => {
+    if (e.target === alertModal) {
+        alertModal.classList.add('hidden');
+    }
+});
         }
 
         // Initialize the app when DOM is loaded
