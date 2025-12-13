@@ -841,7 +841,85 @@
         .card-image {
             height: 150px;
         }
+
+         .header-content {
+        flex-wrap: wrap;
+        gap: 10px;
     }
+    .header-content > div:last-child {
+        display: flex;
+        gap: 8px;
+    }
+
+       #feedbackBtn span,
+    #resetBtn span,
+    #shareAppBtn span {
+        display: none;
+    }
+
+    .header-content .btn {
+        width: auto;
+        padding: 0.6rem;
+        border-radius: 50%;
+        aspect-ratio: 1/1; /* Make buttons square */
+        justify-content: center;
+    }
+
+    .header-content .btn i {
+        margin: 0;
+        font-size: 1.1rem;
+    }
+
+    .header-content .btn {
+        gap: 0;
+    }
+    
+    /* Keep tooltip functional */
+    .header-content .tooltip {
+        position: relative;
+    }
+    
+    /* Show text in landscape mode */
+    @media (orientation: landscape) and (max-width: 768px) {
+        #feedbackBtn span,
+        #resetBtn span,
+        #shareAppBtn span {
+            display: inline;
+        }
+        
+        .header-content .btn {
+            padding: 0.6rem 1rem;
+            border-radius: var(--border-radius);
+            aspect-ratio: auto;
+            width: auto;
+        }
+        
+        .header-content .btn i {
+            margin-right: 5px;
+        }
+    }
+}
+
+/* For very small screens */
+@media (max-width: 480px) {
+    .logo span {
+        font-size: 1.5rem;
+    }
+    
+    .logo i {
+        font-size: 1.3rem;
+    }
+    
+    .header-content .btn {
+        padding: 0.5rem;
+    }
+    
+    .header-content .btn i {
+        font-size: 1rem;
+    }
+}
+
+    
 
     /* Desktop (landscape and up) */
     @media (min-width: 1024px) {
@@ -1029,17 +1107,17 @@
             <i class="fas fa-compass"></i>
             <span>OptiFind</span>
         </div>
-        <div class="header-buttons">
-           <button class="btn btn-secondary" id="feedbackBtn">
-               <i class="fas fa-comment-dots"></i> <span class="btn-text">Feedback</span>
-           </button>
-            <button class="btn btn-secondary" id="resetBtn">
-                <i class="fas fa-redo"></i> <span class="btn-text">Restart</span>
+        <div style="display: flex; gap: 10px; align-items: center;">
+            <button class="btn btn-secondary" id="feedbackBtn">
+                <i class="fas fa-comment-dots"></i> <span>Feedback</span>
             </button>
-           <button class="btn btn-secondary tooltip" id="shareAppBtn">
-               <i class="fas fa-share-alt"></i> <span class="btn-text">Share</span>
-               <span class="tooltip-text">Copy link to share OptiFind with friends</span>
-           </button>
+            <button class="btn btn-secondary" id="resetBtn">
+                <i class="fas fa-redo"></i> <span>Restart Quiz</span>
+            </button>
+            <button class="btn btn-secondary tooltip" id="shareAppBtn">
+                <i class="fas fa-share-alt"></i> <span>Share OptiFind</span>
+                <span class="tooltip-text">Copy link to share OptiFind with friends</span>
+            </button>
         </div>
     </div>
 </header>
