@@ -728,7 +728,66 @@
 
     /* ========== MEDIA QUERIES ========== */
 
-    /* Small phones (portrait) */
+    /* Mobile (portrait) - ONLY apply icon-only behavior here */
+    @media (max-width: 767px) and (orientation: portrait) {
+        /* Make header buttons appear as icons only */
+        #feedbackBtn span,
+        #resetBtn span,
+        #shareAppBtn span {
+            display: none;
+        }
+        
+        .header-content .btn {
+            width: auto;
+            padding: 0.6rem;
+            border-radius: 50%;
+            aspect-ratio: 1/1;
+            justify-content: center;
+            min-width: auto;
+        }
+        
+        .header-content .btn i {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        
+        .header-content .btn {
+            gap: 0;
+        }
+        
+        /* Adjust for very small phones */
+        @media (max-width: 375px) {
+            .header-content .btn {
+                padding: 0.5rem;
+            }
+            
+            .header-content .btn i {
+                font-size: 1rem;
+            }
+        }
+    }
+
+    /* Mobile landscape - show text */
+    @media (max-width: 767px) and (orientation: landscape) {
+        #feedbackBtn span,
+        #resetBtn span,
+        #shareAppBtn span {
+            display: inline;
+        }
+        
+        .header-content .btn {
+            padding: 0.6rem 1rem;
+            border-radius: var(--border-radius);
+            aspect-ratio: auto;
+            width: auto;
+        }
+        
+        .header-content .btn i {
+            margin-right: 5px;
+        }
+    }
+
+    /* Small phones (general adjustments) */
     @media (max-width: 375px) {
         .container {
             padding: 0 12px;
@@ -771,7 +830,7 @@
         }
     }
 
-    /* Tablet (portrait and up) */
+    /* Tablet (portrait and up) - DESKTOP/LANDSCAPE BEHAVIOR */
     @media (min-width: 768px) {
         .container {
             padding: 0 24px;
@@ -794,6 +853,7 @@
             font-size: 1rem;
             flex: none; /* Reset flex for desktop */
             width: auto;
+            min-width: auto;
         }
         
         .quiz-buttons {
@@ -841,85 +901,7 @@
         .card-image {
             height: 150px;
         }
-
-         .header-content {
-        flex-wrap: wrap;
-        gap: 10px;
     }
-    .header-content > div:last-child {
-        display: flex;
-        gap: 8px;
-    }
-
-       #feedbackBtn span,
-    #resetBtn span,
-    #shareAppBtn span {
-        display: none;
-    }
-
-    .header-content .btn {
-        width: auto;
-        padding: 0.6rem;
-        border-radius: 50%;
-        aspect-ratio: 1/1; /* Make buttons square */
-        justify-content: center;
-    }
-
-    .header-content .btn i {
-        margin: 0;
-        font-size: 1.1rem;
-    }
-
-    .header-content .btn {
-        gap: 0;
-    }
-    
-    /* Keep tooltip functional */
-    .header-content .tooltip {
-        position: relative;
-    }
-    
-    /* Show text in landscape mode */
-    @media (orientation: landscape) and (max-width: 768px) {
-        #feedbackBtn span,
-        #resetBtn span,
-        #shareAppBtn span {
-            display: inline;
-        }
-        
-        .header-content .btn {
-            padding: 0.6rem 1rem;
-            border-radius: var(--border-radius);
-            aspect-ratio: auto;
-            width: auto;
-        }
-        
-        .header-content .btn i {
-            margin-right: 5px;
-        }
-    }
-}
-
-/* For very small screens */
-@media (max-width: 480px) {
-    .logo span {
-        font-size: 1.5rem;
-    }
-    
-    .logo i {
-        font-size: 1.3rem;
-    }
-    
-    .header-content .btn {
-        padding: 0.5rem;
-    }
-    
-    .header-content .btn i {
-        font-size: 1rem;
-    }
-}
-
-    
 
     /* Desktop (landscape and up) */
     @media (min-width: 1024px) {
@@ -940,8 +922,8 @@
         }
     }
 
-    /* Landscape orientation fixes */
-    @media (orientation: landscape) and (max-height: 600px) {
+    /* Landscape orientation fixes for small screens */
+    @media (max-width: 767px) and (orientation: landscape) and (max-height: 600px) {
         .main-content {
             padding: 1rem 0;
         }
