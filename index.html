@@ -4,13 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OptiFind - Personalized Learning & Productivity Recommendations</title>
-    
-    <!-- External Resources -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%23f72585' d='M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm306.7 69.1L162.4 380.6c-19.4 7.5-38.5-11.6-31-31l55.5-144.3c3.3-8.5 9.9-15.1 18.4-18.4l144.3-55.5c19.4-7.5 38.5 11.6 31 31L325.1 306.7c-3.2 8.5-9.9 15.1-18.4 18.4zM288 256a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z'/%3E%3C/svg%3E">
-    
-    <!-- Meta Tags -->
-    <meta name="description" content="Get personalized learning and productivity recommendations. Take a 2-minute quiz and discover the best courses, books, skills, and apps for your goals.">
+        <meta name="description" content="Get personalized learning and productivity recommendations. Take a 2-minute quiz and discover the best courses, books, skills, and apps for your goals.">
     <meta name="keywords" content="learning recommendations, productivity tools, personalized courses, skill development">
     
     <!-- Open Graph -->
@@ -23,18 +19,23 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="OptiFind - Personalized Learning Recommendations">
     <meta name="twitter:description" content="Discover your perfect learning path in 2 minutes">
-    
     <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-XXXXXXXXXX');
-    </script>
-    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
     <style>
-        /* ===== CSS VARIABLES ===== */
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
         :root {
             --primary: #4361ee;
             --primary-dark: #3a56d4;
@@ -48,14 +49,6 @@
             --border-radius: 12px;
             --box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
             --transition: all 0.3s ease;
-        }
-
-        /* ===== RESET & BASE STYLES ===== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
@@ -72,70 +65,7 @@
             padding: 0 20px;
         }
 
-        /* ===== TYPOGRAPHY ===== */
-        .section-title {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: var(--dark);
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 60px;
-            height: 4px;
-            background-color: var(--primary);
-            border-radius: 2px;
-        }
-
-        /* ===== BUTTONS ===== */
-        .btn {
-            padding: 0.8rem 1.8rem;
-            border: none;
-            border-radius: var(--border-radius);
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .btn-primary {
-            background-color: var(--primary);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background-color: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(67, 97, 238, 0.2);
-        }
-
-        .btn-secondary {
-            background-color: var(--light-gray);
-            color: var(--dark);
-        }
-
-        .btn-secondary:hover {
-            background-color: #dde1e7;
-        }
-
-        .btn-accent {
-            background-color: var(--accent);
-            color: white;
-        }
-
-        .btn-accent:hover {
-            background-color: #e11576;
-            transform: translateY(-2px);
-        }
-
-        /* ===== HEADER ===== */
+        /* Header Styles */
         header {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
@@ -164,12 +94,32 @@
             color: var(--accent);
         }
 
-        /* ===== MAIN CONTENT ===== */
+   
+        /* Main Content */
         .main-content {
             padding: 2rem 0;
         }
 
-        /* ===== QUIZ SECTION ===== */
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background-color: var(--primary);
+            border-radius: 2px;
+        }
+
+        /* Quiz Styles */
         .quiz-container, .results-container {
             background-color: white;
             border-radius: var(--border-radius);
@@ -184,7 +134,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Quiz Progress */
         .quiz-progress {
             display: flex;
             justify-content: space-between;
@@ -241,7 +190,6 @@
             color: white;
         }
 
-        /* Quiz Questions & Options */
         .quiz-question {
             font-size: 1.4rem;
             margin-bottom: 1.5rem;
@@ -286,7 +234,52 @@
             justify-content: space-between;
         }
 
-        /* ===== RESULTS SECTION ===== */
+        .btn {
+            padding: 0.8rem 1.8rem;
+            border: none;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(67, 97, 238, 0.2);
+        }
+
+        .btn-secondary {
+            background-color: var(--light-gray);
+            color: var(--dark);
+        }
+
+        .btn-secondary:hover {
+            background-color: #dde1e7;
+        }
+
+        .btn-accent {
+            background-color: var(--accent);
+            color: white;
+        }
+
+        .btn-accent:hover {
+            background-color: #e11576;
+            transform: translateY(-2px);
+        }
+
+        /* Results Styles */
+       
+
+
         .results-header {
             display: flex;
             justify-content: space-between;
@@ -296,7 +289,6 @@
             gap: 15px;
         }
 
-        /* Category Filters */
         .category-filters {
             display: flex;
             gap: 10px;
@@ -321,7 +313,6 @@
             background-color: #dde1e7;
         }
 
-        /* Recommendations Grid */
         .recommendations-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -346,7 +337,6 @@
             box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
         }
 
-        /* Card Components */
         .card-image {
             height: 150px;
             background-color: var(--light-gray);
@@ -354,13 +344,6 @@
             align-items: center;
             justify-content: center;
             color: var(--gray);
-            overflow: hidden;
-        }
-
-        .card-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
         }
 
         .card-image i {
@@ -414,7 +397,6 @@
             margin-top: auto;
         }
 
-        /* Share Buttons */
         .share-buttons {
             display: flex;
             gap: 8px;
@@ -436,26 +418,10 @@
             background-color: #25D366;
         }
 
-        .share-btn.twitter {
-            background-color: #000000;
-        }
 
-        .share-btn.twitter svg {
-            width: 16px;
-            height: 16px;
-            fill: #fff;
-        }
 
         .share-btn.telegram {
             background-color: #0088cc;
-        }
-
-        .share-btn.copy-link {
-            background-color: var(--accent);
-        }
-
-        .share-btn.copy-link:hover {
-            background-color: #e11576;
         }
 
         .share-btn:hover {
@@ -476,7 +442,60 @@
             text-decoration: underline;
         }
 
-        /* ===== MODALS ===== */
+        .hidden {
+            display: none !important;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .quiz-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .recommendations-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .results-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .quiz-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid var(--light-gray);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Welcome Modal */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -502,11 +521,16 @@
         }
 
         @keyframes modalSlideIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        /* Welcome Modal */
         .modal-header {
             text-align: center;
             margin-bottom: 1.5rem;
@@ -584,229 +608,238 @@
             margin-top: 1rem;
         }
 
-        /* Alert & Success Modals */
-        .alert-modal {
-            max-width: 400px;
-        }
+        /* Add this to your existing CSS */
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
-        .alert-modal .modal-header {
-            text-align: center;
-        }
+.card-image {
+    height: 150px;
+    background-color: var(--light-gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gray);
+    overflow: hidden; /* Add this to contain the image */
+}
 
-        .alert-modal .modal-header i {
-            font-size: 3rem;
-            color: var(--accent);
-            margin-bottom: 1rem;
-        }
+        /* Custom Alert Modal */
+.alert-modal {
+    max-width: 400px;
+}
 
-        .alert-modal .modal-header i.success {
-            color: var(--success);
-        }
+.alert-modal .modal-header {
+    text-align: center;
+}
 
-        .alert-modal h3 {
-            color: var(--dark);
-            margin-bottom: 0.5rem;
-        }
+.alert-modal .modal-header i {
+    font-size: 3rem;
+    color: var(--accent);
+    margin-bottom: 1rem;
+}
 
-        .alert-modal p {
-            color: var(--gray);
-            line-height: 1.6;
-        }
+.alert-modal h3 {
+    color: var(--dark);
+    margin-bottom: 0.5rem;
+}
 
-        /* Feedback Modal */
-        .feedback-modal {
-            max-width: 450px;
-        }
+.alert-modal p {
+    color: var(--gray);
+    line-height: 1.6;
+}
 
-        .feedback-notice {
-            background-color: rgba(67, 97, 238, 0.08);
-            border-radius: var(--border-radius);
-            padding: 1rem;
-            margin-bottom: 1.5rem;
-            border-left: 4px solid var(--primary);
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-        }
+/* Star rating hover effect */
+.rating-stars i:hover {
+    transform: scale(1.1);
+}
 
-        .feedback-notice i {
-            color: var(--primary);
-            font-size: 1.2rem;
-            margin-top: 2px;
-        }
+/* Success alert styling */
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border-color: #c3e6cb;
+}
 
-        .feedback-notice-content h4 {
-            color: var(--dark);
-            margin-bottom: 0.3rem;
-            font-size: 1rem;
-        }
+.alert-modal .modal-header i.success {
+    color: var(--success);
+}
 
-        .feedback-notice-content p {
-            color: var(--dark);
-            font-size: 0.9rem;
-            margin: 0;
-            line-height: 1.4;
-        }
+/* Compact Feedback Modal */
+.feedback-modal {
+    max-width: 450px;
+}
 
-        .feedback-icon-large {
-            font-size: 3rem;
-            color: var(--primary);
-            opacity: 0.8;
-            margin-bottom: 1rem;
-        }
+.feedback-notice {
+    background-color: rgba(67, 97, 238, 0.08);
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid var(--primary);
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
 
-        .feedback-info-box {
-            background-color: rgba(67, 97, 238, 0.05);
-            border-radius: var(--border-radius);
-            padding: 1rem;
-            margin-bottom: 1.5rem;
-        }
+.feedback-notice i {
+    color: var(--primary);
+    font-size: 1.2rem;
+    margin-top: 2px;
+}
 
-        .feedback-info-box h4 {
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            justify-content: center;
-        }
+.feedback-notice-content h4 {
+    color: var(--dark);
+    margin-bottom: 0.3rem;
+    font-size: 1rem;
+}
 
-        .feedback-info-box ul {
-            color: var(--gray);
-            font-size: 0.85rem;
-            line-height: 1.5;
-            margin: 0;
-            text-align: left;
-            display: inline-block;
-            padding-left: 1.2rem;
-        }
+.feedback-notice-content p {
+    color: var(--dark);
+    font-size: 0.9rem;
+    margin: 0;
+    line-height: 1.4;
+}
 
-        .feedback-info-box li {
-            margin-bottom: 0.3rem;
-        }
+.feedback-icon-large {
+    font-size: 3rem;
+    color: var(--primary);
+    opacity: 0.8;
+    margin-bottom: 1rem;
+}
 
-        .feedback-footer {
-            text-align: center;
-            padding-top: 1.5rem;
-            border-top: 1px solid var(--light-gray);
-        }
+.feedback-info-box {
+    background-color: rgba(67, 97, 238, 0.05);
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+}
 
-        .feedback-footer p {
-            font-size: 0.8rem;
-            color: var(--gray);
-            margin: 0.5rem 0 0;
-            font-style: italic;
-        }
+.feedback-info-box h4 {
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+}
 
-        /* ===== UTILITY CLASSES ===== */
-        .hidden {
-            display: none !important;
-        }
+.feedback-info-box ul {
+    color: var(--gray);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin: 0;
+    text-align: left;
+    display: inline-block;
+    padding-left: 1.2rem;
+}
 
-        /* Loading Animation */
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid var(--light-gray);
-            border-radius: 50%;
-            border-top-color: var(--primary);
-            animation: spin 1s ease-in-out infinite;
-        }
+.feedback-info-box li {
+    margin-bottom: 0.3rem;
+}
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
+.feedback-footer {
+    text-align: center;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--light-gray);
+}
 
-        /* Toast Notification */
-        .toast {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: var(--primary);
-            color: white;
-            padding: 12px 20px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            z-index: 1000;
-            animation: slideInUp 0.3s ease, fadeOut 0.3s ease 2s forwards;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+.feedback-footer p {
+    font-size: 0.8rem;
+    color: var(--gray);
+    margin: 0.5rem 0 0;
+    font-style: italic;
+}
 
-        @keyframes slideInUp {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
+/* Toast Notification */
+.toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--primary);
+    color: white;
+    padding: 12px 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    z-index: 1000;
+    animation: slideInUp 0.3s ease, fadeOut 0.3s ease 2s forwards;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
 
-        @keyframes fadeOut {
-            to { opacity: 0; visibility: hidden; }
-        }
+/* Copy link button style */
+.share-btn.copy-link {
+    background-color: var(--accent);
+}
 
-        /* Tooltip */
-        .tooltip {
-            position: relative;
-        }
+.share-btn.copy-link:hover {
+    background-color: #e11576;
+}
 
-        .tooltip-text {
-            visibility: hidden;
-            background-color: var(--dark);
-            color: white;
-            text-align: center;
-            padding: 5px 10px;
-            border-radius: 6px;
-            position: absolute;
-            z-index: 1;
-            bottom: 125%;
-            left: 50%;
-            transform: translateX(-50%);
-            white-space: nowrap;
-            opacity: 0;
-            transition: opacity 0.3s;
-            font-size: 0.8rem;
-        }
+/* Twitter/X button style update */
+.share-btn.twitter {
+    background-color: #000000; /* Changed from Twitter blue to X black */
+}
 
-        .tooltip:hover .tooltip-text {
-            visibility: visible;
-            opacity: 1;
-        }
+.share-btn.twitter svg {
+    width: 16px;
+    height: 16px;
+    fill: #fff;
+}
 
-        /* ===== FOOTER ===== */
-        footer {
-            text-align: center;
-            padding: 2rem 0;
-            color: var(--gray);
-            font-size: 0.9rem;
-        }
 
-        /* ===== RESPONSIVE DESIGN ===== */
-        @media (max-width: 768px) {
-            .quiz-options,
-            .recommendations-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .results-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .quiz-buttons {
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            .btn {
-                width: 100%;
-                justify-content: center;
-            }
-        }
+
+@keyframes slideInUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+/* Tooltip */
+.tooltip {
+    position: relative;
+}
+
+.tooltip-text {
+    visibility: hidden;
+    background-color: var(--dark);
+    color: white;
+    text-align: center;
+    padding: 5px 10px;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 0.8rem;
+}
+
+.tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
     </style>
 </head>
 <body>
-    <!-- ===== MODALS ===== -->
     <!-- Welcome Modal -->
     <div id="welcomeModal" class="modal-overlay hidden">
         <div class="modal">
@@ -874,107 +907,64 @@
     </div>
 
     <!-- Alert Modal -->
-    <div id="alertModal" class="modal-overlay hidden">
-        <div class="modal alert-modal">
-            <div class="modal-header">
-                <i class="fas fa-exclamation-circle"></i>
-                <h3>Please Select an Option</h3>
-                <p>You need to choose one of the options before continuing to the next question.</p>
-            </div>
-            
-            <div style="text-align: center; margin-top: 2rem;">
-                <button class="btn btn-primary" id="closeAlertBtn">
-                    Got it! <i class="fas fa-check"></i>
-                </button>
-            </div>
+<div id="alertModal" class="modal-overlay hidden">
+    <div class="modal alert-modal">
+        <div class="modal-header">
+            <i class="fas fa-exclamation-circle"></i>
+            <h3>Please Select an Option</h3>
+            <p>You need to choose one of the options before continuing to the next question.</p>
+        </div>
+        
+        <div style="text-align: center; margin-top: 2rem;">
+            <button class="btn btn-primary" id="closeAlertBtn">
+                Got it! <i class="fas fa-check"></i>
+            </button>
         </div>
     </div>
+</div>
 
-    <!-- Success Modal -->
-    <div id="successModal" class="modal-overlay hidden">
-        <div class="modal alert-modal">
-            <div class="modal-header">
-                <i class="fas fa-check-circle" style="color: var(--success);"></i>
-                <h3>Thank You!</h3>
-                <p id="successMessage">Your feedback helps us improve OptiFind.</p>
-            </div>
-            
-            <div style="text-align: center; margin-top: 2rem;">
-                <button class="btn btn-primary" id="closeSuccessBtn">
-                    Continue <i class="fas fa-check"></i>
-                </button>
-            </div>
+<!-- Success Modal -->
+<div id="successModal" class="modal-overlay hidden">
+    <div class="modal alert-modal">
+        <div class="modal-header">
+            <i class="fas fa-check-circle" style="color: var(--success);"></i>
+            <h3>Thank You!</h3>
+            <p id="successMessage">Your feedback helps us improve OptiFind.</p>
+        </div>
+        
+        <div style="text-align: center; margin-top: 2rem;">
+            <button class="btn btn-primary" id="closeSuccessBtn">
+                Continue <i class="fas fa-check"></i>
+            </button>
         </div>
     </div>
+</div>
 
-    <!-- Feedback Modal -->
-    <div id="feedbackModal" class="modal-overlay hidden">
-        <div class="modal feedback-modal">
-            <div class="modal-header">
-                <i class="fas fa-comment-dots"></i>
-                <h2>Help Improve OptiFind</h2>
-                <p>Share your feedback in our quick survey</p>
-            </div>
-            
-            <div style="text-align: center; margin: 1.5rem 0;">
-                <i class="fas fa-external-link-alt feedback-icon-large"></i>
-                <h3 style="color: var(--dark); margin-bottom: 0.5rem;">Open Feedback Form</h3>
-                <p style="color: var(--gray); line-height: 1.5; margin-bottom: 1rem;">
-                    Takes about 2-3 minutes to complete. Helps us improve for all users.
-                </p>
-                
-                <div class="feedback-info-box">
-                    <h4><i class="fas fa-info-circle"></i> What to expect:</h4>
-                    <ul>
-                        <li>Quick questions about your experience</li>
-                        <li>Ratings for different aspects</li>
-                        <li>Optional suggestions</li>
-                        <li>All responses are anonymous</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div style="display: flex; gap: 10px; justify-content: center; margin-top: 1.5rem;">
-                <button type="button" class="btn btn-secondary" id="cancelFeedbackBtn">
-                    Cancel <i class="fas fa-times"></i>
-                </button>
-                <button type="button" class="btn btn-primary" id="openGoogleFormBtn">
-                    <i class="fas fa-external-link-alt"></i> Open Feedback Form
-                </button>
-            </div>
-            
-            <div class="feedback-footer">
-                <p style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 0.5rem;">
-                    <i class="fas fa-lock"></i> Your responses are anonymous
-                </p>
-                <p>Clicking will redirect to: forms.gle/qceyEWMiNfFXpjoX9</p>
-            </div>
-        </div>
-    </div>
 
-    <!-- ===== HEADER ===== -->
+
+    <!-- Header -->
     <header>
-        <div class="container header-content">
-            <div class="logo">
-                <i class="fas fa-compass"></i>
-                <span>OptiFind</span>
-            </div>
-            <div style="display: flex; gap: 10px; align-items: center;">
-                <button class="btn btn-secondary" id="feedbackBtn">
-                    <i class="fas fa-comment-dots"></i> Feedback
-                </button>
-                <button class="btn btn-secondary" id="resetBtn">
-                    <i class="fas fa-redo"></i> Restart Quiz
-                </button>
-                <button class="btn btn-secondary tooltip" id="shareAppBtn">
-                    <i class="fas fa-share-alt"></i> Share OptiFind
-                    <span class="tooltip-text">Copy link to share OptiFind with friends</span>
-                </button>
-            </div>
+    <div class="container header-content">
+        <div class="logo">
+            <i class="fas fa-compass"></i>
+            <span>OptiFind</span>
         </div>
-    </header>
+        <div style="display: flex; gap: 10px; align-items: center;">
+           <button class="btn btn-secondary" id="feedbackBtn">
+    <i class="fas fa-comment-dots"></i> Feedback
+</button>
+            <button class="btn btn-secondary" id="resetBtn">
+                <i class="fas fa-redo"></i> Restart Quiz
+            </button>
+           <button class="btn btn-secondary tooltip" id="shareAppBtn">
+    <i class="fas fa-share-alt"></i> Share OptiFind
+    <span class="tooltip-text">Copy link to share OptiFind with friends</span>
+</button>
+        </div>
+    </div>
+</header>
 
-    <!-- ===== MAIN CONTENT ===== -->
+    <!-- Main Content -->
     <div class="container main-content">
         <!-- Quiz Section -->
         <section id="quizSection">
@@ -1003,6 +993,7 @@
         <!-- Results Section -->
         <section id="resultsSection" class="hidden">
             <div class="results-container">
+                
                 <div class="results-header">
                     <h2 class="section-title">Your Personalized Recommendations</h2>
                     <div class="category-filters" id="categoryFilters">
@@ -1015,7 +1006,7 @@
         </section>
     </div>
 
-    <!-- ===== FOOTER ===== -->
+    <!-- Footer -->
     <footer>
         <div class="container">
             <p>OptiFind - Personalized recommendations for learning and productivity</p>
@@ -1023,70 +1014,557 @@
         </div>
     </footer>
 
+    <!-- Feedback Modal -->
+<div id="feedbackModal" class="modal-overlay hidden">
+    <div class="modal feedback-modal">
+        <div class="modal-header">
+            <i class="fas fa-comment-dots"></i>
+            <h2>Help Improve OptiFind</h2>
+            <p>Share your feedback in our quick survey</p>
+        </div>
+        
+
+        
+        <div style="text-align: center; margin: 1.5rem 0;">
+            <i class="fas fa-external-link-alt feedback-icon-large"></i>
+            <h3 style="color: var(--dark); margin-bottom: 0.5rem;">Open Feedback Form</h3>
+            <p style="color: var(--gray); line-height: 1.5; margin-bottom: 1rem;">
+                Takes about 2-3 minutes to complete. Helps us improve for all users.
+            </p>
+            
+            <div class="feedback-info-box">
+                <h4><i class="fas fa-info-circle"></i> What to expect:</h4>
+                <ul>
+                    <li>Quick questions about your experience</li>
+                    <li>Ratings for different aspects</li>
+                    <li>Optional suggestions</li>
+                    <li>All responses are anonymous</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div style="display: flex; gap: 10px; justify-content: center; margin-top: 1.5rem;">
+            <button type="button" class="btn btn-secondary" id="cancelFeedbackBtn">
+                Cancel <i class="fas fa-times"></i>
+            </button>
+            <button type="button" class="btn btn-primary" id="openGoogleFormBtn">
+                <i class="fas fa-external-link-alt"></i> Open Feedback Form
+            </button>
+        </div>
+        
+        <div class="feedback-footer">
+            <p style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 0.5rem;">
+                <i class="fas fa-lock"></i> Your responses are anonymous
+            </p>
+            <p>Clicking will redirect to: forms.gle/qceyEWMiNfFXpjoX9</p>
+        </div>
+    </div>
+</div>
+
     <script>
-        // ===== CONFIGURATION =====
-        const CONFIG = {
-            GOOGLE_ANALYTICS_ID: 'G-XXXXXXXXXX',
-            GOOGLE_FORMS_URL: 'https://forms.gle/qceyEWMiNfFXpjoX9',
-        };
 
-        // ===== DATASET =====
+        // Configuration - UPDATE THESE WITH YOUR ACTUAL LINKS
+const CONFIG = {
+    GOOGLE_ANALYTICS_ID: 'G-XXXXXXXXXX',
+    GOOGLE_FORMS_URL: 'https://forms.gle/qceyEWMiNfFXpjoX9', // Your form URL
+};
+
+        // Dataset - Updated with better links
         const dataset = {
-            courses: [
+            "courses": [
+    { 
+        "id": 1, 
+        "name": "JavaScript Basics", 
+        "tags": ["javascript", "web", "programming"], 
+        "image": "https://i.imgur.com/ufhoyvP.png", 
+        "link": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/",
+        "description": "Learn JavaScript fundamentals including variables, functions, loops, and DOM manipulation. Perfect for beginners starting their web development journey."
+    },
+    { 
+        "id": 2, 
+        "name": "Intro to Python", 
+        "tags": ["python", "programming", "automation"], 
+        "image": "https://i.imgur.com/dqasyPY.jpeg", 
+        "link": "https://www.codecademy.com/learn/learn-python-3",
+        "description": "Get started with Python programming language. Learn syntax, data structures, and basic concepts for automation and data analysis."
+    },
+    { 
+        "id": 3, 
+        "name": "React for Beginners", 
+        "tags": ["react", "javascript", "web"], 
+        "image": "https://i.imgur.com/snavW5Y.png", 
+        "link": "https://react.dev/learn",
+        "description": "Master React.js fundamentals including components, state, props, and hooks. Build modern web applications with this popular JavaScript library."
+    },
+    { 
+        "id": 4, 
+        "name": "UI/UX Design Fundamentals", 
+        "tags": ["design", "ui", "ux"], 
+        "image": "https://i.imgur.com/UoIMppS.png", 
+        "link": "https://alison.com/course/introduction-to-ui-ux-design?utm_source=google&utm_medium=cpc&utm_campaign=Performance-Max_Tier-4_Tag-Teaching&gad_source=1&gad_campaignid=23345020780&gbraid=0AAAAADt7cD1uydzPmnx8WfHMPC48ggmfw&gclid=Cj0KCQiAuvTJBhCwARIsAL6DemioJr2Ixwdo78SYWyc-0sEQ0a67izwNOn_ZiR7LzWVAsxwxC6lsJhYaAiPREALw_wcB",
+        "description": "Learn user interface and user experience design principles. Create intuitive and beautiful digital products that users love."
+    },
+    { 
+        "id": 5, 
+        "name": "Data Analysis with Excel", 
+        "tags": ["excel", "data", "analytics"], 
+        "image": "https://i.imgur.com/sX79Euz.png", 
+        "link": "https://www.coursera.org/learn/excel-data-analysis",
+        "description": "Master Excel for data analysis. Learn formulas, pivot tables, charts, and data visualization techniques for business insights."
+    },
+    { 
+        "id": 6, 
+        "name": "Machine Learning Basics", 
+        "tags": ["machine learning", "ai", "python"], 
+        "image": "https://i.imgur.com/EonhWZk.jpeg", 
+        "link": "https://www.coursera.org/learn/machine-learning",
+        "description": "Introduction to machine learning concepts, algorithms, and applications. Learn how to build predictive models using Python."
+    },
+    { 
+        "id": 7, 
+        "name": "Personal Productivity Mastery", 
+        "tags": ["productivity", "self-improvement", "habits"], 
+        "image": "https://i.imgur.com/cSRxsaJ.jpeg", 
+        "link": "https://alison.com/course/maximising-personal-productivity",
+        "description": "Develop effective productivity systems, time management strategies, and habit formation techniques to maximize your efficiency."
+    },
+    { 
+        "id": 8, 
+        "name": "Digital Marketing 101", 
+        "tags": ["marketing", "digital", "seo"], 
+        "image": "https://i.imgur.com/Kxxdtie.jpeg", 
+        "link": "https://www.coursera.org/learn/digital-https://alison.com/course/advanced-diploma-in-mastering-elite-digital-marketing-for-consultants?utm_source=google&utm_medium=cpc&utm_campaign=PPC_Tier-4_First-Click_Publisher-Courses&utm_adgroup=Course-4050_Advanced-Diploma-in-Mastering-Elite-Digital-Marketing-for-Consultants&gclid=Cj0KCQiAuvTJBhCwARIsAL6Demj1LvOhZiLdkaIJ3Cp1z1ny1ECerUDg2lh2a7V-iJeTi8zxM2SwuM8aAjwzEALw_wcB&gad_source=1&gad_campaignid=20457694774&gbraid=0AAAAADt7cD03-7wwZXDFe9VRW4Bust0nGmarketing",
+        "description": "Learn digital marketing fundamentals including SEO, social media marketing, content strategy, and email marketing."
+    },
+    { 
+        "id": 9, 
+        "name": "Public Speaking Essentials", 
+        "tags": ["communication", "confidence", "skills"], 
+        "image": "https://i.imgur.com/sn4nitc.jpeg", 
+        "link": "https://www.coursera.org/learn/public-speaking",
+        "description": "Overcome public speaking anxiety and learn to communicate effectively in presentations, meetings, and public forums."
+    },
+    { 
+        "id": 10, 
+        "name": "Introduction to SQL", 
+        "tags": ["sql", "database", "data"], 
+        "image": "https://i.imgur.com/1Jb8kVj.png", 
+        "link": "https://www.khanacademy.org/computing/computer-programming/sql",
+        "description": "Learn SQL for database management. Master queries, joins, and data manipulation for efficient data handling."
+    },
+    { 
+        "id": 11, 
+        "name": "Python for Data Science", 
+        "tags": ["python", "data", "machine learning"], 
+        "image": "https://i.imgur.com/Gu2mTNh.jpeg", 
+        "link": "https://www.courhttps://alison.com/course/diploma-in-using-python-for-data-science?utm_source=google&utm_medium=cpc&utm_campaign=Performance-Max_Tier-4_Tag-Health-and-Safety&gad_source=1&gad_campaignid=23341031924&gbraid=0AAAAADt7cD04huj4dKjvf1LDHe4kmIVJp&gclid=Cj0KCQiAuvTJBhCwARIsAL6Demjr8aAZA2hPAm6rNldwbaYIuBY7DIP5zlve664pnGKyUF-zIgO9caAaAvLvEALw_wcBsera.org/learn/python-for-data-science",
+        "description": "Use Python for data analysis, visualization, and machine learning. Learn pandas, numpy, matplotlib, and scikit-learn."
+    },
+    { 
+        "id": 12, 
+        "name": "Frontend Web Development", 
+        "tags": ["html", "css", "javascript"], 
+        "image": "https://i.imgur.com/UqPsAT4.jpeg", 
+        "link": "https://www.freecodecamp.org/learn/2022/responsive-web-design/",
+        "description": "Complete frontend development course covering HTML5, CSS3, JavaScript, and modern frameworks."
+    },
+    { 
+        "id": 13, 
+        "name": "Principles of Creative Writing", 
+        "tags": ["writing", "creativity", "skills"], 
+        "image": "https://i.imgur.com/VAeYl5V.jpeg", 
+        "link": "https://alison.com/course/principles-of-creative-writing",
+        "description": "Develop your creative writing skills. Learn storytelling techniques, character development, and narrative structure."
+    },
+    { 
+        "id": 14, 
+        "name": "Advanced Excel Techniques", 
+        "tags": ["excel", "productivity", "data"], 
+        "image": "https://i.imgur.com/rLVC9uB.jpeg", 
+        "link": "https://www.linkedin.com/learning/topics/excel",
+        "description": "Advanced Excel skills including macros, VBA, complex formulas, and data analysis tools for power users."
+    },
+    { 
+        "id": 15, 
+        "name": "Python Automation Projects", 
+        "tags": ["python", "automation", "projects"], 
+        "image": "https://i.imgur.com/Dp8Fj3x.jpeg", 
+        "link": "https://www.udemy.com/course/automate-everything-with-python/?utm_campaign=Search_DSA_Alpha_Prof_la.EN_cc.ROW-English_Subs&utm_source=google&utm_medium=paid-search&portfolio=ROW-English&utm_audience=mx&utm_tactic=nb&utm_term=&utm_content=g&funnel=&test=&gad_source=1&gad_campaignid=22894903170&gbraid=0AAAAADROdO3d4dA0mx3K4E4AzdJbwBJMa&gclid=Cj0KCQiAuvTJBhCwARIsAL6DemhM6SG_DPvnlalEKN0lhSpwhIHVTJpPHqlSSN7G8uH5uEZha7AcuY4aArQPEALw_wcB&couponCode=PMNVD2025L1",
+        "description": "Learn Python automation by building real-world projects including web scraping, file management, and task automation."
+    }
+],
+
+            "books": [
+    {
+        "id": 1,
+        "name": "Atomic Habits",
+        "tags": ["habits", "self-improvement", "productivity"],
+        "image": "https://i.imgur.com/Q2iRTN6.jpeg",
+        "link": "https://jamesclear.com/atomic-habits",
+        "description": "Learn how tiny changes can lead to remarkable results. This book provides a framework for building good habits and breaking bad ones."
+    },
+    {
+        "id": 2,
+        "name": "Deep Work",
+        "tags": ["focus", "productivity", "self-improvement"],
+        "image": "https://i.imgur.com/RUKulyW.png",
+        "link": "https://www.amazon.com/Deep-Work-Focused-Success-Distracted/dp/1455586692",
+        "description": "Master the ability to focus without distraction on cognitively demanding tasks. Learn strategies for achieving peak productivity."
+    },
+    {
+        "id": 3,
+        "name": "Clean Code",
+        "tags": ["programming", "software", "development"],
+        "image": "https://i.imgur.com/tVljje4.jpeg",
+        "link": "https://www.amazon.com/s?k=Clean+Code+Robert+C+Martin",
+        "description": "Learn how to write clean, maintainable code. This book covers principles, patterns, and practices for professional software development."
+    },
+    {
+        "id": 4,
+        "name": "The 7 Habits of Highly Effective People",
+        "tags": ["self-improvement", "productivity", "habits"],
+        "image": "https://i.imgur.com/DkG658U.jpeg",
+        "link": "https://www.amazon.com/s?k=The+7+Habits+of+Highly+Effective+People",
+        "description": "Transform your personal and professional life with these seven powerful habits for effectiveness."
+    },
+    {
+        "id": 5,
+        "name": "Thinking, Fast and Slow",
+        "tags": ["psychology", "decision-making", "self-improvement"],
+        "image": "https://i.imgur.com/OYl62JM.jpeg",
+        "link": "https://www.amazon.com/s?k=Thinking+Fast+and+Slow+Daniel+Kahneman",
+        "description": "Explore the two systems that drive how we think: fast, intuitive thinking and slow, deliberate thinking."
+    },
+    {
+        "id": 6,
+        "name": "The Lean Startup",
+        "tags": ["entrepreneurship", "business", "startup"],
+        "image": "https://i.imgur.com/BChoCHZ.jpeg",
+        "link": "https://www.amazon.com/s?k=The+Lean+Startup+Eric+Ries",
+        "description": "Learn how to build a successful startup using continuous innovation and validated learning."
+    },
+    {
+        "id": 7,
+        "name": "Zero to One",
+        "tags": ["entrepreneurship", "business", "innovation"],
+        "image": "https://i.imgur.com/ZUdSRde.jpeg",
+        "link": "https://www.amazon.com/s?k=Zero+to+One+Peter+Thiel",
+        "description": "Learn how to build companies that create new things and move from zero to one in innovation."
+    },
+    {
+        "id": 8,
+        "name": "The Power of Habit",
+        "tags": ["habits", "self-improvement", "psychology"],
+        "image": "https://i.imgur.com/xvovkuH.jpeg",
+        "link": "https://www.amazon.com/s?k=The+Power+of+Habit+Charles+Duhigg",
+        "description": "Understand the science of habits and learn how to transform your business and personal life."
+    },
+    {
+        "id": 9,
+        "name": "Mindset",
+        "tags": ["growth", "self-improvement", "psychology"],
+        "image": "https://i.imgur.com/Z6oG5bb.jpeg",
+        "link": "https://www.amazon.com/s?k=Mindset+Carol+S+Dweck",
+        "description": "Discover how a simple idea about the brain can create a love of learning and resilience in the face of challenges."
+    },
+    {
+        "id": 10,
+        "name": "Hooked",
+        "tags": ["behavior", "design", "psychology"],
+        "image": "https://i.imgur.com/ijfC69E.jpeg",
+        "link": "https://www.amazon.com/s?k=Hooked+Nir+Eyal",
+        "description": "Learn how to build habit-forming products using the Hook Model of trigger, action, variable reward, and investment."
+    },
+    {
+        "id": 11,
+        "name": "Deep Learning with Python",
+        "tags": ["python", "machine learning", "ai"],
+        "image": "https://i.imgur.com/hR4bVRc.jpeg",
+        "link": "https://www.amazon.com/s?k=Deep+Learning+with+Python+Francois+Chollet",
+        "description": "Practical introduction to deep learning using Python and Keras. Build neural networks for real-world applications."
+    },
+    {
+        "id": 12,
+        "name": "Eloquent JavaScript",
+        "tags": ["javascript", "programming", "web"],
+        "image": "https://i.imgur.com/hFQogB6.jpeg",
+        "link": "https://eloquentjavascript.net/",
+        "description": "A modern introduction to programming with JavaScript. Learn the language fundamentals and explore web development."
+    },
+    {
+        "id": 13,
+        "name": "The Art of Thinking Clearly",
+        "tags": ["decision-making", "psychology", "self-improvement"],
+        "image": "https://i.imgur.com/bvzihQO.jpeg",
+        "link": "https://www.amazon.com/s?k=The+Art+of+Thinking+Clearly+Rolf+Dobelli",
+        "description": "Learn about cognitive biases and how to avoid them to make better decisions in life and business."
+    },
+    {
+        "id": 14,
+        "name": "Design of Everyday Things",
+        "tags": ["design", "ux", "product"],
+        "image": "https://i.imgur.com/H4YMCTO.jpeg",
+        "link": "https://www.amazon.com/s?k=The+Design+of+Everyday+Things+Don+Norman",
+        "description": "Understand the principles of good design and how to create products that are intuitive and user-friendly."
+    },
+    {
+        "id": 15,
+        "name": "Cracking the Coding Interview",
+        "tags": ["programming", "interview", "career"],
+        "image": "https://i.imgur.com/tZGgScE.jpeg",
+        "link": "https://www.amazon.com/s?k=Cracking+the+Coding+Interview+Gayle+Laakmann+McDowell",
+        "description": "Prepare for technical interviews with coding problems, solutions, and strategies for success."
+    }
+],
+
+            "skills": [
                 { 
-                    id: 1, 
-                    name: "JavaScript Basics", 
-                    tags: ["javascript", "web", "programming"], 
-                    image: "https://i.imgur.com/ufhoyvP.png", 
-                    link: "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/",
-                    description: "Learn JavaScript fundamentals including variables, functions, loops, and DOM manipulation. Perfect for beginners starting their web development journey."
+                    "id": 1, 
+                    "name": "Web Development", 
+                    "tags": ["html", "css", "javascript"], 
+                    "image": "https://i.imgur.com/0EMlkiS.jpeg", 
+                    "link": "#",
+                    "description": "Learn to build responsive websites and web applications using HTML, CSS, and JavaScript."
                 },
                 { 
-                    id: 2, 
-                    name: "Intro to Python", 
-                    tags: ["python", "programming", "automation"], 
-                    image: "https://i.imgur.com/dqasyPY.jpeg", 
-                    link: "https://www.codecademy.com/learn/learn-python-3",
-                    description: "Get started with Python programming language. Learn syntax, data structures, and basic concepts for automation and data analysis."
+                    "id": 2, 
+                    "name": "Time Management", 
+                    "tags": ["productivity", "habits", "focus"], 
+                    "image": "https://i.imgur.com/Ho1IbLt.jpeg", 
+                    "link": "#",
+                    "description": "Master techniques for prioritizing tasks, avoiding procrastination, and maximizing productivity."
                 },
-                // ... (other courses remain the same)
+                { 
+                    "id": 3, 
+                    "name": "UI Design", 
+                    "tags": ["design", "ui", "ux"], 
+                    "image": "https://i.imgur.com/KTsteuI.jpeg", 
+                    "link": "#",
+                    "description": "Create beautiful and functional user interfaces for websites and mobile applications."
+                },
+                { 
+                    "id": 4, 
+                    "name": "Public Speaking", 
+                    "tags": ["communication", "confidence", "skills"], 
+                    "image": "https://i.imgur.com/iYl5MFA.jpeg", 
+                    "link": "#",
+                    "description": "Develop confidence and skills for effective public speaking and presentation delivery."
+                },
+                { 
+                    "id": 5, 
+                    "name": "Data Analysis", 
+                    "tags": ["excel", "data", "analytics"], 
+                    "image": "https://i.imgur.com/5fCFltl.jpeg", 
+                    "link": "#",
+                    "description": "Learn to collect, process, analyze, and visualize data to make informed decisions."
+                },
+                { 
+                    "id": 6, 
+                    "name": "Python Programming", 
+                    "tags": ["python", "programming", "automation"], 
+                    "image": "https://i.imgur.com/btjKn49.jpeg", 
+                    "link": "#",
+                    "description": "Master Python programming for automation, data analysis, web development, and more."
+                },
+                { 
+                    "id": 7, 
+                    "name": "Machine Learning", 
+                    "tags": ["ai", "python", "data"], 
+                    "image": "https://i.imgur.com/ARe6YO2.jpeg", 
+                    "link": "#",
+                    "description": "Learn to build and train machine learning models for prediction, classification, and pattern recognition."
+                },
+                { 
+                    "id": 8, 
+                    "name": "Creative Writing", 
+                    "tags": ["writing", "creativity", "skills"], 
+                    "image": "https://i.imgur.com/Crl0Ssf.jpeg", 
+                    "link": "#",
+                    "description": "Develop your writing voice and learn techniques for storytelling, poetry, and creative expression."
+                },
+                { 
+                    "id": 9, 
+                    "name": "Digital Marketing", 
+                    "tags": ["marketing", "digital", "seo"], 
+                    "image": "https://i.imgur.com/QSv6EhZ.jpeg", 
+                    "link": "#",
+                    "description": "Learn to promote products and services using digital channels and analytics."
+                },
+                { 
+                    "id": 10, 
+                    "name": "Project Management", 
+                    "tags": ["organization", "planning", "skills"], 
+                    "image": "https://i.imgur.com/0405GnS.png", 
+                    "link": "#",
+                    "description": "Master project planning, execution, and delivery using various methodologies and tools."
+                },
+                { 
+                    "id": 11, 
+                    "name": "Interview Preparation", 
+                    "tags": ["career", "skills", "programming"], 
+                    "image": "https://i.imgur.com/lYGpLKe.png", 
+                    "link": "#",
+                    "description": "Prepare for technical and behavioral interviews with practice questions and strategies."
+                },
+                { 
+                    "id": 12, 
+                    "name": "Networking Skills", 
+                    "tags": ["communication", "career", "social"], 
+                    "image": "https://i.imgur.com/QQkEvjO.jpeg", 
+                    "link": "#",
+                    "description": "Learn to build professional relationships and expand your career network effectively."
+                },
+                { 
+                    "id": 13, 
+                    "name": "Graphic Design", 
+                    "tags": ["design", "creativity", "ux"], 
+                    "image": "https://i.imgur.com/kxp7LP6.jpeg", 
+                    "link": "#",
+                    "description": "Create visual content using design principles, typography, and color theory."
+                },
+                { 
+                    "id": 14, 
+                    "name": "Excel Advanced Skills", 
+                    "tags": ["excel", "data", "analytics"], 
+                    "image": "https://i.imgur.com/0h8hTCO.png", 
+                    "link": "#",
+                    "description": "Master advanced Excel features including complex formulas, pivot tables, and data analysis tools."
+                },
+                { 
+                    "id": 15, 
+                    "name": "AI Prompt Engineering", 
+                    "tags": ["ai", "machine learning", "tools"], 
+                    "image": "https://i.imgur.com/ijOVZMV.jpeg", 
+                    "link": "#",
+                    "description": "Learn to craft effective prompts for AI models to get optimal results and creative outputs."
+                }
             ],
-            books: [
-                {
-                    id: 1,
-                    name: "Atomic Habits",
-                    tags: ["habits", "self-improvement", "productivity"],
-                    image: "https://i.imgur.com/Q2iRTN6.jpeg",
-                    link: "https://jamesclear.com/atomic-habits",
-                    description: "Learn how tiny changes can lead to remarkable results. This book provides a framework for building good habits and breaking bad ones."
-                },
-                // ... (other books remain the same)
-            ],
-            skills: [
-                { 
-                    id: 1, 
-                    name: "Web Development", 
-                    tags: ["html", "css", "javascript"], 
-                    image: "https://i.imgur.com/0EMlkiS.jpeg", 
-                    link: "#",
-                    description: "Learn to build responsive websites and web applications using HTML, CSS, and JavaScript."
-                },
-                // ... (other skills remain the same)
-            ],
-            apps: [
-                { 
-                    id: 1, 
-                    name: "Notion", 
-                    tags: ["productivity", "notes", "organization"], 
-                    image: "https://i.imgur.com/SzJUaBF.png", 
-                    link: "https://www.notion.so/product",
-                    description: "All-in-one workspace for notes, tasks, wikis, and databases. Great for personal and team productivity."
-                },
-                // ... (other apps remain the same)
-            ]
+
+            "apps": [
+    { 
+        "id": 1, 
+        "name": "Notion", 
+        "tags": ["productivity", "notes", "organization"], 
+        "image": "https://i.imgur.com/SzJUaBF.png", 
+        "link": "https://www.notion.so/product",
+        "description": "All-in-one workspace for notes, tasks, wikis, and databases. Great for personal and team productivity."
+    },
+    { 
+        "id": 2, 
+        "name": "Obsidian", 
+        "tags": ["notes", "knowledge", "organization"], 
+        "image": "https://i.imgur.com/pkWdf9L.jpeg", 
+        "link": "https://obsidian.md/",
+        "description": "Powerful knowledge base that works on top of a local folder of plain text Markdown files."
+    },
+    { 
+        "id": 3, 
+        "name": "Todoist", 
+        "tags": ["productivity", "tasks", "planning"], 
+        "image": "https://i.imgur.com/CmBA7vt.png", 
+        "link": "https://todoist.com/",
+        "description": "Simple yet powerful task manager to organize your work and life. Available on all platforms."
+    },
+    { 
+        "id": 4, 
+        "name": "Trello", 
+        "tags": ["project management", "planning", "team"], 
+        "image": "https://i.imgur.com/3qgG8A1.png", 
+        "link": "https://trello.com/",
+        "description": "Visual project management tool using boards, lists, and cards. Great for team collaboration."
+    },
+    { 
+        "id": 5, 
+        "name": "Figma", 
+        "tags": ["design", "ui", "ux"], 
+        "image": "https://i.imgur.com/7tKBu4e.png", 
+        "link": "https://www.figma.com/",
+        "description": "Collaborative interface design tool for creating, prototyping, and sharing designs."
+    },
+    { 
+        "id": 6, 
+        "name": "Canva", 
+        "tags": ["design", "creativity", "marketing"], 
+        "image": "https://i.imgur.com/Pii1RDZ.jpeg", 
+        "link": "https://www.canva.com/",
+        "description": "Easy-to-use design tool for creating graphics, presentations, and social media content."
+    },
+    { 
+        "id": 7, 
+        "name": "Slack", 
+        "tags": ["team", "communication", "organization"], 
+        "image": "https://i.imgur.com/41YSc14.png", 
+        "link": "https://slack.com/",
+        "description": "Team communication platform with channels, direct messages, and integrations with other tools."
+    },
+    { 
+        "id": 8, 
+        "name": "Google Calendar", 
+        "tags": ["planning", "productivity", "organization"], 
+        "image": "https://i.imgur.com/yrkG4iU.png", 
+        "link": "https://calendar.google.com/",
+        "description": "Time-management and scheduling calendar service for organizing meetings, events, and tasks."
+    },
+    { 
+        "id": 9, 
+        "name": "Evernote", 
+        "tags": ["notes", "organization", "productivity"], 
+        "image": "https://i.imgur.com/nPe6Kez.png", 
+        "link": "https://evernote.com/",
+        "description": "Note-taking app for capturing ideas, organizing information, and syncing across devices."
+    },
+    { 
+        "id": 10, 
+        "name": "Zoom", 
+        "tags": ["communication", "meetings", "team"], 
+        "image": "https://i.imgur.com/HtfRL3w.png", 
+        "link": "https://zoom.us/",
+        "description": "Video conferencing platform for hosting meetings, webinars, and virtual events."
+    },
+    { 
+        "id": 11, 
+        "name": "Asana", 
+        "tags": ["project management", "team", "planning"], 
+        "image": "https://i.imgur.com/RjdmPLk.png", 
+        "link": "https://asana.com/",
+        "description": "Work management platform for teams to organize, track, and manage their work."
+    },
+    { 
+        "id": 12, 
+        "name": "ClickUp", 
+        "tags": ["productivity", "tasks", "planning"], 
+        "image": "https://i.imgur.com/rH5dwcP.png", 
+        "link": "https://clickup.com/",
+        "description": "All-in-one productivity platform for tasks, docs, goals, and team collaboration."
+    },
+    { 
+        "id": 13, 
+        "name": "VS Code", 
+        "tags": ["programming", "development", "tools"], 
+        "image": "https://i.imgur.com/uuNX4pZ.jpeg", 
+        "link": "https://code.visualstudio.com/",
+        "description": "Free source-code editor with built-in support for debugging, Git, extensions, and IntelliSense."
+    },
+    { 
+        "id": 14, 
+        "name": "Spotify", 
+        "tags": ["music", "entertainment", "apps"], 
+        "image": "https://i.imgur.com/xujjktk.png", 
+        "link": "https://www.spotify.com/",
+        "description": "Music streaming service with millions of songs, podcasts, and personalized playlists."
+    },
+    { 
+        "id": 15, 
+        "name": "Duolingo", 
+        "tags": ["learning", "languages", "skills"], 
+        "image": "https://i.imgur.com/STu1RY9.jpeg", 
+        "link": "https://www.duolingo.com/",
+        "description": "Language-learning platform with gamified lessons for learning new languages effectively."
+    }
+]
         };
 
-        // ===== QUIZ QUESTIONS =====
+        // Quiz Questions
         const quizQuestions = [
             {
                 id: 1,
@@ -1098,57 +1576,124 @@
                     { text: "Business & Entrepreneurship", tags: ["business", "entrepreneurship", "marketing", "startup"] }
                 ]
             },
-            // ... (other questions remain the same)
+            {
+                id: 2,
+                question: "Which of these sounds most interesting to you?",
+                options: [
+                    { text: "Building websites and web applications", tags: ["web", "javascript", "html", "css"] },
+                    { text: "Analyzing data and finding insights", tags: ["data", "analytics", "excel", "python"] },
+                    { text: "Creating visual designs and user experiences", tags: ["design", "ui", "ux", "creativity"] },
+                    { text: "Managing projects and teams efficiently", tags: ["project management", "organization", "team", "planning"] }
+                ]
+            },
+            {
+                id: 3,
+                question: "What's your current skill level in your chosen area?",
+                options: [
+                    { text: "Beginner - Just starting out", tags: ["basics", "fundamentals", "intro"] },
+                    { text: "Intermediate - Have some experience", tags: ["intermediate", "projects", "development"] },
+                    { text: "Advanced - Looking to master specific areas", tags: ["advanced", "mastery", "expert"] },
+                    { text: "Mixed - Strong in some areas, new to others", tags: ["mixed", "variety", "skills"] }
+                ]
+            },
+            {
+                id: 4,
+                question: "How do you prefer to learn?",
+                options: [
+                    { text: "Structured courses with clear progression", tags: ["courses", "structured", "learning"] },
+                    { text: "Reading books to deeply understand concepts", tags: ["books", "deep", "understanding"] },
+                    { text: "Practical apps and tools I can use immediately", tags: ["apps", "tools", "practical"] },
+                    { text: "Developing specific skills through practice", tags: ["skills", "practice", "application"] }
+                ]
+            },
+            {
+                id: 5,
+                question: "What's your primary goal?",
+                options: [
+                    { text: "Advance my career", tags: ["career", "interview", "skills"] },
+                    { text: "Increase personal productivity", tags: ["productivity", "habits", "focus"] },
+                    { text: "Learn for personal enjoyment", tags: ["creativity", "writing", "psychology"] },
+                    { text: "Start my own business/project", tags: ["entrepreneurship", "startup", "business"] }
+                ]
+            },
+            {
+                id: 6,
+                question: "Which tools do you use most often?",
+                options: [
+                    { text: "Programming tools (VS Code, Git, etc.)", tags: ["programming", "development", "tools"] },
+                    { text: "Productivity apps (Notion, Todoist, Calendar)", tags: ["productivity", "notes", "organization"] },
+                    { text: "Design software (Figma, Canva, Adobe)", tags: ["design", "ui", "ux"] },
+                    { text: "Communication tools (Slack, Zoom, Teams)", tags: ["communication", "team", "meetings"] }
+                ]
+            },
+            {
+                id: 7,
+                question: "How much time can you dedicate weekly?",
+                options: [
+                    { text: "1-3 hours - Light learning", tags: ["basics", "fundamentals", "intro"] },
+                    { text: "3-7 hours - Moderate commitment", tags: ["intermediate", "projects", "skills"] },
+                    { text: "7+ hours - Deep dive", tags: ["advanced", "mastery", "deep"] },
+                    { text: "Varies - Depends on the week", tags: ["flexible", "variety", "mixed"] }
+                ]
+            }
         ];
 
-        // ===== ANALYTICS FUNCTIONS =====
-        function trackEvent(category, action, label) {
-            if (typeof gtag !== 'undefined') {
-                gtag('event', action, {
-                    'event_category': category,
-                    'event_label': label
-                });
-            }
-            console.log(`Tracked: ${category} - ${action} - ${label}`);
-        }
+         // Analytics Tracking Functions
+function trackEvent(category, action, label) {
+    if (typeof gtag !== 'undefined') {
+        gtag('event', action, {
+            'event_category': category,
+            'event_label': label
+        });
+    }
+    console.log(`Tracked: ${category} - ${action} - ${label}`);
+}
 
-        function trackQuizCompletion() {
-            const completionTime = Math.round((Date.now() - quizStartTime) / 1000);
-            trackEvent('Quiz', 'Completed', `Time: ${completionTime}s, Answers: ${state.userAnswers.length}`);
-        }
+// Track quiz completion
+function trackQuizCompletion() {
+    const completionTime = Math.round((Date.now() - quizStartTime) / 1000); // in seconds
+    trackEvent('Quiz', 'Completed', `Time: ${completionTime}s, Answers: ${state.userAnswers.length}`);
+}
 
-        function trackCategoryFilter(category) {
-            trackEvent('Navigation', 'Category_Filter', category);
-        }
+// Track category filter usage
+function trackCategoryFilter(category) {
+    trackEvent('Navigation', 'Category_Filter', category);
+}
 
-        function trackShare(platform, itemName) {
-            trackEvent('Social', 'Share', `${platform} - ${itemName}`);
-        }
+// Track share actions
+function trackShare(platform, itemName) {
+    trackEvent('Social', 'Share', `${platform} - ${itemName}`);
+}
 
-        function trackFeedbackOpen() {
-            trackEvent('Feedback', 'Modal_Opened', 'User clicked feedback button');
-        }
+// Track feedback button click
+function trackFeedbackOpen() {
+    trackEvent('Feedback', 'Modal_Opened', 'User clicked feedback button');
+}
 
-        function trackFeedbackSubmit() {
-            trackEvent('Feedback', 'Submitted', 'User submitted feedback');
-        }
+// Track feedback submission
+function trackFeedbackSubmit() {
+    trackEvent('Feedback', 'Submitted', 'User submitted feedback');
+}
 
-        let quizStartTime = Date.now();
-        function trackQuizStart() {
-            quizStartTime = Date.now();
-            trackEvent('Quiz', 'Started', 'User began the quiz');
-        }
+// Track page view (already handled by gtag config)
+// Let's also track when quiz starts
+let quizStartTime = Date.now();
+function trackQuizStart() {
+    quizStartTime = Date.now();
+    trackEvent('Quiz', 'Started', 'User began the quiz');
+}
 
-        function trackQuizAbandoned() {
-            if (state.userAnswers.length > 0 && state.userAnswers.length < quizQuestions.length) {
-                const timeSpent = Math.round((Date.now() - quizStartTime) / 1000);
-                trackEvent('Quiz', 'Abandoned', 
-                    `At question ${state.userAnswers.length + 1}, Time: ${timeSpent}s`
-                );
-            }
-        }
+// Track quiz abandonment
+function trackQuizAbandoned() {
+    if (state.userAnswers.length > 0 && state.userAnswers.length < quizQuestions.length) {
+        const timeSpent = Math.round((Date.now() - quizStartTime) / 1000);
+        trackEvent('Quiz', 'Abandoned', 
+            `At question ${state.userAnswers.length + 1}, Time: ${timeSpent}s`
+        );
+    }
+}   
 
-        // ===== APP STATE =====
+        // App State
         const state = {
             currentQuestionIndex: 0,
             userAnswers: [],
@@ -1158,7 +1703,7 @@
             activeCategory: 'all'
         };
 
-        // ===== DOM ELEMENTS =====
+        // DOM Elements
         const quizSection = document.getElementById('quizSection');
         const resultsSection = document.getElementById('resultsSection');
         const questionText = document.getElementById('questionText');
@@ -1182,326 +1727,63 @@
         const cancelFeedbackBtn = document.getElementById('cancelFeedbackBtn');
         const openGoogleFormBtn = document.getElementById('openGoogleFormBtn');
         const successModal = document.getElementById('successModal');
-        const closeSuccessBtn = document.getElementById('closeSuccessBtn');
+const closeSuccessBtn = document.getElementById('closeSuccessBtn');
 
-        // ===== CORE FUNCTIONS =====
+
+        // Initialize the app
         function init() {
-            const hasSeenTutorial = localStorage.getItem('optifindSeenTutorial');
-            const savedState = localStorage.getItem('optifindState');
-            
-            if (savedState) {
-                const parsedState = JSON.parse(savedState);
-                state.userAnswers = parsedState.userAnswers || [];
-                state.userTags = parsedState.userTags || [];
-                
-                if (state.userAnswers.length === quizQuestions.length) {
-                    showResults();
-                    generateRecommendations();
-                } else {
-                    state.currentQuestionIndex = state.userAnswers.length;
-                    loadQuestion();
-                }
-            } else {
-                loadQuestion();
-            }
-            
-            if (!hasSeenTutorial) {
-                quizSection.classList.add('hidden');
-                setTimeout(() => {
-                    welcomeModal.classList.remove('hidden');
-                }, 500);
-            }
-            
-            setupEventListeners();
-            createProgressSteps();
-        }
-
-        function createProgressSteps() {
-            const progressContainer = document.querySelector('.quiz-progress');
-            const existingSteps = document.querySelectorAll('.progress-step');
-            existingSteps.forEach(step => step.remove());
-            
-            for (let i = 0; i < quizQuestions.length; i++) {
-                const step = document.createElement('div');
-                step.className = 'progress-step';
-                if (i < state.currentQuestionIndex) {
-                    step.classList.add('completed');
-                } else if (i === state.currentQuestionIndex) {
-                    step.classList.add('active');
-                }
-                step.textContent = i + 1;
-                progressContainer.appendChild(step);
-            }
-            
-            const progressPercentage = (state.currentQuestionIndex / (quizQuestions.length - 1)) * 100;
-            progressFill.style.width = `${progressPercentage}%`;
-        }
-
-        function loadQuestion() {
-            const currentQuestion = quizQuestions[state.currentQuestionIndex];
-            questionText.textContent = currentQuestion.question;
-            
-            quizOptions.innerHTML = '';
-            
-            currentQuestion.options.forEach((option, index) => {
-                const optionElement = document.createElement('div');
-                optionElement.className = 'quiz-option';
-                if (state.userAnswers[state.currentQuestionIndex] === index) {
-                    optionElement.classList.add('selected');
-                }
-                
-                optionElement.innerHTML = `
-                    <i class="fas fa-${getOptionIcon(state.currentQuestionIndex, index)}"></i>
-                    <span>${option.text}</span>
-                `;
-                
-                optionElement.addEventListener('click', () => selectOption(index));
-                quizOptions.appendChild(optionElement);
-            });
-            
-            prevBtn.disabled = state.currentQuestionIndex === 0;
-            nextBtn.innerHTML = state.currentQuestionIndex === quizQuestions.length - 1 ? 
-                'Get Recommendations <i class="fas fa-arrow-right"></i>' : 
-                'Next <i class="fas fa-arrow-right"></i>';
-            
-            createProgressSteps();
-        }
-
-        function getOptionIcon(questionIndex, optionIndex) {
-            const iconSets = [
-                ['laptop-code', 'chart-line', 'palette', 'briefcase'],
-                ['code', 'chart-bar', 'paint-brush', 'project-diagram'],
-                ['seedling', 'rocket', 'crown', 'layer-group'],
-                ['graduation-cap', 'book-open', 'mobile-alt', 'dumbbell'],
-                ['user-tie', 'bolt', 'heart', 'lightbulb'],
-                ['code', 'clipboard-list', 'pen-fancy', 'comments'],
-                ['clock', 'calendar-check', 'brain', 'random']
-            ];
-            
-            const icons = iconSets[questionIndex] || ['circle', 'square', 'star', 'check'];
-            return icons[optionIndex] || 'question';
-        }
-
-        function selectOption(optionIndex) {
-            const options = document.querySelectorAll('.quiz-option');
-            options.forEach(option => option.classList.remove('selected'));
-            options[optionIndex].classList.add('selected');
-            
-            state.userAnswers[state.currentQuestionIndex] = optionIndex;
-            saveState();
-        }
-
-        function saveState() {
-            localStorage.setItem('optifindState', JSON.stringify({
-                userAnswers: state.userAnswers,
-                userTags: state.userTags
-            }));
-        }
-
-        function nextQuestion() {
-            if (state.userAnswers[state.currentQuestionIndex] === undefined) {
-                alertModal.classList.remove('hidden');
-                return;
-            }
-            
-            if (state.currentQuestionIndex === 0 && state.userAnswers.length === 1) {
-                trackQuizStart();
-            }
-            
-            if (state.currentQuestionIndex === quizQuestions.length - 1) {
-                calculateUserTags();
-                showResults();
-                generateRecommendations();
-                return;
-            }
-            
-            state.currentQuestionIndex++;
-            loadQuestion();
-            saveState();
-        }
-
-        function prevQuestion() {
-            state.currentQuestionIndex--;
+    // Check if user has seen tutorial
+    const hasSeenTutorial = localStorage.getItem('optifindSeenTutorial');
+    
+    // Check if user has completed quiz before
+    const savedState = localStorage.getItem('optifindState');
+    
+    if (savedState) {
+        const parsedState = JSON.parse(savedState);
+        state.userAnswers = parsedState.userAnswers || [];
+        state.userTags = parsedState.userTags || [];
+        
+        if (state.userAnswers.length === quizQuestions.length) {
+            // User has completed the quiz before
+            showResults();
+            generateRecommendations();
+        } else {
+            // User has partial answers, restore state
+            state.currentQuestionIndex = state.userAnswers.length;
             loadQuestion();
         }
+    } else {
+        // New user - load first question
+        loadQuestion();
+    }
+    
+    // Show welcome modal only on first visit
+    if (!hasSeenTutorial) {
+        // Hide quiz section only when showing welcome modal
+        quizSection.classList.add('hidden');
+        setTimeout(() => {
+            welcomeModal.classList.remove('hidden');
+        }, 500);
+    }
+    
+    setupEventListeners();
+    createProgressSteps();
+}
 
-        function calculateUserTags() {
-            state.userTags = [];
-            
-            state.userAnswers.forEach((answerIndex, questionIndex) => {
-                const selectedOption = quizQuestions[questionIndex].options[answerIndex];
-                state.userTags.push(...selectedOption.tags);
-            });
-            
-            state.userTags = [...new Set(state.userTags)];
-            saveState();
-        }
-
-        function getRecommendations(userTags) {
-            const allItems = [];
-            
-            for (const category in dataset) {
-                dataset[category].forEach(item => {
-                    allItems.push({
-                        ...item,
-                        category: category.charAt(0).toUpperCase() + category.slice(1)
-                    });
-                });
-            }
-            
-            const scoredItems = allItems.map(item => {
-                let score = 0;
-                
-                item.tags.forEach(tag => {
-                    if (userTags.includes(tag)) {
-                        score += 1;
-                    }
-                });
-                
-                return {
-                    ...item,
-                    score: score
-                };
-            });
-            
-            const topItems = scoredItems
-                .sort((a, b) => b.score - a.score)
-                .slice(0, 10);
-            
-            return topItems;
-        }
-
-        function generateRecommendations() {
-            const recommendations = getRecommendations(state.userTags);
-            state.filteredRecommendations = recommendations;
-            state.currentRecIndex = 0;
-            
-            displayCategoryFilters();
-            displayRecommendations(recommendations);
-        }
-
-        function displayCategoryFilters() {
-            const categories = ['all', 'Courses', 'Books', 'Skills', 'Apps'];
-            
-            categoryFilters.innerHTML = '';
-            
-            categories.forEach(category => {
-                const filter = document.createElement('div');
-                filter.className = `category-filter ${state.activeCategory === category ? 'active' : ''}`;
-                filter.textContent = category === 'all' ? 'All' : category;
-                filter.addEventListener('click', () => filterByCategory(category));
-                categoryFilters.appendChild(filter);
-            });
-        }
-
-        function filterByCategory(category) {
-            trackCategoryFilter(category);
-            state.activeCategory = category;
-            
-            document.querySelectorAll('.category-filter').forEach(filter => {
-                filter.classList.remove('active');
-                if (filter.textContent === (category === 'all' ? 'All' : category)) {
-                    filter.classList.add('active');
-                }
-            });
-            
-            let filtered = state.filteredRecommendations;
-            if (category !== 'all') {
-                filtered = state.filteredRecommendations.filter(item => 
-                    item.category.toLowerCase() === category.toLowerCase()
-                );
-            }
-            
-            displayRecommendations(filtered);
-        }
-
-        function displayRecommendations(items) {
-            recommendationsGrid.innerHTML = '';
-            
-            if (items.length === 0) {
-                recommendationsGrid.innerHTML = `
-                    <div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--gray);">
-                        <i class="fas fa-search" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.5;"></i>
-                        <h3>No recommendations found for this category</h3>
-                        <p>Try selecting a different category or restart the quiz</p>
-                    </div>
-                `;
-                return;
-            }
-            
-            items.forEach(item => {
-                const card = document.createElement('div');
-                card.className = 'recommendation-card';
-                const hasValidLink = item.link && item.link !== '#';
-                
-                card.innerHTML = `
-                    <div class="card-image">
-                        ${item.image && item.image !== 'https://via.placeholder.com/150' ? 
-                            `<img src="${item.image}" alt="${item.name}" style="width: 100%; height: 100%; object-fit: cover;">` :
-                            `<i class="fas fa-${getCategoryIcon(item.category)}"></i>`
-                        }
-                    </div>
-                    <div class="card-content">
-                        <span class="card-category">${item.category}</span>
-                        <h3 class="card-title">${item.name}</h3>
-                        <div class="card-tags">
-                            ${item.tags.map(tag => `<span class="card-tag">${tag}</span>`).join('')}
-                        </div>
-                        <div class="card-actions">
-                            <div class="share-buttons">
-                                <div class="share-btn whatsapp" onclick="shareItem('${item.name}', 'whatsapp')">
-                                    <i class="fab fa-whatsapp"></i>
-                                </div>
-                                <div class="share-btn twitter" onclick="shareItem('${item.name}', 'x')">
-                                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                                        <path d="M18.244 2H21.552L14.367 10.217L22.8 22H16.113L10.78 14.659L4.42 22H1.11L8.76 13.258L0.6 2H7.455L12.272 8.72L18.244 2ZM17.082 20.03H18.914L6.46 3.87H4.495L17.082 20.03Z"/>
-                                    </svg>
-                                </div>
-                                <div class="share-btn telegram" onclick="shareItem('${item.name}', 'telegram')">
-                                    <i class="fab fa-telegram"></i>
-                                </div>
-                                <div class="share-btn copy-link tooltip" onclick="copyItemLink('${item.name}', '${item.category}', '${item.id}')">
-                                    <i class="fas fa-link"></i>
-                                    <span class="tooltip-text">Copy link</span>
-                                </div>
-                            </div>
-                            ${hasValidLink ? 
-                                `<a href="${item.link}" class="card-link" target="_blank">
-                                    Learn More <i class="fas fa-arrow-right"></i>
-                                </a>` : 
-                                `<a href="javascript:void(0)" class="card-link" onclick="showDescription(${JSON.stringify(item).replace(/"/g, '&quot;')})">
-                                    View Details <i class="fas fa-info-circle"></i>
-                                </a>`
-                            }
-                        </div>
-                    </div>
-                `;
-                
-                recommendationsGrid.appendChild(card);
-            });
-        }
-
-        function getCategoryIcon(category) {
-            const icons = {
-                'Courses': 'graduation-cap',
-                'Books': 'book',
-                'Skills': 'tools',
-                'Apps': 'mobile-alt'
-            };
-            return icons[category] || 'star';
-        }
-
+        // Show item description modal
         function showDescription(item) {
             descriptionTitle.textContent = item.name;
             descriptionCategory.textContent = item.category;
             
             let descriptionHTML = `
                 <p>${item.description}</p>
+                
                 <div class="description-tags">
                     ${item.tags.map(tag => `<span class="card-tag">${tag}</span>`).join('')}
                 </div>
             `;
             
+            // Add link section if available
             if (item.link && item.link !== '#') {
                 descriptionHTML += `
                     <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--light-gray);">
@@ -1518,35 +1800,421 @@
             descriptionModal.classList.remove('hidden');
         }
 
+        // Create progress steps for the quiz
+        function createProgressSteps() {
+            const progressContainer = document.querySelector('.quiz-progress');
+            // Clear existing steps (except progress bar)
+            const existingSteps = document.querySelectorAll('.progress-step');
+            existingSteps.forEach(step => step.remove());
+            
+            // Create steps for each question
+            for (let i = 0; i < quizQuestions.length; i++) {
+                const step = document.createElement('div');
+                step.className = 'progress-step';
+                if (i < state.currentQuestionIndex) {
+                    step.classList.add('completed');
+                } else if (i === state.currentQuestionIndex) {
+                    step.classList.add('active');
+                }
+                step.textContent = i + 1;
+                progressContainer.appendChild(step);
+            }
+            
+            // Update progress bar fill
+            const progressPercentage = (state.currentQuestionIndex / (quizQuestions.length - 1)) * 100;
+            progressFill.style.width = `${progressPercentage}%`;
+        }
+
+        // Load current question
+        function loadQuestion() {
+            const currentQuestion = quizQuestions[state.currentQuestionIndex];
+            questionText.textContent = currentQuestion.question;
+            
+            // Clear previous options
+            quizOptions.innerHTML = '';
+            
+            // Create new options
+            currentQuestion.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'quiz-option';
+                if (state.userAnswers[state.currentQuestionIndex] === index) {
+                    optionElement.classList.add('selected');
+                }
+                
+              optionElement.innerHTML = `
+    <i class="fas fa-${getOptionIcon(state.currentQuestionIndex, index)}"></i>
+    <span>${option.text}</span>
+`;
+                optionElement.addEventListener('click', () => selectOption(index));
+                quizOptions.appendChild(optionElement);
+            });
+            
+            // Update buttons
+            prevBtn.disabled = state.currentQuestionIndex === 0;
+            nextBtn.textContent = state.currentQuestionIndex === quizQuestions.length - 1 ? 'Get Recommendations' : 'Next';
+            nextBtn.innerHTML = state.currentQuestionIndex === quizQuestions.length - 1 ? 
+                'Get Recommendations <i class="fas fa-arrow-right"></i>' : 
+                'Next <i class="fas fa-arrow-right"></i>';
+            
+            // Update progress steps
+            createProgressSteps();
+        }
+
+        // Get icon for option based on index
+        // Get icon for option based on question and option index
+
+// Add before generateRecommendations()
+function showLoading() {
+    recommendationsGrid.innerHTML = `
+        <div style="grid-column: 1/-1; text-align: center; padding: 3rem;">
+            <div class="loading"></div>
+            <p style="margin-top: 1rem; color: var(--gray);">Generating your personalized recommendations...</p>
+        </div>
+    `;
+}
+
+function getOptionIcon(questionIndex, optionIndex) {
+    // Different icon sets for different questions
+    const iconSets = [
+        ['laptop-code', 'chart-line', 'palette', 'briefcase'], // Q1: Area of focus
+        ['code', 'chart-bar', 'paint-brush', 'project-diagram'], // Q2: Interests
+        ['seedling', 'rocket', 'crown', 'layer-group'], // Q3: Skill level
+        ['graduation-cap', 'book-open', 'mobile-alt', 'dumbbell'], // Q4: Learning preference
+        ['user-tie', 'bolt', 'heart', 'lightbulb'], // Q5: Primary goal
+        ['code', 'clipboard-list', 'pen-fancy', 'comments'], // Q6: Tools used
+        ['clock', 'calendar-check', 'brain', 'random'] // Q7: Time dedication
+    ];
+    
+    // Use questionIndex to get the right icon set, fallback to default if out of bounds
+    const icons = iconSets[questionIndex] || ['circle', 'square', 'star', 'check'];
+    
+    // Return the icon for this option, fallback if out of bounds
+    return icons[optionIndex] || 'question';
+}
+
+        // Select an option
+        function selectOption(optionIndex) {
+            // Update UI
+            const options = document.querySelectorAll('.quiz-option');
+            options.forEach(option => option.classList.remove('selected'));
+            options[optionIndex].classList.add('selected');
+            
+            // Save answer
+            state.userAnswers[state.currentQuestionIndex] = optionIndex;
+            
+            // Save state to localStorage
+            saveState();
+        }
+
+        // Save state to localStorage
+        function saveState() {
+            localStorage.setItem('optifindState', JSON.stringify({
+                userAnswers: state.userAnswers,
+                userTags: state.userTags
+            }));
+        }
+
+        // Go to next question
+        function nextQuestion() {
+            // Check if an option is selected
+            if (state.userAnswers[state.currentQuestionIndex] === undefined) {
+    alertModal.classList.remove('hidden');
+    return;
+}
+
+// Track quiz start if first question
+    if (state.currentQuestionIndex === 0 && state.userAnswers.length === 1) {
+        trackQuizStart();
+    }
+            
+            // If this is the last question, calculate results
+            if (state.currentQuestionIndex === quizQuestions.length - 1) {
+                calculateUserTags();
+                showResults();
+                generateRecommendations();
+                return;
+            }
+            
+            // Otherwise, go to next question
+            state.currentQuestionIndex++;
+            loadQuestion();
+            saveState();
+        }
+
+        
+
+        // Go to previous question
+        function prevQuestion() {
+            state.currentQuestionIndex--;
+            loadQuestion();
+        }
+
+        // Calculate user tags based on answers
+        function calculateUserTags() {
+            state.userTags = [];
+            
+            // Collect all tags from selected options
+            state.userAnswers.forEach((answerIndex, questionIndex) => {
+                const selectedOption = quizQuestions[questionIndex].options[answerIndex];
+                state.userTags.push(...selectedOption.tags);
+            });
+            
+            // Remove duplicates
+            state.userTags = [...new Set(state.userTags)];
+            
+            saveState();
+        }
+
+        /**
+         * RECOMMENDATION ENGINE
+         * This function scores each item in the dataset based on how many tags match the user's selected tags.
+         * It returns the top 10 items sorted by score (highest first).
+         * 
+         * Logic:
+         * 1. Combine all items from all categories into one array
+         * 2. For each item, calculate a score based on tag matches
+         * 3. Each matching tag adds 1 point to the score
+         * 4. Sort items by score (descending)
+         * 5. Return top 10 items
+         * 
+         * @param {Array} userTags - Array of tags selected by the user
+         * @returns {Array} Top 10 recommended items with their categories
+         */
+        function getRecommendations(userTags) {
+            // Combine all items from all categories with their category info
+            const allItems = [];
+            
+            for (const category in dataset) {
+                dataset[category].forEach(item => {
+                    allItems.push({
+                        ...item,
+                        category: category.charAt(0).toUpperCase() + category.slice(1)
+                    });
+                });
+            }
+            
+            // Calculate score for each item based on tag matches
+            const scoredItems = allItems.map(item => {
+                let score = 0;
+                
+                // For each tag in the item, check if it matches any user tag
+                item.tags.forEach(tag => {
+                    if (userTags.includes(tag)) {
+                        score += 1;
+                    }
+                });
+                
+                return {
+                    ...item,
+                    score: score
+                };
+            });
+            
+            // Sort by score (descending) and get top 10
+            const topItems = scoredItems
+                .sort((a, b) => b.score - a.score)
+                .slice(0, 10);
+            
+            return topItems;
+        }
+
+        // Generate and display recommendations
+        function generateRecommendations() {
+            const recommendations = getRecommendations(state.userTags);
+            state.filteredRecommendations = recommendations;
+            state.currentRecIndex = 0;
+            
+            // Display category filters
+            displayCategoryFilters();
+            
+            // Display recommendations
+            displayRecommendations(recommendations);
+        }
+
+        // Display category filters
+        function displayCategoryFilters() {
+            const categories = ['all', 'Courses', 'Books', 'Skills', 'Apps'];
+            
+            categoryFilters.innerHTML = '';
+            
+            categories.forEach(category => {
+                const filter = document.createElement('div');
+                filter.className = `category-filter ${state.activeCategory === category ? 'active' : ''}`;
+                filter.textContent = category === 'all' ? 'All' : category;
+                filter.addEventListener('click', () => filterByCategory(category));
+                categoryFilters.appendChild(filter);
+            });
+        }
+
+        // Filter recommendations by category
+        function filterByCategory(category) {
+            trackCategoryFilter(category);
+            state.activeCategory = category;
+            
+            // Update active filter UI
+            document.querySelectorAll('.category-filter').forEach(filter => {
+                filter.classList.remove('active');
+                if (filter.textContent === (category === 'all' ? 'All' : category)) {
+                    filter.classList.add('active');
+                }
+            });
+            
+            // Filter recommendations
+            let filtered = state.filteredRecommendations;
+            if (category !== 'all') {
+                filtered = state.filteredRecommendations.filter(item => 
+                    item.category.toLowerCase() === category.toLowerCase()
+                );
+            }
+            
+            displayRecommendations(filtered);
+        }
+
+        // Display recommendations in the grid
+// Display recommendations in the grid
+function displayRecommendations(items) {
+    recommendationsGrid.innerHTML = '';
+    
+    if (items.length === 0) {
+        recommendationsGrid.innerHTML = `
+            <div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--gray);">
+                <i class="fas fa-search" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.5;"></i>
+                <h3>No recommendations found for this category</h3>
+                <p>Try selecting a different category or restart the quiz</p>
+            </div>
+        `;
+        return;
+    }
+    
+    items.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'recommendation-card';
+        
+        // Check if link is valid (not "#")
+        const hasValidLink = item.link && item.link !== '#';
+        
+// In displayRecommendations function, update the X/Twitter button:
+card.innerHTML = `
+    <div class="card-image">
+        ${item.image && item.image !== 'https://via.placeholder.com/150' ? 
+            `<img src="${item.image}" alt="${item.name}" style="width: 100%; height: 100%; object-fit: cover;">` :
+            `<i class="fas fa-${getCategoryIcon(item.category)}"></i>`
+        }
+    </div>
+    <div class="card-content">
+        <span class="card-category">${item.category}</span>
+        <h3 class="card-title">${item.name}</h3>
+        <div class="card-tags">
+            ${item.tags.map(tag => `<span class="card-tag">${tag}</span>`).join('')}
+        </div>
+        <div class="card-actions">
+            <div class="share-buttons">
+                <div class="share-btn whatsapp" onclick="shareItem('${item.name}', 'whatsapp')">
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+                <div class="share-btn twitter" onclick="shareItem('${item.name}', 'x')">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M18.244 2H21.552L14.367 10.217L22.8 22H16.113L10.78 14.659L4.42 22H1.11L8.76 13.258L0.6 2H7.455L12.272 8.72L18.244 2ZM17.082 20.03H18.914L6.46 3.87H4.495L17.082 20.03Z"/>
+                    </svg>
+                </div>
+                <div class="share-btn telegram" onclick="shareItem('${item.name}', 'telegram')">
+                    <i class="fab fa-telegram"></i>
+                </div>
+                <div class="share-btn copy-link tooltip" onclick="copyItemLink('${item.name}', '${item.category}', '${item.id}')">
+                    <i class="fas fa-link"></i>
+                    <span class="tooltip-text">Copy link</span>
+                </div>
+            </div>
+            ${hasValidLink ? 
+                `<a href="${item.link}" class="card-link" target="_blank">
+                    Learn More <i class="fas fa-arrow-right"></i>
+                </a>` : 
+                `<a href="javascript:void(0)" class="card-link" onclick="showDescription(${JSON.stringify(item).replace(/"/g, '&quot;')})">
+                    View Details <i class="fas fa-info-circle"></i>
+                </a>`
+            }
+        </div>
+    </div>
+`;
+        
+        recommendationsGrid.appendChild(card);
+    });
+}
+
+        // Get icon for category
+        function getCategoryIcon(category) {
+            const icons = {
+                'Courses': 'graduation-cap',
+                'Books': 'book',
+                'Skills': 'tools',
+                'Apps': 'mobile-alt'
+            };
+            return icons[category] || 'star';
+        }
+
+       // Share item on social media
+// Add trackShare call to the existing shareItem function
+function shareItem(itemName, platform) {
+    const url = window.location.href;
+    const text = `Check out "${itemName}" on OptiFind - personalized recommendations for learning and productivity!`;
+    
+    let shareUrl = '';
+    
+    switch(platform) {
+        case 'whatsapp':
+            shareUrl = `https://wa.me/?text=${encodeURIComponent(text + ' ' + url)}`;
+            break;
+        case 'x':  // Changed from 'twitter' to 'x'
+            shareUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+            break;
+        case 'telegram':
+            shareUrl = `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
+            break;
+    }
+    
+    // Track the share event
+    trackShare(platform, itemName);
+    
+    window.open(shareUrl, '_blank', 'width=600,height=400');
+}
+       
+
+        // Show results section
         function showResults() {
             quizSection.classList.add('hidden');
             resultsSection.classList.remove('hidden');
         }
 
+        // Reset quiz
         function resetQuiz() {
-            trackQuizAbandoned();
-            
             state.currentQuestionIndex = 0;
             state.userAnswers = [];
             state.userTags = [];
             state.filteredRecommendations = [];
             state.currentRecIndex = 0;
             state.activeCategory = 'all';
+
+             trackQuizAbandoned();
             
+            // Clear localStorage
             localStorage.removeItem('optifindState');
             
+            // Show quiz section
             resultsSection.classList.add('hidden');
             quizSection.classList.remove('hidden');
             
+            // Reload first question
             loadQuestion();
         }
 
+        // Start quiz from welcome modal
         function startQuiz() {
             welcomeModal.classList.add('hidden');
             quizSection.classList.remove('hidden');
             localStorage.setItem('optifindSeenTutorial', 'true');
         }
 
+        // Simple feedback functions
         function openFeedbackModal() {
             trackFeedbackOpen();
             feedbackModal.classList.remove('hidden');
@@ -1556,126 +2224,39 @@
             feedbackModal.classList.add('hidden');
         }
 
+        // Show success modal
+function showSuccessModal(message) {
+    const successModal = document.getElementById('successModal');
+    const successMessage = document.getElementById('successMessage');
+    
+    if (successModal && successMessage) {
+        successMessage.textContent = message;
+        successModal.classList.remove('hidden');
+    }
+}
+
+// Close success modal
+function closeSuccessModal() {
+    const successModal = document.getElementById('successModal');
+    if (successModal) {
+        successModal.classList.add('hidden');
+    }
+}
+
         function openGoogleForm() {
             trackFeedbackSubmit();
             window.open(CONFIG.GOOGLE_FORMS_URL, '_blank');
             closeFeedbackModal();
             
-            setTimeout(() => {
-                showSuccessModal('Thank you! Your feedback helps us improve OptiFind.');
-            }, 500);
+             // Show success modal instead of alert
+    setTimeout(() => {
+        showSuccessModal('Thank you! Your feedback helps us improve OptiFind.');
+    }, 500);
+
+            
         }
 
-        function showSuccessModal(message) {
-            const successMessage = document.getElementById('successMessage');
-            if (successModal && successMessage) {
-                successMessage.textContent = message;
-                successModal.classList.remove('hidden');
-            }
-        }
-
-        function closeSuccessModal() {
-            if (successModal) {
-                successModal.classList.add('hidden');
-            }
-        }
-
-        function shareItem(itemName, platform) {
-            const url = window.location.href;
-            const text = `Check out "${itemName}" on OptiFind - personalized recommendations for learning and productivity!`;
-            
-            let shareUrl = '';
-            
-            switch(platform) {
-                case 'whatsapp':
-                    shareUrl = `https://wa.me/?text=${encodeURIComponent(text + ' ' + url)}`;
-                    break;
-                case 'x':
-                    shareUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
-                    break;
-                case 'telegram':
-                    shareUrl = `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
-                    break;
-            }
-            
-            trackShare(platform, itemName);
-            window.open(shareUrl, '_blank', 'width=600,height=400');
-        }
-
-        function showToast(message) {
-            const existingToast = document.querySelector('.toast');
-            if (existingToast) existingToast.remove();
-            
-            const toast = document.createElement('div');
-            toast.className = 'toast';
-            toast.innerHTML = `
-                <i class="fas fa-check-circle"></i>
-                <span>${message}</span>
-            `;
-            
-            document.body.appendChild(toast);
-            
-            setTimeout(() => {
-                if (toast.parentNode) {
-                    toast.parentNode.removeChild(toast);
-                }
-            }, 2500);
-        }
-
-        function copyAppLink() {
-            const url = window.location.href;
-            
-            navigator.clipboard.writeText(url).then(() => {
-                showToast('OptiFind link copied ✔');
-                trackEvent('Social', 'Copy_Link', 'App');
-            }).catch(err => {
-                const textArea = document.createElement('textarea');
-                textArea.value = url;
-                document.body.appendChild(textArea);
-                textArea.select();
-                try {
-                    document.execCommand('copy');
-                    showToast('OptiFind link copied ✔');
-                    trackEvent('Social', 'Copy_Link', 'App');
-                } catch (err) {
-                    showToast('Failed to copy link');
-                }
-                document.body.removeChild(textArea);
-            });
-        }
-
-        function copyItemLink(itemName, category, itemId) {
-            const baseUrl = window.location.origin + window.location.pathname;
-            const shareUrl = `${baseUrl}?rec=${itemId}`;
-            
-            navigator.clipboard.writeText(shareUrl).then(() => {
-                showToast('Link copied');
-                trackEvent('Social', 'Copy_Link', `Recommendation - ${itemName}`);
-            }).catch(err => {
-                const textArea = document.createElement('textarea');
-                textArea.value = shareUrl;
-                document.body.appendChild(textArea);
-                textArea.select();
-                try {
-                    document.execCommand('copy');
-                    showToast('Link copied');
-                    trackEvent('Social', 'Copy_Link', `Recommendation - ${itemName}`);
-                } catch (err) {
-                    showToast('Failed to copy link');
-                }
-                document.body.removeChild(textArea);
-            });
-        }
-
-        function addTooltip(element, text) {
-            element.classList.add('tooltip');
-            const tooltip = document.createElement('span');
-            tooltip.className = 'tooltip-text';
-            tooltip.textContent = text;
-            element.appendChild(tooltip);
-        }
-
-        // ===== EVENT LISTENERS SETUP =====
+        // Set up event listeners
         function setupEventListeners() {
             prevBtn.addEventListener('click', prevQuestion);
             nextBtn.addEventListener('click', nextQuestion);
@@ -1684,13 +2265,8 @@
             closeDescriptionBtn.addEventListener('click', () => {
                 descriptionModal.classList.add('hidden');
             });
-            closeAlertBtn.addEventListener('click', () => {
-                alertModal.classList.add('hidden');
-            });
-            closeSuccessBtn.addEventListener('click', () => {
-                successModal.classList.add('hidden');
-            });
             
+            // Close modals when clicking outside
             welcomeModal.addEventListener('click', (e) => {
                 if (e.target === welcomeModal) {
                     startQuiz();
@@ -1702,51 +2278,257 @@
                     descriptionModal.classList.add('hidden');
                 }
             });
-            
-            alertModal.addEventListener('click', (e) => {
-                if (e.target === alertModal) {
-                    alertModal.classList.add('hidden');
-                }
-            });
-            
-            successModal.addEventListener('click', (e) => {
-                if (e.target === successModal) {
-                    successModal.classList.add('hidden');
-                }
-            });
-            
-            document.getElementById('feedbackBtn').addEventListener('click', openFeedbackModal);
-            cancelFeedbackBtn.addEventListener('click', closeFeedbackModal);
-            openGoogleFormBtn.addEventListener('click', openGoogleForm);
-            
-            feedbackModal.addEventListener('click', (e) => {
-                if (e.target === feedbackModal) {
-                    closeFeedbackModal();
-                }
-            });
-            
-            document.getElementById('shareAppBtn').addEventListener('click', copyAppLink);
-            addTooltip(document.getElementById('shareAppBtn'), 'Copy link to share OptiFind with friends');
-            
-            document.addEventListener('keydown', (e) => {
-                if (quizSection.classList.contains('hidden')) return;
-                
-                if (e.key === 'ArrowRight' && !nextBtn.disabled) {
-                    nextQuestion();
-                } else if (e.key === 'ArrowLeft' && !prevBtn.disabled) {
-                    prevQuestion();
-                } else if (e.key >= '1' && e.key <= '4') {
-                    const optionIndex = parseInt(e.key) - 1;
-                    const options = document.querySelectorAll('.quiz-option');
-                    if (options[optionIndex]) {
-                        selectOption(optionIndex);
-                    }
-                }
-            });
+
+            closeAlertBtn.addEventListener('click', () => {
+    alertModal.classList.add('hidden');
+});
+
+// Close alert modal when clicking outside
+alertModal.addEventListener('click', (e) => {
+    if (e.target === alertModal) {
+        alertModal.classList.add('hidden');
+    }
+});
+
+// Feedback modal event listeners
+document.getElementById('feedbackBtn').addEventListener('click', openFeedbackModal);
+cancelFeedbackBtn.addEventListener('click', closeFeedbackModal);
+openGoogleFormBtn.addEventListener('click', openGoogleForm);
+
+ if (cancelFeedbackBtn) {
+        cancelFeedbackBtn.addEventListener('click', closeFeedbackModal);
+    }
+    
+    if (openGoogleFormBtn) {
+        openGoogleFormBtn.addEventListener('click', openGoogleForm);
+    }
+
+    document.getElementById('feedbackBtn').addEventListener('click', () => {
+    feedbackModal.classList.remove('hidden');
+});
+
+// Close feedback modal when clicking outside
+feedbackModal.addEventListener('click', (e) => {
+    if (e.target === feedbackModal) {
+        closeFeedbackModal();
+    }
+});
+
+document.getElementById('shareAppBtn').addEventListener('click', copyAppLink);
+
+const shareBtn = document.getElementById('shareAppBtn');
+if (shareBtn) {
+    addTooltip(shareBtn, 'Copy link to share OptiFind with friends');
+}
+
+document.addEventListener('keydown', (e) => {
+    if (quizSection.classList.contains('hidden')) return;
+    
+    if (e.key === 'ArrowRight' && !nextBtn.disabled) {
+        nextQuestion();
+    } else if (e.key === 'ArrowLeft' && !prevBtn.disabled) {
+        prevQuestion();
+    } else if (e.key >= '1' && e.key <= '4') {
+        const optionIndex = parseInt(e.key) - 1;
+        const options = document.querySelectorAll('.quiz-option');
+        if (options[optionIndex]) {
+            selectOption(optionIndex);
+        }
+    }
+});
+
+document.getElementById('shareAppBtn').addEventListener('click', copyAppLink);
+
+// Show success modal
+function showSuccessModal(message) {
+    const successModal = document.getElementById('successModal');
+    const successMessage = document.getElementById('successMessage');
+    
+    if (successModal && successMessage) {
+        successMessage.textContent = message;
+        successModal.classList.remove('hidden');
+    }
+}
+
+// Close success modal
+function closeSuccessModal() {
+    const successModal = document.getElementById('successModal');
+    if (successModal) {
+        successModal.classList.add('hidden');
+    }
+}
+
+// Show success modal
+function showSuccessModal(message) {
+    const successModal = document.getElementById('successModal');
+    const successMessage = document.getElementById('successMessage');
+    
+    if (successModal && successMessage) {
+        successMessage.textContent = message;
+        successModal.classList.remove('hidden');
+    }
+}
+
+// Close success modal
+function closeSuccessModal() {
+    const successModal = document.getElementById('successModal');
+    if (successModal) {
+        successModal.classList.add('hidden');
+    }
+}
+
+closeSuccessBtn.addEventListener('click', () => {
+    successModal.classList.add('hidden');
+});
+
+successModal.addEventListener('click', (e) => {
+    if (e.target === successModal) {
+        successModal.classList.add('hidden');
+    }
+});
+
+
         }
 
-        // ===== INITIALIZE APP =====
+        // Initialize the app when DOM is loaded
         document.addEventListener('DOMContentLoaded', init);
+
+        // Toast notification function
+function showToast(message, type = 'info') {
+    // Remove existing toast
+    const existingToast = document.querySelector('.toast');
+    if (existingToast) existingToast.remove();
+    
+    // Create new toast
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.innerHTML = `
+        <i class="fas fa-check-circle"></i>
+        <span>${message}</span>
+    `;
+    
+    document.body.appendChild(toast);
+    
+    // Auto remove after 2.5 seconds
+    setTimeout(() => {
+        if (toast.parentNode) {
+            toast.parentNode.removeChild(toast);
+        }
+    }, 2500);
+}
+
+// Copy app link function
+function copyAppLink() {
+    const url = window.location.href;
+    
+    navigator.clipboard.writeText(url).then(() => {
+        showToast('OptiFind link copied ✔');
+        trackEvent('Social', 'Copy_Link', 'App');
+    }).catch(err => {
+        // Fallback for older browsers
+        const textArea = document.createElement('textarea');
+        textArea.value = url;
+        document.body.appendChild(textArea);
+        textArea.select();
+        try {
+            document.execCommand('copy');
+            showToast('OptiFind link copied ✔');
+            trackEvent('Social', 'Copy_Link', 'App');
+        } catch (err) {
+            showToast('Failed to copy link');
+        }
+        document.body.removeChild(textArea);
+    });
+}
+
+// Copy item link function
+function copyItemLink(itemName, category, itemId) {
+    // Create a shareable URL with context
+    const baseUrl = window.location.origin + window.location.pathname;
+    const shareText = `Check out "${itemName}" (${category}) on OptiFind - personalized learning recommendations!`;
+    const shareUrl = `${baseUrl}?rec=${itemId}`;
+    
+    navigator.clipboard.writeText(shareUrl).then(() => {
+        showToast('Link copied');
+        trackEvent('Social', 'Copy_Link', `Recommendation - ${itemName}`);
+    }).catch(err => {
+        // Fallback for older browsers
+        const textArea = document.createElement('textarea');
+        textArea.value = shareUrl;
+        document.body.appendChild(textArea);
+        textArea.select();
+        try {
+            document.execCommand('copy');
+            showToast('Link copied');
+            trackEvent('Social', 'Copy_Link', `Recommendation - ${itemName}`);
+        } catch (err) {
+            showToast('Failed to copy link');
+        }
+        document.body.removeChild(textArea);
+    });
+}
+
+// Add tooltip to share app button
+function addTooltip(element, text) {
+    element.classList.add('tooltip');
+    const tooltip = document.createElement('span');
+    tooltip.className = 'tooltip-text';
+    tooltip.textContent = text;
+    element.appendChild(tooltip);
+}
+
+// Toast notification function
+function showToast(message, type = 'info') {
+    // Remove existing toast
+    const existingToast = document.querySelector('.toast');
+    if (existingToast) existingToast.remove();
+    
+    // Create new toast
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.innerHTML = `
+        <i class="fas fa-check-circle"></i>
+        <span>${message}</span>
+    `;
+    
+    document.body.appendChild(toast);
+    
+    // Auto remove after 2.5 seconds
+    setTimeout(() => {
+        if (toast.parentNode) {
+            toast.parentNode.removeChild(toast);
+        }
+    }, 2500);
+}
+
+// Copy item link function
+function copyItemLink(itemName, category, itemId) {
+    // Create a shareable URL with context
+    const baseUrl = window.location.origin + window.location.pathname;
+    const shareText = `Check out "${itemName}" (${category}) on OptiFind - personalized learning recommendations!`;
+    const shareUrl = `${baseUrl}?rec=${itemId}`;
+    
+    navigator.clipboard.writeText(shareUrl).then(() => {
+        showToast('Link copied');
+        trackEvent('Social', 'Copy_Link', `Recommendation - ${itemName}`);
+    }).catch(err => {
+        // Fallback for older browsers
+        const textArea = document.createElement('textarea');
+        textArea.value = shareUrl;
+        document.body.appendChild(textArea);
+        textArea.select();
+        try {
+            document.execCommand('copy');
+            showToast('Link copied');
+            trackEvent('Social', 'Copy_Link', `Recommendation - ${itemName}`);
+        } catch (err) {
+            showToast('Failed to copy link');
+        }
+        document.body.removeChild(textArea);
+    });
+}
+
     </script>
+
 </body>
 </html>
